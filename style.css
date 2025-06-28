@@ -4,22 +4,30 @@ body {
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    background-color: #f8f8f8; /* Light gray background */
-    color: #333; /* Dark gray text */
-    -webkit-font-smoothing: antialiased; /* Smoother fonts for webkit browsers */
-    -moz-osx-font-smoothing: grayscale; /* Smoother fonts for firefox */
+    background-color: #f8f8f8;
+    /* Light gray background */
+    color: #333;
+    /* Dark gray text */
+    -webkit-font-smoothing: antialiased;
+    /* Smoother fonts for webkit browsers */
+    -moz-osx-font-smoothing: grayscale;
+    /* Smoother fonts for firefox */
 }
 
 /* Container for overall page content (optional, but good for centering) */
 .container {
-    max-width: 1200px; /* Max width of your content */
-    margin: 0 auto; /* Center the container */
-    padding: 0 20px; /* Add some padding on sides */
+    max-width: 1200px;
+    /* Max width of your content */
+    margin: 0 auto;
+    /* Center the container */
+    padding: 0 20px;
+    /* Add some padding on sides */
 }
 
 /* Header Styles */
 header {
-    background-color: #0056b3; /* Dark blue */
+    background-color: #0056b3;
+    /* Dark blue */
     color: #fff;
     padding: 1rem 0;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -36,23 +44,29 @@ header h1 {
 /* Navigation Styles */
 nav {
     text-align: center;
-    background-color: #004085; /* Slightly darker blue than header */
+    background-color: #004085;
+    /* Slightly darker blue than header */
     padding: 0.5rem 0;
     display: flex;
     justify-content: center;
-    flex-wrap: wrap; /* Keep this to handle very small screens gracefully */
-    gap: 8px; /* Slightly reduced gap between navigation items */
+    flex-wrap: wrap;
+    /* Keep this to handle very small screens gracefully */
+    gap: 8px;
+    /* Slightly reduced gap between navigation items */
 }
 
 nav a {
     color: #fff;
     text-decoration: none;
-    padding: 0.75rem 1rem; /* Slightly reduced padding to help fit */
+    padding: 0.75rem 1rem;
+    /* Slightly reduced padding to help fit */
     display: inline-block;
     transition: background-color 0.3s ease, color 0.3s ease;
     font-weight: 500;
-    white-space: nowrap; /* Ensures text doesn't wrap within the link */
-    font-size: 0.95em; /* Slightly reduced font size for all nav links */
+    white-space: nowrap;
+    /* Ensures text doesn't wrap within the link */
+    font-size: 0.95em;
+    /* Slightly reduced font size for all nav links */
 }
 
 nav a:hover,
@@ -118,12 +132,14 @@ img {
 }
 
 /* Lists */
-ul, ol {
+ul,
+ol {
     margin-bottom: 1em;
     padding-left: 25px;
 }
 
-ul li, ol li {
+ul li,
+ol li {
     margin-bottom: 0.5em;
 }
 
@@ -148,7 +164,7 @@ footer p {
     padding: 20px;
     background-color: #fefefe;
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .form-group {
@@ -212,8 +228,10 @@ footer p {
 /* Responsive Design for smaller screens */
 @media (max-width: 1024px) {
     nav a {
-        padding: 0.6rem 0.9rem; /* Further reduced padding */
-        font-size: 0.9em; /* Even smaller font for more links */
+        padding: 0.6rem 0.9rem;
+        /* Further reduced padding */
+        font-size: 0.9em;
+        /* Even smaller font for more links */
     }
 }
 
@@ -223,14 +241,18 @@ footer p {
     }
 
     nav {
-        flex-wrap: wrap; /* Allows wrapping on smaller screens */
+        flex-wrap: wrap;
+        /* Allows wrapping on smaller screens */
         padding: 0.5rem 10px;
-        gap: 5px; /* Smaller gap for wrapped items */
+        gap: 5px;
+        /* Smaller gap for wrapped items */
     }
 
     nav a {
-        padding: 0.5rem 0.6rem; /* Adjusted padding for very small screens */
-        font-size: 0.85em; /* Smallest font size for extreme cases */
+        padding: 0.5rem 0.6rem;
+        /* Adjusted padding for very small screens */
+        font-size: 0.85em;
+        /* Smallest font size for extreme cases */
         margin-bottom: 5px;
     }
 
@@ -262,6 +284,7 @@ footer p {
         text-align: center;
         padding: 0.75rem 0;
     }
+
     nav a:last-child {
         border-bottom: none;
     }
@@ -273,5 +296,38 @@ footer p {
     .btn {
         width: 100%;
         max-width: none;
+    }
+
+    /* Breadcrumbs Styling */
+    .breadcrumbs {
+        padding: 15px 0;
+        font-size: 0.9em;
+        color: #666;
+        margin-bottom: 20px;
+    }
+
+    .breadcrumbs a {
+        color: #0056b3;
+        text-decoration: none;
+        font-weight: normal;
+        /* Override any bolding from nav links */
+    }
+
+    .breadcrumbs a:hover {
+        text-decoration: underline;
+    }
+
+    .breadcrumbs span {
+        font-weight: bold;
+        color: #333;
+        /* Current page text is slightly darker */
+    }
+
+    /* Add spacing for the separator (e.g., > ) */
+    .breadcrumbs a+span::before,
+    .breadcrumbs a+a::before {
+        content: " > ";
+        color: #999;
+        padding: 0 5px;
     }
 }
