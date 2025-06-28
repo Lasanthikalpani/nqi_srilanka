@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - NQI Sri Lanka</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="container"> <!-- Added container for styling -->
+            <h1>NQI Catalogue Sri Lanka</h1>
+            <nav>
+                <a href="index.html" class="active">Home</a> <!-- Added 'active' class -->
+                <a href="introduction.html">Introduction</a>
+                <a href="sme-policy.html">SME Development</a>
+                <a href="nqi-strategy.html">NQI Strategy</a>
+                <a href="tbt-sps.html">TBT & SPS</a>
+                <a href="standards-metrology.html">Standards</a>
+                <a href="accreditation.html">Accreditation</a>
+                <a href="contacts.html">Institutions</a>
+                <a href="programs.html">Awards</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container"> <!-- Added container for styling -->
+        <section>
+            <h2>Welcome to the National Quality Infrastructure Catalogue for SMEs in Sri Lanka</h2>
+            <p>This website serves as a vital guide for Small and Medium-sized Enterprises (SMEs) in Sri Lanka, providing a comprehensive overview of the national quality infrastructure and the essential services offered by its institutional framework.</p>
+            <p>Our goal is to simplify access to critical information on quality control, assurance, technical requirements, management systems, conformity assessment, metrology, accreditation, and training, empowering SMEs to enhance their competitiveness in both local and international markets.</p>
+            <p>Explore the various sections to understand the policy frameworks, strategic initiatives, and key institutions dedicated to fostering quality and innovation across Sri Lanka's economic landscape.</p>
+        </section>
+
+        <section>
+            <h2>Key Areas Covered:</h2>
+            <ul>
+                <li>National Policy Framework for SME Development</li>
+                <li>NQI Strategy for Sri Lanka</li>
+                <li>Technical Barriers to Trade (TBT) & Sanitary and Phytosanitary (SPS) Measures</li>
+                <li>Standards and Metrology Services</li>
+                <li>Accreditation Services and Institutions</li>
+                <li>Key Institutions and Contact Information</li>
+                <li>National Quality Awards and Recognition Programs</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container"> <!-- Added container for styling -->
+            <p>&copy; 2025 NQI Sri Lanka. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

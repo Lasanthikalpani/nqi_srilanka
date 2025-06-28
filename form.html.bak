@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Feedback - NQI Sri Lanka</title>
+    <!-- Link to your main CSS file -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1>NQI Catalogue Sri Lanka</h1>
+            <!-- Navigation links removed from here -->
+        </div>
+    </header>
+
+    <main class="container">
+        <section>
+            <h2>Submit Your Feedback</h2>
+            <p>We value your input! Please use the form below to send us your questions, comments, or suggestions regarding the National Quality Infrastructure Catalogue.</p>
+
+            <form action="submit.php" method="POST" class="feedback-form">
+                <div class="form-group">
+                    <label for="name">Your Name:</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Your Email:</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Your Message:</label>
+                    <textarea id="message" name="message" placeholder="Type your message here..." rows="8"></textarea>
+                </div>
+                <button type="submit" class="btn">Send Feedback</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 NQI Sri Lanka. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
