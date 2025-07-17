@@ -4,43 +4,1041 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TBT & SPS Measures - NQI Sri Lanka</title>
-    <link rel="stylesheet" href="style.css">
+    <title>TBT & SPS - NQI Sri Lanka</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,700|Sen:400,700,800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0d47a1;
+            --secondary-color: #ff6f00;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            background-color: #f5f7fa;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .main-content {
+            flex: 1;
+        }
+
+        .header_section {
+            background-color: var(--primary-color);
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-light .navbar-nav .nav-link {
+            color: rgba(255, 255, 255, 0.85);
+            font-weight: 500;
+            padding: 10px 15px;
+            transition: all 0.3s;
+        }
+
+        .navbar-light .navbar-nav .nav-link:hover,
+        .navbar-light .navbar-nav .active>.nav-link {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        .navbar-brand {
+            font-family: 'Sen', sans-serif;
+            font-weight: 800;
+            font-size: 1.8rem;
+            color: white;
+            letter-spacing: 0.5px;
+        }
+
+        .banner_section {
+            background: linear-gradient(135deg, var(--primary-color), #1a73e8);
+            color: white;
+            padding: 80px 0 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .banner_section::before {
+            content: "";
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+            transform: rotate(30deg);
+        }
+
+        .banner_section h1 {
+            font-family: 'Sen', sans-serif;
+            font-weight: 800;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .banner_section p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+
+        .feature_section {
+            padding: 80px 0;
+        }
+
+        .feature_card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            height: 100%;
+            border: none;
+        }
+
+        .feature_card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature_card .card-header {
+            background: linear-gradient(135deg, var(--primary-color), #1a73e8);
+            color: white;
+            padding: 20px;
+            border: none;
+        }
+
+        .feature_card .card-body {
+            padding: 25px;
+        }
+
+        .feature_card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .feature_card h3 {
+            font-family: 'Sen', sans-serif;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .feature_card p {
+            color: #666;
+        }
+
+        .content_section {
+            padding: 80px 0 40px;
+            background-color: white;
+        }
+
+        .section_title {
+            position: relative;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .section_title h2 {
+            font-family: 'Sen', sans-serif;
+            font-weight: 800;
+            color: var(--primary-color);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+
+        .section_title h2::after {
+            content: "";
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: var(--secondary-color);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .key_areas {
+            background-color: #f0f7ff;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 40px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .key_areas h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .key_areas ul {
+            columns: 2;
+            -webkit-columns: 2;
+            -moz-columns: 2;
+        }
+
+        .key_areas li {
+            margin-bottom: 12px;
+            position: relative;
+            padding-left: 25px;
+            font-size: 1.05rem;
+        }
+
+        .key_areas li::before {
+            content: "\f00c";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 4px;
+            color: var(--secondary-color);
+        }
+
+        .partner_logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 40px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .partner_logos .partner-box {
+            background: #0033A0;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+            min-width: 150px;
+        }
+
+        .partner_logos .eu {
+            background: #0057B8;
+        }
+
+        .partner_logos .giz {
+            background: #154194;
+        }
+
+        .footer_section {
+            background: linear-gradient(135deg, #0a3a7a, var(--primary-color));
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer_section h5 {
+            font-family: 'Sen', sans-serif;
+            font-weight: 700;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer_section h5::after {
+            content: "";
+            position: absolute;
+            width: 40px;
+            height: 3px;
+            background: var(--secondary-color);
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer_section ul {
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .footer_section ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer_section ul li a {
+            color: rgba(255, 255, 255, 0.8);
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .footer_section ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .footer_section .contact_info li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .footer_section .contact_info i {
+            margin-right: 15px;
+            margin-top: 5px;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        .footer_section .contact_info .fa-map-marker-alt {
+            color: #fff;
+            background: #ff6f00;
+            padding: 5px;
+            border-radius: 50%;
+            font-size: 14px;
+        }
+
+        .footer_section .contact_info .fa-phone {
+            color: #fff;
+            background: #4CAF50;
+            padding: 5px;
+            border-radius: 50%;
+            font-size: 14px;
+        }
+
+        .footer_section .contact_info .fa-envelope {
+            color: #fff;
+            background: #2196F3;
+            padding: 5px;
+            border-radius: 50%;
+            font-size: 14px;
+        }
+
+        .footer_section .contact_info .fa-clock {
+            color: #fff;
+            background: #9C27B0;
+            padding: 5px;
+            border-radius: 50%;
+            font-size: 14px;
+        }
+
+        .social_icon {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social_icon a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        .social_icon a:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        .copyright_section {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px 0;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .copyright_section p {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        @media (max-width: 991px) {
+            .banner_section h1 {
+                font-size: 2.5rem;
+            }
+
+            .key_areas ul {
+                columns: 1;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .banner_section {
+                padding: 60px 0 40px;
+            }
+
+            .banner_section h1 {
+                font-size: 2rem;
+            }
+
+            .feature_section,
+            .content_section {
+                padding: 60px 0;
+            }
+
+            .navbar-brand {
+                font-size: 1.5rem;
+            }
+
+            .footer_section .row>div {
+                margin-bottom: 30px;
+            }
+        }
+        
+        /* TBT-SPS specific styles */
+        .tbt-sps-card {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            height: 100%;
+            margin-bottom: 20px;
+            border: none;
+        }
+        
+        .tbt-sps-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tbt-sps-card .card-header {
+            background: linear-gradient(135deg, var(--primary-color), #1a73e8);
+            color: white;
+            border-radius: 10px 10px 0 0 !important;
+            padding: 15px 20px;
+        }
+        
+        .definition-box {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--secondary-color);
+        }
+        
+        .process-steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 40px 0;
+        }
+        
+        .process-step {
+            flex: 0 0 18%;
+            text-align: center;
+            padding: 15px;
+            position: relative;
+        }
+        
+        .process-step:not(:last-child):after {
+            content: "→";
+            position: absolute;
+            right: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 24px;
+            color: var(--secondary-color);
+        }
+        
+        .process-step .step-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 24px;
+        }
+        
+        .benefit-list li {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .benefit-list li:before {
+            content: "\f00c";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 4px;
+            color: var(--secondary-color);
+        }
+        
+        .sector-icons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .sector-icon {
+            text-align: center;
+            width: 120px;
+        }
+        
+        .sector-icon i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .comparison-table th {
+            background: var(--primary-color);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        
+        .comparison-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+    </style>
 </head>
 
 <body>
-    <header>
+    <!-- Header Section -->
+    <div class="header_section">
         <div class="container">
-            <h1>NQI Catalogue Sri Lanka</h1>
-            <nav>
-                <a href="index.html">Home</a>
-                <a href="introduction.html">Introduction to NQI</a>
-                <a href="sme-policy.html">SME Development</a>
-                <a href="nqi-strategy.html">NQI Strategy</a>
-                <a href="tbt-sps.html">TBT & SPS Measures</a>
-                <a href="standards.html">Standards</a>
-                <a href="metrology.html">Metrology</a>
-                <a href="accreditation.html">Accreditation</a>
-                <a href="institutions.html">Institutions</a>
-                <a href="awards.html">Quality Awards</a>
-                <a href="form.html">Feedback</a>
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="introduction.html">QI Framework</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="sme-policy.html">SME Policy</a>
+                        </li>
+                        <li class="nav-item dropdown active">
+                            <a class="nav-link dropdown-toggle" href="#" id="strategyDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                NQI Strategy
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="strategyDropdown">
+                                <a class="dropdown-item" href="nqi-strategy.html">Quality Policy</a>
+                                <a class="dropdown-item active" href="tbt-sps.html">TBT & SPS</a>
+                                <a class="dropdown-item" href="regulatory-functions.html">Regulatory Functions</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="qualityDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Quality Services
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="qualityDropdown">
+                                <a class="dropdown-item" href="standards.html">Standardization</a>
+                                <a class="dropdown-item" href="metrology.html">Metrology</a>
+                                <a class="dropdown-item" href="accreditation.html">Accreditation</a>
+                                <a class="dropdown-item" href="conformity.html">Conformity Assessment</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="institutions.html">Institutions</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="awards.html">Quality Awards</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="form.html">Feedback</a>
+                        </li>
+                    </ul>
+                </div>
             </nav>
         </div>
-    </header>
+    </div>
 
-    <main class="container">
-        <section>
-            <h2>Technical Barriers to Trade (TBT) & Sanitary and Phytosanitary (SPS) Measures</h2>
-            <p>Content on TBT and SPS measures will be added here. This will explain how these regulations impact trade
-                and quality assurance for SMEs.</p>
+    <div class="main-content">
+        <!-- Banner Section -->
+        <section class="banner_section">
+            <div class="container text-center">
+                <h1>TBT & SPS Measures</h1>
+                <p>Navigating Technical Barriers to Trade and Sanitary/Phytosanitary Requirements</p>
+            </div>
         </section>
-    </main>
 
-    <footer>
+        <!-- Main Content Section -->
+        <section class="content_section">
+            <div class="container">
+                <div class="section_title">
+                    <h2>Technical Barriers to Trade & Sanitary Measures</h2>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-10 mx-auto">
+                        <div class="text-center mb-5">
+                            <p>TBT (Technical Barriers to Trade) and SPS (Sanitary and Phytosanitary) measures are crucial elements of international trade agreements designed to protect human, animal, and plant health while ensuring fair trade practices. Sri Lanka implements these measures to facilitate exports and protect domestic consumers.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="definition-box">
+                            <h4 class="text-primary"><i class="fas fa-exclamation-triangle mr-2"></i>Technical Barriers to Trade (TBT)</h4>
+                            <p>TBT measures include technical regulations, standards, and conformity assessment procedures that can affect international trade. They cover aspects such as product quality, safety, labeling, and packaging requirements.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="definition-box">
+                            <h4 class="text-primary"><i class="fas fa-seedling mr-2"></i>Sanitary & Phytosanitary (SPS)</h4>
+                            <p>SPS measures are applied to protect human, animal, or plant life from risks arising from additives, contaminants, toxins, pests, or diseases. They include food safety regulations and quarantine requirements.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <div class="key_areas">
+                            <h3>Importance of TBT/SPS for Sri Lanka</h3>
+                            <ul>
+                                <li>Ensure Sri Lankan exports meet international requirements</li>
+                                <li>Protect domestic consumers from unsafe products</li>
+                                <li>Prevent the introduction of pests and diseases</li>
+                                <li>Facilitate market access for Sri Lankan products</li>
+                                <li>Comply with WTO agreements on TBT and SPS</li>
+                                <li>Prevent unnecessary technical barriers to trade</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col-md-12">
+                        <div class="tbt-sps-card card">
+                            <div class="card-header">
+                                <h4 class="mb-0">National Enquiry Points</h4>
+                            </div>
+                            <div class="card-body">
+                                <p>Sri Lanka has established National Enquiry Points as required by the WTO TBT and SPS Agreements:</p>
+                                
+                                <div class="row mt-4">
+                                    <div class="col-md-6">
+                                        <div class="bg-light p-4 rounded">
+                                            <h5><i class="fas fa-question-circle text-primary mr-2"></i>TBT Enquiry Point</h5>
+                                            <p>Sri Lanka Standards Institution (SLSI)</p>
+                                            <ul>
+                                                <li>Provides information on technical regulations</li>
+                                                <li>Accepts comments on proposed regulations</li>
+                                                <li>Coordinates with relevant agencies</li>
+                                            </ul>
+                                            <p class="mt-3">
+                                                <strong>Contact:</strong> tbt@spsi.lk<br>
+                                                <strong>Phone:</strong> +94 11 2 675 675
+                                            </p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-6">
+                                        <div class="bg-light p-4 rounded">
+                                            <h5><i class="fas fa-leaf text-success mr-2"></i>SPS Enquiry Point</h5>
+                                            <p>Department of Agriculture</p>
+                                            <ul>
+                                                <li>Provides information on SPS measures</li>
+                                                <li>Handles notifications on food safety</li>
+                                                <li>Coordinates plant and animal health matters</li>
+                                            </ul>
+                                            <p class="mt-3">
+                                                <strong>Contact:</strong> sps@doa.gov.lk<br>
+                                                <strong>Phone:</strong> +94 11 2 876 543
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <h3 class="text-center mb-4">TBT/SPS Notification Process</h3>
+                        <p class="text-center">How Sri Lanka notifies and responds to TBT/SPS measures</p>
+                    </div>
+                    
+                    <div class="col-md-12">
+                        <div class="process-steps">
+                            <div class="process-step">
+                                <div class="step-icon">
+                                    <i class="fas fa-bullhorn"></i>
+                                </div>
+                                <h5>Drafting</h5>
+                                <p>Regulatory agency prepares draft measure</p>
+                            </div>
+                            
+                            <div class="process-step">
+                                <div class="step-icon">
+                                    <i class="fas fa-share-alt"></i>
+                                </div>
+                                <h5>Notification</h5>
+                                <p>Sent to WTO through National Enquiry Point</p>
+                            </div>
+                            
+                            <div class="process-step">
+                                <div class="step-icon">
+                                    <i class="fas fa-globe"></i>
+                                </div>
+                                <h5>Circulation</h5>
+                                <p>WTO circulates to all member countries</p>
+                            </div>
+                            
+                            <div class="process-step">
+                                <div class="step-icon">
+                                    <i class="fas fa-comments"></i>
+                                </div>
+                                <h5>Comments</h5>
+                                <p>60-day period for member comments</p>
+                            </div>
+                            
+                            <div class="process-step">
+                                <div class="step-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <h5>Implementation</h5>
+                                <p>Final measure adopted after review</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-12 text-center mt-4">
+                        <a href="#" class="btn btn-outline-primary">View Current Notifications</a>
+                        <a href="#" class="btn btn-primary ml-3">Submit Comments</a>
+                    </div>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col-md-6">
+                        <div class="tbt-sps-card card">
+                            <div class="card-header">
+                                <h4 class="mb-0">Key Regulatory Frameworks</h4>
+                            </div>
+                            <div class="card-body">
+                                <h5>TBT-Related Legislation</h5>
+                                <ul>
+                                    <li>Consumer Affairs Authority Act</li>
+                                    <li>Sri Lanka Standards Institution Act</li>
+                                    <li>Measurement Units, Standards & Services Act</li>
+                                    <li>Import and Export Control Act</li>
+                                </ul>
+                                
+                                <h5 class="mt-4">SPS-Related Legislation</h5>
+                                <ul>
+                                    <li>Food Act</li>
+                                    <li>Plant Protection Act</li>
+                                    <li>Animal Diseases Act</li>
+                                    <li>Cosmetics, Devices & Drugs Act</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="tbt-sps-card card">
+                            <div class="card-header">
+                                <h4 class="mb-0">Institutions Involved</h4>
+                            </div>
+                            <div class="card-body">
+                                <table class="table">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th>Institution</th>
+                                            <th>Role</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Sri Lanka Standards Institution (SLSI)</td>
+                                            <td>National Standards Body, TBT Enquiry Point</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Department of Agriculture</td>
+                                            <td>SPS Enquiry Point, Plant Health</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ministry of Health</td>
+                                            <td>Food Safety, Human Health</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Department of Animal Production & Health</td>
+                                            <td>Animal Health, Veterinary Measures</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Sri Lanka Customs</td>
+                                            <td>Border Control, Import Inspection</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col-md-12">
+                        <div class="key_areas">
+                            <h3>Impact on Key Export Sectors</h3>
+                            <div class="row mt-4">
+                                <div class="col-md-4">
+                                    <div class="bg-white p-4 rounded shadow-sm">
+                                        <div class="d-flex align-items-center mb-3">
+                                            <div class="bg-primary text-white p-2 rounded mr-3">
+                                                <i class="fas fa-tshirt fa-2x"></i>
+                                            </div>
+                                            <h5 class="mb-0">Textiles & Apparel</h5>
+                                        </div>
+                                        <p>Compliance with chemical restrictions (REACH), labeling requirements, and flammability standards</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-4">
+                                    <div class="bg-white p-4 rounded shadow-sm">
+                                        <div class="d-flex align-items-center mb-3">
+                                            <div class="bg-success text-white p-2 rounded mr-3">
+                                                <i class="fas fa-seedling fa-2x"></i>
+                                            </div>
+                                            <h5 class="mb-0">Agriculture</h5>
+                                        </div>
+                                        <p>Meeting pesticide residue limits, phytosanitary requirements, and organic certification standards</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-4">
+                                    <div class="bg-white p-4 rounded shadow-sm">
+                                        <div class="d-flex align-items-center mb-3">
+                                            <div class="bg-warning text-white p-2 rounded mr-3">
+                                                <i class="fas fa-fish fa-2x"></i>
+                                            </div>
+                                            <h5 class="mb-0">Fisheries</h5>
+                                        </div>
+                                        <p>Compliance with EU IUU regulations, HACCP requirements, and traceability systems</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-4 mt-4">
+                                    <div class="bg-white p-4 rounded shadow-sm">
+                                        <div class="d-flex align-items-center mb-3">
+                                            <div class="bg-info text-white p-2 rounded mr-3">
+                                                <i class="fas fa-coffee fa-2x"></i>
+                                            </div>
+                                            <h5 class="mb-0">Tea & Spices</h5>
+                                        </div>
+                                        <p>Meeting maximum residue levels, aflatoxin limits, and quality grading standards</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-4 mt-4">
+                                    <div class="bg-white p-4 rounded shadow-sm">
+                                        <div class="d-flex align-items-center mb-3">
+                                            <div class="bg-danger text-white p-2 rounded mr-3">
+                                                <i class="fas fa-plug fa-2x"></i>
+                                            </div>
+                                            <h5 class="mb-0">Electronics</h5>
+                                        </div>
+                                        <p>Compliance with RoHS, WEEE, and electrical safety standards</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-4 mt-4">
+                                    <div class="bg-white p-4 rounded shadow-sm">
+                                        <div class="d-flex align-items-center mb-3">
+                                            <div class="bg-secondary text-white p-2 rounded mr-3">
+                                                <i class="fas fa-prescription-bottle fa-2x"></i>
+                                            </div>
+                                            <h5 class="mb-0">Ayurveda & Cosmetics</h5>
+                                        </div>
+                                        <p>Meeting GMP requirements, ingredient restrictions, and labeling regulations</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col-md-12">
+                        <div class="tbt-sps-card card">
+                            <div class="card-header">
+                                <h4 class="mb-0">Support for Exporters</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h5>Information Services</h5>
+                                        <ul class="benefit-list">
+                                            <li>Early warning on new regulations</li>
+                                            <li>Market-specific requirements database</li>
+                                            <li>Standards information center</li>
+                                            <li>Regular trade alerts newsletter</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h5>Technical Assistance</h5>
+                                        <ul class="benefit-list">
+                                            <li>Testing and certification support</li>
+                                            <li>Compliance training programs</li>
+                                            <li>Laboratory upgrading assistance</li>
+                                            <li>Export certification services</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                <div class="row mt-4">
+                                    <div class="col-12 text-center">
+                                        <a href="#" class="btn btn-primary mr-3">Access Export Requirements Database</a>
+                                        <a href="#" class="btn btn-outline-primary">Register for Training</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="footer_section">
         <div class="container">
-            <p>&copy; 2025 NQI Sri Lanka. All rights reserved.</p>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                    <h5>Quick Links</h5>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="introduction.html">Introduction to NQI</a></li>
+                        <li><a href="sme-policy.html">SME Development</a></li>
+                        <li><a href="standards.html">Standards</a></li>
+                        <li><a href="metrology.html">Metrology</a></li>
+                        <li><a href="accreditation.html">Accreditation</a></li>
+                        <li><a href="awards.html">Quality Awards</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                    <h5>Contact Information</h5>
+                    <ul class="contact_info">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Ministry of Industry & Commerce, Colombo 01, Sri Lanka</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>+94 11 2 675 675</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>info@nqi-srilanka.gov.lk</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <span>Monday-Friday: 8:30 AM - 4:30 PM</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4 col-md-12">
+                    <h5>About NQI Sri Lanka</h5>
+                    <p>The National Quality Infrastructure (NQI) is the backbone for quality assurance in Sri Lanka,
+                        providing the technical framework for standards, metrology, accreditation, and conformity
+                        assessment services to enhance the competitiveness of Sri Lankan products and services in global
+                        markets.</p>
+                    <div class="social_icon">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="copyright_section">
+            <div class="container">
+                <p>&copy; 2025 NQI Sri Lanka. All rights reserved. | Developed for SMEs in Sri Lanka</p>
+            </div>
         </div>
     </footer>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+    <script>
+        // Add active class to current page in navigation
+        $(document).ready(function () {
+            var current = location.pathname.split('/')[1];
+            if (current === "") current = "index.html";
+            $('.navbar-nav li a').each(function () {
+                var $this = $(this);
+                if ($this.attr('href').indexOf(current) !== -1) {
+                    $this.parent().addClass('active');
+                    
+                    // If it's in a dropdown, also activate the parent
+                    if ($this.parents('.dropdown-menu').length) {
+                        $this.closest('.dropdown').addClass('active');
+                        $this.closest('.dropdown-menu').prev('.dropdown-toggle').addClass('active');
+                    }
+                }
+            });
+
+            // Smooth scrolling
+            $('a[href*="#"]').on('click', function (e) {
+                e.preventDefault();
+                $('html, body').animate(
+                    {
+                        scrollTop: $($(this).attr('href')).offset().top - 70,
+                    },
+                    500,
+                    'linear'
+                );
+            });
+        });
+    </script>
 </body>
 
 </html>
