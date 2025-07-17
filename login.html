@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - NQI Sri Lanka</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,700|Sen:400,700,800&display=swap" rel="stylesheet">
+    <style>
+        /* Reuse existing styles from index.html */
+        :root {
+            --primary-color: #0d47a1;
+            --secondary-color: #a13e0d;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            background-color: #f5f7fa;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-container {
+            max-width: 500px;
+            width: 100%;
+            margin: 2rem auto;
+        }
+
+        .login-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .login-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .login-header {
+            background: linear-gradient(135deg, var(--primary-color), #1a73e8);
+            color: white;
+            padding: 25px;
+            text-align: center;
+            border: none;
+        }
+
+        .login-header h2 {
+            font-family: 'Sen', sans-serif;
+            font-weight: 800;
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        .login-body {
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-control {
+            height: 50px;
+            border-radius: 5px;
+            padding: 0 15px;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(13, 71, 161, 0.25);
+        }
+
+        .btn-login {
+            background: linear-gradient(135deg, var(--primary-color), #1a73e8);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 1.1rem;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s;
+            width: 100%;
+            height: 50px;
+        }
+
+        .btn-login:hover {
+            background: linear-gradient(135deg, #0a3a7a, #0d47a1);
+            transform: translateY(-2px);
+        }
+
+        .login-footer {
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid #eee;
+        }
+
+        .login-footer a {
+            color: var(--primary-color);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .login-footer a:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .social-btn.google {
+            background: #DB4437;
+        }
+
+        .social-btn.facebook {
+            background: #4267B2;
+        }
+
+        .social-btn.linkedin {
+            background: #0077B5;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .or-divider {
+            display: flex;
+            align-items: center;
+            margin: 25px 0;
+        }
+
+        .or-divider::before,
+        .or-divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #ddd;
+        }
+
+        .or-divider span {
+            padding: 0 15px;
+            color: #777;
+            font-weight: 500;
+        }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .remember-me label {
+            color: #555;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Section -->
+    <div class="header_section">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <a class="navbar-brand" href="index.html">NQI Sri Lanka</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <!-- Other nav items -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="form.html">Feedback</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="login.html">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="signup.html">Sign Up</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="container">
+            <div class="login-container">
+                <div class="login-card">
+                    <div class="login-header">
+                        <h2>Login to Your Account</h2>
+                    </div>
+                    <div class="login-body">
+                        <form id="loginForm">
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" class="form-control" id="email" required
+                                    placeholder="Enter your email">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" id="password" required
+                                    placeholder="Enter your password">
+                            </div>
+                            <div class="remember-forgot">
+                                <div class="remember-me">
+                                    <input type="checkbox" id="remember">
+                                    <label for="remember">Remember me</label>
+                                </div>
+                                <a href="forgot-password.html">Forgot Password?</a>
+                            </div>
+                            <button type="submit" class="btn btn-login">Login</button>
+
+                            <div class="or-divider">
+                                <span>OR</span>
+                            </div>
+
+                            <div class="social-login">
+                                <a href="#" class="social-btn google">
+                                    <i class="fab fa-google"></i>
+                                </a>
+                                <a href="#" class="social-btn facebook">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="#" class="social-btn linkedin">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="login-footer">
+                        <p>Don't have an account? <a href="signup.html">Sign Up Now</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <!-- Reuse the footer from index.html -->
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+    <script>
+        // Form validation
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Simple validation
+            if (email && password) {
+                // Here you would typically make an API call
+                alert('Login successful! Redirecting to your dashboard...');
+                // Redirect to dashboard or home page
+                window.location.href = 'index.html';
+            } else {
+                alert('Please fill in all required fields.');
+            }
+        });
+    </script>
+</body>
+
+</html>
+[file content end]

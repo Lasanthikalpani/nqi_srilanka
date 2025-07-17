@@ -14,7 +14,9 @@
     <style>
         :root {
             --primary-color: #0d47a1;
-            --secondary-color: #ff6f00;
+            --secondary-color: #a13e0d;
+            --stakeholder-color: #0d47a1; /* Professional green */
+            --stakeholder-light: #468bf1; /* Lighter green */
             --light-color: #f8f9fa;
             --dark-color: #212529;
         }
@@ -365,6 +367,123 @@
             margin: 0;
             color: rgba(255, 255, 255, 0.7);
         }
+        
+        /* Stakeholder Form Highlight - Green Theme */
+        .stakeholder-highlight {
+            background: linear-gradient(135deg, var(--stakeholder-light), var(--stakeholder-color));
+            padding: 60px 0;
+            position: relative;
+            overflow: hidden;
+            margin: 0;
+            color: white;
+        }
+        
+        .stakeholder-highlight::before {
+            content: "";
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
+            transform: rotate(30deg);
+        }
+        
+        .stakeholder-highlight .container {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+        }
+        
+        .stakeholder-highlight .highlight-card {
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .stakeholder-highlight h3 {
+            font-family: 'Sen', sans-serif;
+            font-weight: 700;
+            margin-bottom: 20px;
+            font-size: 2.2rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .stakeholder-highlight p {
+            font-size: 1.15rem;
+            margin-bottom: 20px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+        
+        .stakeholder-highlight .btn-highlight {
+            background: white;
+            color: var(--stakeholder-color);
+            border: none;
+            padding: 14px 40px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+            display: inline-block;
+        }
+        
+        .stakeholder-highlight .btn-highlight:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            background: #f5f5f5;
+        }
+        
+        .stakeholder-highlight .benefits {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .stakeholder-highlight .benefit-item {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 250px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .stakeholder-highlight .benefit-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .stakeholder-highlight .benefit-item i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: white;
+        }
+        
+        .stakeholder-highlight .benefit-item h4 {
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        /* Navigation Highlight */
+        .nav-item.stakeholder-nav .nav-link {
+            background-color: var(--stakeholder-color);
+            color: white !important;
+            border-radius: 4px;
+            font-weight: bold;
+            padding: 10px 20px;
+        }
+        
+        .nav-item.stakeholder-nav .nav-link:hover {
+            background-color: #1b5e20;
+        }
 
         @media (max-width: 991px) {
             .banner_section h1 {
@@ -397,6 +516,28 @@
             .footer_section .row>div {
                 margin-bottom: 30px;
             }
+            
+            .stakeholder-highlight {
+                padding: 40px 0;
+            }
+            
+            .stakeholder-highlight .highlight-card {
+                padding: 20px;
+            }
+            
+            .stakeholder-highlight h3 {
+                font-size: 1.8rem;
+            }
+            
+            .stakeholder-highlight .benefits {
+                gap: 15px;
+            }
+            
+            .stakeholder-highlight .benefit-item {
+                padding: 15px;
+                max-width: 100%;
+                flex: 1 1 100%;
+            }
         }
     </style>
 </head>
@@ -405,7 +546,6 @@
     <!-- Header Section -->
     <div class="header_section">
         <div class="container">
-
             <nav class="navbar navbar-expand-lg navbar-light">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -417,12 +557,12 @@
                             <a class="nav-link" href="index.html">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="introduction.html">QI Framework</a> <!-- Updated name -->
+                            <a class="nav-link" href="introduction.html">QI Framework</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="sme-policy.html">SME Policy</a> <!-- Updated name -->
+                            <a class="nav-link" href="sme-policy.html">SME Policy</a>
                         </li>
-                        <li class="nav-item dropdown"> <!-- Converted to dropdown -->
+                        <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="strategyDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 NQI Strategy
@@ -439,11 +579,10 @@
                                 Quality Services
                             </a>
                             <div class="dropdown-menu" aria-labelledby="qualityDropdown">
-                                <a class="dropdown-item" href="standards.html">Standardization</a> <!-- Updated name -->
+                                <a class="dropdown-item" href="standards.html">Standardization</a>
                                 <a class="dropdown-item" href="metrology.html">Metrology</a>
                                 <a class="dropdown-item" href="accreditation.html">Accreditation</a>
                                 <a class="dropdown-item" href="conformity.html">Conformity Assessment</a>
-                                <!-- New sublink -->
                             </div>
                         </li>
                         <li class="nav-item">
@@ -452,6 +591,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="awards.html">Quality Awards</a>
                         </li>
+                        
                         <li class="nav-item">
                             <a class="nav-link" href="form.html">Feedback</a>
                         </li>
@@ -492,7 +632,6 @@
                         </div>
                     </div>
 
-                    <!-- Repeat similar structure for other cards -->
                     <div class="col-md-3 mb-4">
                         <div class="feature_card card h-100">
                             <div class="card-header">
@@ -537,8 +676,39 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
 
-
+        <!-- Stakeholder Form Highlight Section - Green Theme -->
+        <section class="stakeholder-highlight">
+            <div class="container">
+                <div class="highlight-card">
+                    <h3>Help Improve Sri Lanka's Quality Infrastructure</h3>
+                    <p>We're building a comprehensive database of quality infrastructure stakeholders in Sri Lanka. Your participation helps us create a more accurate and useful resource for businesses and organizations across the country.</p>
+                    <p>Update your organization's information to be included in our National Quality Infrastructure directory.</p>
+                    
+                    <a href="nqi_form.html" class="btn btn-highlight">
+                        <i class="fas fa-edit mr-2"></i>Update Stakeholder Information
+                    </a>
+                    
+                    <div class="benefits">
+                        <div class="benefit-item">
+                            <i class="fas fa-database"></i>
+                            <h4>Comprehensive Database</h4>
+                            <p>Help build Sri Lanka's most complete quality infrastructure directory</p>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-handshake"></i>
+                            <h4>Enhanced Collaboration</h4>
+                            <p>Connect with other stakeholders and quality service providers</p>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-chart-line"></i>
+                            <h4>Business Growth</h4>
+                            <p>Increase visibility for your organization among potential clients</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -636,6 +806,7 @@
                         <li><a href="metrology.html">Metrology</a></li>
                         <li><a href="accreditation.html">Accreditation</a></li>
                         <li><a href="awards.html">Quality Awards</a></li>
+                        <li><a href="nqi_form.html">Stakeholder Form</a></li>
                     </ul>
                 </div>
 
