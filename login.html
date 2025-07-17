@@ -2,17 +2,19 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login - NQI Sri Lanka</title>
+
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" />
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:400,700|Sen:400,700,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,700|Sen:400,700,800&display=swap"
+        rel="stylesheet" />
+
     <style>
-        /* Reuse existing styles from index.html */
         :root {
             --primary-color: #0d47a1;
             --secondary-color: #a13e0d;
@@ -22,13 +24,40 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            color: #333;
             background-color: #f5f7fa;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
         }
 
+        /* Header */
+        .header_section {
+            background-color: var(--primary-color);
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            color: #fff;
+            text-decoration: none;
+            font-family: 'Sen', sans-serif;
+            font-weight: 800;
+            font-size: 1.5rem;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        /* Login */
         .main-content {
             flex: 1;
             display: flex;
@@ -37,37 +66,30 @@
         }
 
         .login-container {
-            max-width: 500px;
             width: 100%;
-            margin: 2rem auto;
+            max-width: 500px;
+            padding: 20px;
         }
 
         .login-card {
-            background: white;
+            background: #fff;
             border-radius: 10px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
             overflow: hidden;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            border: none;
-        }
-
-        .login-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s;
         }
 
         .login-header {
             background: linear-gradient(135deg, var(--primary-color), #1a73e8);
             color: white;
-            padding: 25px;
             text-align: center;
-            border: none;
+            padding: 30px;
         }
 
         .login-header h2 {
-            font-family: 'Sen', sans-serif;
-            font-weight: 800;
             margin: 0;
+            font-family: 'Sen', sans-serif;
+            font-weight: 700;
             font-size: 1.8rem;
         }
 
@@ -75,58 +97,37 @@
             padding: 30px;
         }
 
-        .form-group {
-            margin-bottom: 1.5rem;
+        .form-group label {
+            font-weight: 500;
+            color: #333;
         }
 
         .form-control {
-            height: 50px;
-            border-radius: 5px;
-            padding: 0 15px;
-            font-size: 1rem;
-            border: 1px solid #ddd;
-            transition: all 0.3s;
-        }
-
-        .form-control:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 0.2rem rgba(13, 71, 161, 0.25);
+            height: 45px;
+            border-radius: 6px;
         }
 
         .btn-login {
             background: linear-gradient(135deg, var(--primary-color), #1a73e8);
-            color: white;
+            color: #fff;
             border: none;
-            padding: 12px 20px;
-            font-size: 1.1rem;
-            border-radius: 5px;
+            height: 45px;
+            font-size: 1rem;
             font-weight: 600;
-            transition: all 0.3s;
+            border-radius: 6px;
             width: 100%;
-            height: 50px;
         }
 
         .btn-login:hover {
             background: linear-gradient(135deg, #0a3a7a, #0d47a1);
-            transform: translateY(-2px);
         }
 
-        .login-footer {
-            text-align: center;
-            padding: 20px 0;
-            border-top: 1px solid #eee;
-        }
-
-        .login-footer a {
-            color: var(--primary-color);
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-
-        .login-footer a:hover {
-            color: var(--secondary-color);
-            text-decoration: underline;
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
         }
 
         .social-login {
@@ -137,36 +138,33 @@
         }
 
         .social-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
             color: white;
-            font-size: 1.2rem;
-            transition: all 0.3s;
+            font-size: 1.1rem;
+            transition: 0.3s;
         }
 
         .social-btn.google {
-            background: #DB4437;
+            background-color: #db4437;
         }
 
         .social-btn.facebook {
-            background: #4267B2;
+            background-color: #4267b2;
         }
 
         .social-btn.linkedin {
-            background: #0077B5;
-        }
-
-        .social-btn:hover {
-            transform: translateY(-3px);
+            background-color: #0077b5;
         }
 
         .or-divider {
             display: flex;
             align-items: center;
+            text-align: center;
             margin: 25px 0;
         }
 
@@ -175,140 +173,153 @@
             content: "";
             flex: 1;
             height: 1px;
-            background: #ddd;
+            background: #ccc;
         }
 
         .or-divider span {
-            padding: 0 15px;
-            color: #777;
-            font-weight: 500;
+            margin: 0 10px;
+            color: #888;
         }
 
-        .remember-forgot {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
+        .login-footer {
+            text-align: center;
+            padding: 15px 20px;
+            background-color: #f1f1f1;
+            font-size: 0.95rem;
         }
 
-        .remember-me label {
-            color: #555;
-            margin-left: 5px;
+        .login-footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .login-footer a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #0d47a1;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 576px) {
+            .remember-forgot {
+                flex-direction: column;
+                align-items: flex-start;
+            }
         }
     </style>
 </head>
 
 <body>
+    <!-- Redirect if already authenticated -->
+    <script>
+        if (localStorage.getItem('authenticated') === 'true') {
+            fetch('check_session.php')
+                .then(res => res.json())
+                .then(data => {
+                    if (data.authenticated) window.location.href = 'index.html';
+                    else localStorage.removeItem('authenticated');
+                });
+        }
+    </script>
+
     <!-- Header Section -->
     <div class="header_section">
-        <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-light">
-                <a class="navbar-brand" href="index.html">NQI Sri Lanka</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.html">Home</a>
-                        </li>
-                        <!-- Other nav items -->
-                        <li class="nav-item">
-                            <a class="nav-link" href="form.html">Feedback</a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="login.html">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="signup.html">Sign Up</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
+        <a class="logo" href="index.html">
+            <i class="fas fa-certificate" style="font-size: 28px; margin-right: 10px; color: white;"></i>
+            NQI Sri Lanka
+        </a>
     </div>
 
+    <!-- Main Content -->
     <div class="main-content">
-        <div class="container">
-            <div class="login-container">
-                <div class="login-card">
-                    <div class="login-header">
-                        <h2>Login to Your Account</h2>
-                    </div>
-                    <div class="login-body">
-                        <form id="loginForm">
-                            <div class="form-group">
-                                <label for="email">Email Address</label>
-                                <input type="email" class="form-control" id="email" required
-                                    placeholder="Enter your email">
+        <div class="login-container">
+            <div class="login-card">
+                <div class="login-header">
+                    <h2>Login to Your Account</h2>
+                </div>
+                <div class="login-body">
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" class="form-control" required
+                                placeholder="Enter your email" />
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" class="form-control" required
+                                placeholder="Enter your password" />
+                        </div>
+                        <div class="remember-forgot">
+                            <div>
+                                <input type="checkbox" id="remember" />
+                                <label for="remember">Remember me</label>
                             </div>
-                            <div class="form-group">
-                                <label for="password">Password</label>
-                                <input type="password" class="form-control" id="password" required
-                                    placeholder="Enter your password">
-                            </div>
-                            <div class="remember-forgot">
-                                <div class="remember-me">
-                                    <input type="checkbox" id="remember">
-                                    <label for="remember">Remember me</label>
-                                </div>
-                                <a href="forgot-password.html">Forgot Password?</a>
-                            </div>
-                            <button type="submit" class="btn btn-login">Login</button>
+                            <a href="forgot-password.html">Forgot Password?</a>
+                        </div>
+                        <button type="submit" class="btn btn-login">Login</button>
 
-                            <div class="or-divider">
-                                <span>OR</span>
-                            </div>
+                        <div id="loginError" class="alert alert-danger mt-3" style="display: none;"></div>
 
-                            <div class="social-login">
-                                <a href="#" class="social-btn google">
-                                    <i class="fab fa-google"></i>
-                                </a>
-                                <a href="#" class="social-btn facebook">
-                                    <i class="fab fa-facebook-f"></i>
-                                </a>
-                                <a href="#" class="social-btn linkedin">
-                                    <i class="fab fa-linkedin-in"></i>
-                                </a>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="login-footer">
-                        <p>Don't have an account? <a href="signup.html">Sign Up Now</a></p>
-                    </div>
+                        <div class="or-divider"><span>OR</span></div>
+
+                        <div class="social-login">
+                            <a href="#" class="social-btn google"><i class="fab fa-google"></i></a>
+                            <a href="#" class="social-btn facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-btn linkedin"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </form>
+                </div>
+                <div class="login-footer">
+                    Don't have an account? <a href="signup.html">Sign Up Now</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Footer Section -->
-    <!-- Reuse the footer from index.html -->
+    <!-- Footer -->
+    <div class="footer">
+        © 2025 NQI Sri Lanka. All rights reserved.
+    </div>
 
-    <!-- JavaScript -->
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
     <script>
-        // Form validation
         document.getElementById('loginForm').addEventListener('submit', function (e) {
             e.preventDefault();
 
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
+            const errorDiv = document.getElementById('loginError');
 
-            // Simple validation
-            if (email && password) {
-                // Here you would typically make an API call
-                alert('Login successful! Redirecting to your dashboard...');
-                // Redirect to dashboard or home page
-                window.location.href = 'index.html';
-            } else {
-                alert('Please fill in all required fields.');
-            }
+            fetch('login.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        localStorage.setItem('authenticated', 'true');
+                        window.location.href = 'index.html';
+                    } else {
+                        errorDiv.innerHTML = data.error || "Login failed. Please try again.";
+                        errorDiv.style.display = 'block';
+                    }
+                })
+                .catch(() => {
+                    errorDiv.innerHTML = "Something went wrong. Please try again.";
+                    errorDiv.style.display = 'block';
+                });
         });
     </script>
 </body>
 
 </html>
-[file content end]

@@ -1,6 +1,13 @@
+<?php
+session_start();
+// Redirect to login if not authenticated
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,10 +22,8 @@
         :root {
             --primary-color: #0d47a1;
             --secondary-color: #a13e0d;
-            --stakeholder-color: #0d47a1;
-            /* Professional green */
-            --stakeholder-light: #468bf1;
-            /* Lighter green */
+            --stakeholder-color: #0d47a1; /* Professional green */
+            --stakeholder-light: #468bf1; /* Lighter green */
             --light-color: #f8f9fa;
             --dark-color: #212529;
         }
@@ -369,7 +374,7 @@
             margin: 0;
             color: rgba(255, 255, 255, 0.7);
         }
-
+        
         /* Stakeholder Form Highlight - Green Theme */
         .stakeholder-highlight {
             background: linear-gradient(135deg, var(--stakeholder-light), var(--stakeholder-color));
@@ -379,7 +384,7 @@
             margin: 0;
             color: white;
         }
-
+        
         .stakeholder-highlight::before {
             content: "";
             position: absolute;
@@ -390,18 +395,18 @@
             background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
             transform: rotate(30deg);
         }
-
+        
         .stakeholder-highlight .container {
             position: relative;
             z-index: 1;
             max-width: 900px;
         }
-
+        
         .stakeholder-highlight .highlight-card {
             text-align: center;
             padding: 30px;
         }
-
+        
         .stakeholder-highlight h3 {
             font-family: 'Sen', sans-serif;
             font-weight: 700;
@@ -409,7 +414,7 @@
             font-size: 2.2rem;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
-
+        
         .stakeholder-highlight p {
             font-size: 1.15rem;
             margin-bottom: 20px;
@@ -418,7 +423,7 @@
             margin-right: auto;
             line-height: 1.7;
         }
-
+        
         .stakeholder-highlight .btn-highlight {
             background: white;
             color: var(--stakeholder-color);
@@ -432,13 +437,13 @@
             margin-top: 20px;
             display: inline-block;
         }
-
+        
         .stakeholder-highlight .btn-highlight:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
             background: #f5f5f5;
         }
-
+        
         .stakeholder-highlight .benefits {
             display: flex;
             justify-content: center;
@@ -446,7 +451,7 @@
             gap: 30px;
             margin-top: 40px;
         }
-
+        
         .stakeholder-highlight .benefit-item {
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(5px);
@@ -456,24 +461,24 @@
             text-align: center;
             transition: all 0.3s;
         }
-
+        
         .stakeholder-highlight .benefit-item:hover {
             transform: translateY(-5px);
             background: rgba(255, 255, 255, 0.2);
         }
-
+        
         .stakeholder-highlight .benefit-item i {
             font-size: 2.5rem;
             margin-bottom: 15px;
             color: white;
         }
-
+        
         .stakeholder-highlight .benefit-item h4 {
             font-weight: 600;
             margin-bottom: 10px;
             font-size: 1.2rem;
         }
-
+        
         /* Navigation Highlight */
         .nav-item.stakeholder-nav .nav-link {
             background-color: var(--stakeholder-color);
@@ -482,7 +487,7 @@
             font-weight: bold;
             padding: 10px 20px;
         }
-
+        
         .nav-item.stakeholder-nav .nav-link:hover {
             background-color: #1b5e20;
         }
@@ -518,23 +523,23 @@
             .footer_section .row>div {
                 margin-bottom: 30px;
             }
-
+            
             .stakeholder-highlight {
                 padding: 40px 0;
             }
-
+            
             .stakeholder-highlight .highlight-card {
                 padding: 20px;
             }
-
+            
             .stakeholder-highlight h3 {
                 font-size: 1.8rem;
             }
-
+            
             .stakeholder-highlight .benefits {
                 gap: 15px;
             }
-
+            
             .stakeholder-highlight .benefit-item {
                 padding: 15px;
                 max-width: 100%;
@@ -543,280 +548,219 @@
         }
     </style>
 </head>
-
 <body>
-    <!-- Add this to the top of every protected page -->
-    <script>
-        // Check authentication status on page load
-        fetch('check_session.php')
-            .then(response => response.json())
-            .then(data => {
-                if (!data.authenticated) {
-                    localStorage.removeItem('authenticated');
-                    window.location.href = 'login.html';
-                }
-            });
-    </script>
-    <!-- index.html - Add this at the very top of <body> -->
-    <script>
-        // Check if user is authenticated
-        if (localStorage.getItem('authenticated') !== 'true') {
-            window.location.href = 'login.html';
-        }
-    </script>
-    <!-- Header Section -->
     <div class="header_section">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.html">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="introduction.html">QI Framework</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="sme-policy.html">SME Policy</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="strategyDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                NQI Strategy
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="strategyDropdown">
-                                <a class="dropdown-item" href="nqi-strategy.html">Quality Policy</a>
-                                <a class="dropdown-item" href="tbt-sps.html">TBT & SPS</a>
-                                <a class="dropdown-item" href="regulatory-functions.html">Regulatory Functions</a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="qualityDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Quality Services
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="qualityDropdown">
-                                <a class="dropdown-item" href="standards.html">Standardization</a>
-                                <a class="dropdown-item" href="metrology.html">Metrology</a>
-                                <a class="dropdown-item" href="accreditation.html">Accreditation</a>
-                                <a class="dropdown-item" href="conformity.html">Conformity Assessment</a>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="institutions.html">Institutions</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="awards.html">Quality Awards</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="form.html">Feedback</a>
-                        </li>
-                        <!-- index.html - Add logout button in header -->
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" id="logoutLink">Logout</a>
-                        </li>
-                    </ul>
-                </div>
+                <!-- ... existing nav ... -->
+                <ul class="navbar-nav ml-auto">
+                    <!-- ... other nav items ... -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-user mr-1"></i> 
+                            <?php echo htmlspecialchars($_SESSION['first_name']); ?>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="userDropdown">
+                            <a class="dropdown-item" href="profile.html">Profile</a>
+                            <a class="dropdown-item" href="logout.php">Logout</a>
+                        </div>
+                    </li>
+                </ul>
             </nav>
         </div>
     </div>
-
-    <div class="main-content">
+<div class="main-content">
         <!-- Banner Section -->
         <section class="banner_section">
             <div class="container text-center">
-                <h1>QI Catalogue Sri Lanka</h1>
-                <p>A directory for understanding the National Quality Infrastructure and services for SMEs in Sri Lanka
-                </p>
-                <a href="#key-areas" class="btn btn-warning btn-lg mt-3">Explore NQI Framework</a>
+                <h1>NQI Stakeholder Information Update</h1>
+                <p>Help us maintain an up-to-date National Quality Infrastructure stakeholder database in Sri Lanka</p>
             </div>
         </section>
 
-        <!-- Feature Section -->
-        <section class="feature_section">
+        <!-- Form Section -->
+        <section class="form-section">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-3 mb-4">
-                        <div class="feature_card card h-100">
-                            <div class="card-header">
-                                <h3 class="mb-0">Standards</h3>
-                            </div>
-                            <div class="card-body">
-                                <div class="icon">
-                                    <i class="fas fa-book"></i>
-                                </div>
-                                <p>SLS, ISO, and technical regulations developed by Sri Lanka Standards Institution
-                                    (SLSI)</p>
-                                <a href="standards.html" class="btn btn-sm btn-outline-primary">Learn More</a>
-                            </div>
-                        </div>
-                    </div>
+                <div class="form-container">
+                    <h2 class="form-title">🇱🇰 NQI Stakeholder Information Update – Sri Lanka</h2>
+                    <p class="text-center mb-4">This form collects up-to-date contact, services, and accreditation details from NQI bodies and stakeholders in Sri Lanka.</p>
 
-                    <div class="col-md-3 mb-4">
-                        <div class="feature_card card h-100">
-                            <div class="card-header">
-                                <h3 class="mb-0">Metrology</h3>
-                            </div>
-                            <div class="card-body">
-                                <div class="icon">
-                                    <i class="fas fa-ruler-combined"></i>
-                                </div>
-                                <p>Measurement services by MUSSD - National Metrology Institute</p>
-                                <a href="metrology.html" class="btn btn-sm btn-outline-primary">Learn More</a>
-                            </div>
+                    <form action="submit_nqi_form.php" method="POST">
+                        <!-- Section 1: Organization Details -->
+                        <h5 class="section-title">🏢 Organization Details</h5>
+                        
+                        <div class="form-group">
+                            <label for="organization_name">Organization Name *</label>
+                            <input type="text" class="form-control" id="organization_name" name="organization_name" required>
                         </div>
-                    </div>
 
-                    <div class="col-md-3 mb-4">
-                        <div class="feature_card card h-100">
-                            <div class="card-header">
-                                <h3 class="mb-0">Accreditation</h3>
-                            </div>
-                            <div class="card-body">
-                                <div class="icon">
-                                    <i class="fas fa-certificate"></i>
-                                </div>
-                                <p>SLAB accreditation for testing labs, certification bodies and inspection agencies</p>
-                                <a href="accreditation.html" class="btn btn-sm btn-outline-primary">Learn More</a>
-                            </div>
+                        <div class="form-group">
+                            <label for="organization_type">Type of Organization *</label>
+                            <select class="form-control" id="organization_type" name="organization_type" required>
+                                <option>🏛️ NQI Body (e.g., SLSI, SLAB, MUSSD)</option>
+                                <option>⚖️ Regulatory Authority</option>
+                                <option>🔬 Testing Laboratory</option>
+                                <option>📜 Certification Body</option>
+                                <option>🎓 Educational/Research Institute</option>
+                                <option>🏭 Industry/Enterprise</option>
+                                <option>🏢 Industry Association/Chamber</option>
+                                <option>📝 Other</option>
+                            </select>
                         </div>
-                    </div>
 
-                    <div class="col-md-3 mb-4">
-                        <div class="feature_card card h-100">
-                            <div class="card-header">
-                                <h3 class="mb-0">Conformity Assessment</h3>
-                            </div>
-                            <div class="card-body">
-                                <div class="icon">
-                                    <i class="fas fa-check-double"></i>
+                        <div class="form-group">
+                            <label for="organization_type_other">✏️ If Other, please specify</label>
+                            <input type="text" class="form-control" id="organization_type_other" name="organization_type_other">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contact_person">👤 Contact Person Name</label>
+                            <input type="text" class="form-control" id="contact_person" name="contact_person">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="designation">💼 Designation/Position</label>
+                            <input type="text" class="form-control" id="designation" name="designation">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">📧 Email Address *</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">📞 Phone Number *</label>
+                            <input type="text" class="form-control" id="phone" name="phone" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="website">🌐 Official Website</label>
+                            <input type="url" class="form-control" id="website" name="website">
+                        </div>
+
+                        <div class="section-divider"></div>
+                        
+                        <!-- Section 2: Services -->
+                        <h5 class="section-title">📝 Services</h5>
+                        
+                        <div class="form-group">
+                            <label for="core_services">Describe your core activities and services</label>
+                            <textarea class="form-control" id="core_services" name="core_services" rows="4"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>☑️ Services Offered *</label>
+                            <div class="checkbox-group">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="services[]" value="📘 Standards Development" id="service1">
+                                    <label class="form-check-label" for="service1">Standards Development</label>
                                 </div>
-                                <p>Testing, inspection and certification services for product compliance</p>
-                                <a href="conformity.html" class="btn btn-sm btn-outline-primary">Learn More</a>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="services[]" value="🧪 Calibration" id="service2">
+                                    <label class="form-check-label" for="service2">Calibration</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="services[]" value="🛡️ Certification" id="service3">
+                                    <label class="form-check-label" for="service3">Product/System Certification</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="services[]" value="🔬 Laboratory Testing" id="service4">
+                                    <label class="form-check-label" for="service4">Laboratory Testing</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="services[]" value="🔎 Inspection" id="service5">
+                                    <label class="form-check-label" for="service5">Inspection</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="services[]" value="🎯 Training" id="service6">
+                                    <label class="form-check-label" for="service6">Training</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="services[]" value="📏 Metrology" id="service7">
+                                    <label class="form-check-label" for="service7">Metrology</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="services[]" value="⚖️ Regulatory Oversight" id="service8">
+                                    <label class="form-check-label" for="service8">Regulatory Oversight</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="services[]" value="🧠 R&D" id="service9">
+                                    <label class="form-check-label" for="service9">Research & Development</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="services[]" value="📝 Other" id="service10">
+                                    <label class="form-check-label" for="service10">Other</label>
+                                </div>
                             </div>
                         </div>
-                    </div>
+
+                        <div class="form-group">
+                            <label for="services_other">✏️ If Other, please specify additional services</label>
+                            <input type="text" class="form-control" id="services_other" name="services_other">
+                        </div>
+
+                        <div class="section-divider"></div>
+                        
+                        <!-- Section 3: Accreditation -->
+                        <h5 class="section-title">🏅 Accreditation</h5>
+                        
+                        <div class="form-group">
+                            <label for="accreditation">Accreditation Status *</label>
+                            <select class="form-control" id="accreditation" name="accreditation" required>
+                                <option>🟢 Yes (SLAB)</option>
+                                <option>🌐 Yes (Other)</option>
+                                <option>🔴 No</option>
+                                <option>🚫 Not Applicable</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="accreditation_details">📋 Accreditation Details</label>
+                            <textarea class="form-control" id="accreditation_details" name="accreditation_details" rows="3"></textarea>
+                        </div>
+
+                        <div class="section-divider"></div>
+                        
+                        <!-- Section 4: Compliance & Regional -->
+                        <h5 class="section-title">🔄 Compliance & Regional Information</h5>
+                        
+                        <div class="form-group">
+                            <label for="compliance_update">Update Regulatory Compliance? *</label>
+                            <select class="form-control" id="compliance_update" name="compliance_update" required>
+                                <option>✅ Yes</option>
+                                <option>❌ No</option>
+                                <option>🤔 Not Sure</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="regional_branches">🏢 Regional Branches/Labs? *</label>
+                            <select class="form-control" id="regional_branches" name="regional_branches" required>
+                                <option>✅ Yes</option>
+                                <option>❌ No</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="regional_branch_list">📍 List of branches</label>
+                            <textarea class="form-control" id="regional_branch_list" name="regional_branch_list" rows="3"></textarea>
+                        </div>
+
+                        <div class="section-divider"></div>
+                        
+                        <!-- Section 5: Additional Notes -->
+                        <h5 class="section-title">🗒️ Additional Information</h5>
+                        
+                        <div class="form-group">
+                            <label for="comments">Additional Remarks or Comments</label>
+                            <textarea class="form-control" id="comments" name="comments" rows="4"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-submit">Submit Information</button>
+                    </form>
                 </div>
             </div>
-        </section>
-
-        <!-- Stakeholder Form Highlight Section - Green Theme -->
-        <section class="stakeholder-highlight">
-            <div class="container">
-                <div class="highlight-card">
-                    <h3>Help Improve Sri Lanka's Quality Infrastructure</h3>
-                    <p>We're building a comprehensive database of quality infrastructure stakeholders in Sri Lanka. Your
-                        participation helps us create a more accurate and useful resource for businesses and
-                        organizations across the country.</p>
-                    <p>Update your organization's information to be included in our National Quality Infrastructure
-                        directory.</p>
-
-                    <a href="nqi_form.html" class="btn btn-highlight">
-                        <i class="fas fa-edit mr-2"></i>Update Stakeholder Information
-                    </a>
-
-                    <div class="benefits">
-                        <div class="benefit-item">
-                            <i class="fas fa-database"></i>
-                            <h4>Comprehensive Database</h4>
-                            <p>Help build Sri Lanka's most complete quality infrastructure directory</p>
-                        </div>
-                        <div class="benefit-item">
-                            <i class="fas fa-handshake"></i>
-                            <h4>Enhanced Collaboration</h4>
-                            <p>Connect with other stakeholders and quality service providers</p>
-                        </div>
-                        <div class="benefit-item">
-                            <i class="fas fa-chart-line"></i>
-                            <h4>Business Growth</h4>
-                            <p>Increase visibility for your organization among potential clients</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Main Content Section -->
-        <section class="content_section">
-            <div class="container">
-                <div class="section_title">
-                    <h2>Welcome to the National Quality Infrastructure Catalogue</h2>
-                </div>
-
-                <div class="row justify-content-center">
-                    <div class="col-lg-10">
-                        <div class="text-center mb-5">
-                            <div class="partner_logos">
-                                <div class="partner-box ptb">PTB Germany</div>
-                                <div class="partner-box eu">European Union</div>
-                                <div class="partner-box slab">SLAB</div>
-                                <div class="partner-box slsi">SLSI</div>
-                            </div>
-
-                            <p>This comprehensive guide for Sri Lankan SMEs covers all aspects of our National Quality
-                                Infrastructure:</p>
-
-                            <div class="row mt-5">
-                                <div class="col-md-12">
-                                    <h3 class="text-center mb-4">Core Components of Quality Infrastructure</h3>
-                                    <div class="card border-0 shadow-sm">
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-md-4 text-center">
-                                                    <div class="mb-3">
-                                                        <i class="fas fa-balance-scale fa-3x text-primary"></i>
-                                                    </div>
-                                                    <h5>Standards & Technical Regulations</h5>
-                                                    <p>Voluntary and mandatory standards for consumer safety</p>
-                                                </div>
-                                                <div class="col-md-4 text-center">
-                                                    <div class="mb-3">
-                                                        <i class="fas fa-flask fa-3x text-primary"></i>
-                                                    </div>
-                                                    <h5>Conformity Assessment</h5>
-                                                    <p>Testing, inspection and certification services</p>
-                                                </div>
-                                                <div class="col-md-4 text-center">
-                                                    <div class="mb-3">
-                                                        <i class="fas fa-award fa-3x text-primary"></i>
-                                                    </div>
-                                                    <h5>Accreditation</h5>
-                                                    <p>Formal recognition of technical competence</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div id="key-areas" class="key_areas">
-                                <h3>National Quality Infrastructure Framework</h3>
-                                <ul>
-                                    <li><a href="nqi-strategy.html">National Quality Policy 2018-2022</a></li>
-                                    <li><a href="tbt-sps.html">TBT & SPS Strategies for trade compliance</a></li>
-                                    <li><a href="regulatory.html">Regulatory functions for imports/exports</a></li>
-                                    <li><a href="standards.html">Standardization through SLSI</a></li>
-                                    <li><a href="metrology.html">Metrology services (Scientific, Legal & Industrial)</a>
-                                    </li>
-                                    <li><a href="accreditation.html">Accreditation of CABs</a></li>
-                                    <li><a href="conformity.html">Conformity Assessment services</a></li>
-                                    <li><a href="education.html">Educational programmes in quality management</a></li>
-                                    <li><a href="institutions.html">Contact details of 200+ organizations</a></li>
-                                    <li><a href="awards.html">National Quality Excellence Awards</a></li>
-                                </ul>
-                            </div>
-
-                            <div class="text-center mt-5">
-                                <a href="introduction.html" class="btn btn-primary btn-lg">Get Started with NQI</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
         </section>
     </div>
 
@@ -834,7 +778,6 @@
                         <li><a href="metrology.html">Metrology</a></li>
                         <li><a href="accreditation.html">Accreditation</a></li>
                         <li><a href="awards.html">Quality Awards</a></li>
-                        <li><a href="nqi_form.html">Stakeholder Form</a></li>
                     </ul>
                 </div>
 
@@ -866,12 +809,6 @@
                         providing the technical framework for standards, metrology, accreditation, and conformity
                         assessment services to enhance the competitiveness of Sri Lankan products and services in global
                         markets.</p>
-                    <div class="social_icon">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                    </div>
                 </div>
             </div>
         </div>
@@ -888,39 +825,11 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
     <script>
-        // Add active class to current page in navigation
         $(document).ready(function () {
-            var current = location.pathname.split('/')[1];
-            if (current === "") current = "index.html";
-            $('.navbar-nav li a').each(function () {
-                var $this = $(this);
-                if ($this.attr('href').indexOf(current) !== -1) {
-                    $this.parent().addClass('active');
-                }
-            });
-
-            // Smooth scrolling
-            $('a[href*="#"]').on('click', function (e) {
-                e.preventDefault();
-                $('html, body').animate(
-                    {
-                        scrollTop: $($(this).attr('href')).offset().top - 70,
-                    },
-                    500,
-                    'linear'
-                );
-            });
+            // Add active class to current page in navigation
+            $('.navbar-nav li a').filter(function() {
+                return this.href == location.href;
+            }).parent().addClass('active').siblings().removeClass('active');
         });
-    </script>
-    <!-- index.html - Add logout script at bottom -->
-    <script>
-        // Logout functionality
-        $('#logoutLink').click(function (e) {
-            e.preventDefault();
-            localStorage.removeItem('authenticated');
-            window.location.href = 'login.html';
-        });
-    </script>
-</body>
-
+    </script></body>
 </html>
