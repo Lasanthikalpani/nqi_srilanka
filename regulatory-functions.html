@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Submit Feedback - NQI Sri Lanka</title>
+    <title>Regulatory Functions in Sri Lanka's Quality Infrastructure</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <!-- Font Awesome -->
@@ -12,7 +11,6 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,700|Sen:400,700,800&display=swap" rel="stylesheet">
     <style>
-        /* All CSS from index.html */
         :root {
             --primary-color: #0d47a1;
             --secondary-color: #ff6f00;
@@ -64,7 +62,7 @@
         .banner_section {
             background: linear-gradient(135deg, var(--primary-color), #1a73e8);
             color: white;
-            padding: 80px 0 60px;
+            padding: 60px 0 40px;
             position: relative;
             overflow: hidden;
         }
@@ -83,73 +81,19 @@
         .banner_section h1 {
             font-family: 'Sen', sans-serif;
             font-weight: 800;
-            font-size: 3rem;
+            font-size: 2.5rem;
             margin-bottom: 20px;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
-        .banner_section p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto 30px;
-            opacity: 0.9;
-        }
-
-        .feature_section {
-            padding: 80px 0;
-        }
-
-        .feature_card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-            height: 100%;
-            border: none;
-        }
-
-        .feature_card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .feature_card .card-header {
-            background: linear-gradient(135deg, var(--primary-color), #1a73e8);
-            color: white;
-            padding: 20px;
-            border: none;
-        }
-
-        .feature_card .card-body {
-            padding: 25px;
-        }
-
-        .feature_card .icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            color: var(--primary-color);
-        }
-
-        .feature_card h3 {
-            font-family: 'Sen', sans-serif;
-            font-weight: 700;
-            margin-bottom: 15px;
-            color: var(--primary-color);
-        }
-
-        .feature_card p {
-            color: #666;
-        }
-
         .content_section {
-            padding: 80px 0 40px;
+            padding: 60px 0;
             background-color: white;
         }
 
         .section_title {
             position: relative;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
             text-align: center;
         }
 
@@ -174,73 +118,55 @@
             border-radius: 2px;
         }
 
-        .key_areas {
-            background-color: #f0f7ff;
-            padding: 30px;
-            border-radius: 10px;
-            margin: 40px 0;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-
-        .key_areas h3 {
-            color: var(--primary-color);
-            margin-bottom: 20px;
+        .section-subtitle {
+            font-family: 'Sen', sans-serif;
             font-weight: 700;
-            text-align: center;
-        }
-
-        .key_areas ul {
-            columns: 2;
-            -webkit-columns: 2;
-            -moz-columns: 2;
-        }
-
-        .key_areas li {
-            margin-bottom: 12px;
+            color: var(--primary-color);
+            margin-top: 40px;
+            margin-bottom: 20px;
             position: relative;
-            padding-left: 25px;
-            font-size: 1.05rem;
+            padding-bottom: 10px;
         }
 
-        .key_areas li::before {
-            content: "\f00c";
-            font-family: "Font Awesome 5 Free";
-            font-weight: 900;
+        .section-subtitle::after {
+            content: "";
             position: absolute;
+            width: 60px;
+            height: 3px;
+            background: var(--secondary-color);
+            bottom: 0;
             left: 0;
-            top: 4px;
-            color: var(--secondary-color);
         }
 
-        .partner_logos {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 30px;
-            margin: 40px 0;
-            padding: 20px;
-            background: white;
-            border-radius: 10px;
+        /* Table styling */
+        .regulatory-table {
+            margin-bottom: 30px;
+            width: 100%;
+            border-collapse: collapse;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
         }
 
-        .partner_logos .partner-box {
-            background: #0033A0;
+        .regulatory-table th {
+            background-color: var(--primary-color);
             color: white;
-            padding: 15px 25px;
-            border-radius: 5px;
-            font-weight: bold;
-            text-align: center;
-            min-width: 150px;
+            font-weight: 600;
+            padding: 12px 15px;
+            text-align: left;
         }
 
-        .partner_logos .eu {
-            background: #0057B8;
+        .regulatory-table td {
+            padding: 10px 15px;
+            border-bottom: 1px solid #e0e0e0;
         }
 
-        .partner_logos .giz {
-            background: #154194;
+        .regulatory-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        .regulatory-table tr:hover {
+            background-color: #e9f7ff;
         }
 
         .footer_section {
@@ -293,45 +219,6 @@
             margin-bottom: 15px;
         }
 
-        .footer_section .contact_info i {
-            margin-right: 15px;
-            margin-top: 5px;
-            min-width: 20px;
-            text-align: center;
-        }
-
-        .footer_section .contact_info .fa-map-marker-alt {
-            color: #fff;
-            background: #ff6f00;
-            padding: 5px;
-            border-radius: 50%;
-            font-size: 14px;
-        }
-
-        .footer_section .contact_info .fa-phone {
-            color: #fff;
-            background: #4CAF50;
-            padding: 5px;
-            border-radius: 50%;
-            font-size: 14px;
-        }
-
-        .footer_section .contact_info .fa-envelope {
-            color: #fff;
-            background: #2196F3;
-            padding: 5px;
-            border-radius: 50%;
-            font-size: 14px;
-        }
-
-        .footer_section .contact_info .fa-clock {
-            color: #fff;
-            background: #9C27B0;
-            padding: 5px;
-            border-radius: 50%;
-            font-size: 14px;
-        }
-
         .social_icon {
             display: flex;
             gap: 15px;
@@ -367,106 +254,13 @@
             color: rgba(255, 255, 255, 0.7);
         }
 
-        /* Additional styles for form page */
-        .form-section {
-            background-color: white;
-            padding: 60px 0;
-        }
-
-        .form-container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: #fff;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-        }
-
-        .form-title {
-            text-align: center;
-            margin-bottom: 30px;
-            color: var(--primary-color);
-            font-family: 'Sen', sans-serif;
-            font-weight: 700;
-        }
-
-        .form-group label {
-            font-weight: 600;
-            color: #555;
-            margin-bottom: 8px;
-        }
-
-        .form-control {
-            border: 2px solid #e1e5eb;
-            border-radius: 6px;
-            padding: 12px 15px;
-            transition: all 0.3s;
-        }
-
-        .form-control:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 0.2rem rgba(13, 71, 161, 0.25);
-        }
-
-        textarea.form-control {
-            min-height: 150px;
-            resize: vertical;
-        }
-
-        .btn-submit {
-            background: linear-gradient(135deg, var(--primary-color), #1a73e8);
-            border: none;
-            color: white;
-            padding: 12px 30px;
-            font-size: 1.1rem;
-            border-radius: 6px;
-            transition: all 0.3s;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            display: block;
-            margin: 30px auto 0;
-            width: 200px;
-        }
-
-        .btn-submit:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(13, 71, 161, 0.3);
-        }
-
-        @media (max-width: 991px) {
-            .banner_section h1 {
-                font-size: 2.5rem;
-            }
-
-            .key_areas ul {
-                columns: 1;
-            }
-        }
-
         @media (max-width: 767px) {
-            .banner_section {
-                padding: 60px 0 40px;
-            }
-
             .banner_section h1 {
                 font-size: 2rem;
             }
-
-            .feature_section,
-            .content_section {
-                padding: 60px 0;
-            }
-
-            .navbar-brand {
-                font-size: 1.5rem;
-            }
-
-            .footer_section .row>div {
-                margin-bottom: 30px;
-            }
-
-            .form-container {
-                padding: 25px;
+            
+            .section-subtitle {
+                font-size: 1.4rem;
             }
         }
     </style>
@@ -487,16 +281,21 @@
                             <a class="nav-link" href="index.html">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="introduction.html">Introduction</a>
+                            <a class="nav-link" href="introduction.html">QI Framework</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="sme-policy.html">SME </a>
+                            <a class="nav-link" href="sme-policy.html">SME Policy</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="nqi-strategy.html"> Strategy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="tbt-sps.html">TBT&SPS</a>
+                        <li class="nav-item dropdown active">
+                            <a class="nav-link dropdown-toggle" href="#" id="strategyDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                NQI Strategy
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="strategyDropdown">
+                                <a class="dropdown-item" href="nqi-strategy.html">Quality Policy</a>
+                                <a class="dropdown-item" href="tbt-sps.html">TBT & SPS</a>
+                                <a class="dropdown-item active" href="regulatory-functions.html">Regulatory Functions</a>
+                            </div>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="qualityDropdown" role="button"
@@ -504,9 +303,10 @@
                                 Quality Services
                             </a>
                             <div class="dropdown-menu" aria-labelledby="qualityDropdown">
-                                <a class="dropdown-item" href="standards.html">Standards</a>
+                                <a class="dropdown-item" href="standards.html">Standardization</a>
                                 <a class="dropdown-item" href="metrology.html">Metrology</a>
                                 <a class="dropdown-item" href="accreditation.html">Accreditation</a>
+                                <a class="dropdown-item" href="conformity.html">Conformity Assessment</a>
                             </div>
                         </li>
                         <li class="nav-item">
@@ -515,7 +315,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="awards.html">Quality Awards</a>
                         </li>
-                        <li class="nav-item active">
+                        <li class="nav-item">
                             <a class="nav-link" href="form.html">Feedback</a>
                         </li>
                     </ul>
@@ -528,37 +328,102 @@
         <!-- Banner Section -->
         <section class="banner_section">
             <div class="container text-center">
-                <h1>Share Your Feedback</h1>
-                <p>Help us improve the National Quality Infrastructure Catalogue for SMEs in Sri Lanka</p>
+                <h1>Regulatory Functions in Sri Lanka's Quality Infrastructure</h1>
+                <p>Comprehensive guide to regulatory authorities and requirements</p>
             </div>
         </section>
 
-        <!-- Form Section -->
-        <section class="form-section">
+        <!-- Main Content Section -->
+        <section class="content_section">
             <div class="container">
-                <div class="form-container">
-                    <h2 class="form-title">Submit Your Feedback</h2>
-                    <p class="text-center mb-4">We value your input! Please use the form below to send us your
-                        questions, comments, or suggestions regarding the National Quality Infrastructure Catalogue.</p>
+                <div class="section_title">
+                    <h2>Regulatory Authorities Overview</h2>
+                </div>
+                
+                <div class="table-section">
+                    <h3 class="section-subtitle">3.3.1 Regulatory Bodies for Imports and Domestic Products</h3>
+                    <table class="regulatory-table">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Product Category/Activity</th>
+                                <th>Administrative Authority for Imports</th>
+                                <th>Administrative Authority for Domestic Products</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1</td><td>Primary agricultural products</td><td>FCAU</td><td>DOA & FCAU</td></tr>
+                            <tr><td>2</td><td>Animal husbandry</td><td>DAPH & FCAU</td><td>DAPH & FCAU</td></tr>
+                            <tr><td>3</td><td>Milk products</td><td>DAPH & FCAU</td><td>DAPH & FCAU</td></tr>
+                            <tr><td>4</td><td>Coconuts & products</td><td>FCAU & CDA</td><td>FCAU & CDA</td></tr>
+                            <tr><td>5</td><td>Manufactured tea</td><td>FCAU & SLTB</td><td>FCAU & SLTB</td></tr>
+                            <tr><td>6</td><td>Fish products</td><td>FCAU</td><td>DFAR & FCAU</td></tr>
+                            <tr><td>7</td><td>Food standards</td><td>FCAU & SLSI</td><td>FCAU</td></tr>
+                            <tr><td>8</td><td>Alcoholic beverages</td><td>ED/SLC</td><td>ED</td></tr>
+                            <tr><td>9</td><td>Food safety implementation</td><td colspan="2">MOPCLG</td></tr>
+                            <tr><td>10</td><td>National standards formulation</td><td colspan="2">SLSI</td></tr>
+                            <tr><td>11</td><td>Consumer protection</td><td>FCAU</td><td>CAA</td></tr>
+                            <tr><td>12</td><td>Cosmetics/drugs</td><td colspan="2">NMRA</td></tr>
+                            <tr><td>13</td><td>Homeopathic drugs</td><td colspan="2">HMC</td></tr>
+                            <tr><td>14</td><td>Veterinary drugs</td><td colspan="2">DAPH</td></tr>
+                            <tr><td>15</td><td>Ayurvedic drugs</td><td colspan="2">NMRA</td></tr>
+                            <tr><td>16</td><td>Spices</td><td colspan="2">FCAU</td></tr>
+                        </tbody>
+                    </table>
+                </div>
 
-                    <form action="submit.php" method="POST" class="feedback-form">
-                        <div class="form-group">
-                            <label for="name">Your Name:</label>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name"
-                                required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Your Email:</label>
-                            <input type="email" class="form-control" id="email" name="email"
-                                placeholder="Enter your email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Your Message:</label>
-                            <textarea class="form-control" id="message" name="message"
-                                placeholder="Type your message here..." rows="8" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-submit">Send Feedback</button>
-                    </form>
+                <div class="table-section">
+                    <h3 class="section-subtitle">3.3.2 Regulatory Bodies for Exports</h3>
+                    <table class="regulatory-table">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Product Category</th>
+                                <th>Certificate Required</th>
+                                <th>Responsible Authority</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1</td><td>Tea</td><td>Quality/Auction Price Certificates</td><td>SLTB</td></tr>
+                            <tr><td>2</td><td>Gems/jewelry</td><td>Gem Dealer's License</td><td>NGJA</td></tr>
+                            <tr><td>3</td><td>Meat products</td><td>Health Certificate</td><td>DAPH & SLSI</td></tr>
+                            <tr><td>4</td><td>Cashew kernels</td><td>Pre-shipment Inspection</td><td>SLSI/ITI/NPQS</td></tr>
+                            <tr><td>5</td><td>Spices</td><td>Origin Certificate</td><td>DOC/Chamber of Commerce</td></tr>
+                            <tr><td>6</td><td>Cinnamon</td><td>Ceylon Logo License</td><td>EDB/SLSI/SGS</td></tr>
+                            <tr><td>7</td><td>Coconut products</td><td>Export Permits</td><td>CDA</td></tr>
+                            <tr><td>8</td><td>Fruits/vegetables</td><td>Phytosanitary Certificate</td><td>NPQS</td></tr>
+                            <tr><td>9</td><td>Fishery products</td><td>Health/Catch Certificates</td><td>DFAR</td></tr>
+                            <tr><td>10</td><td>Ornamental fish</td><td>Phytosanitary Certificate</td><td>DAPH</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="table-section">
+                    <h3 class="section-subtitle">3.3.3 Regulatory Bodies for Other Areas</h3>
+                    <table class="regulatory-table">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Regulatory Function</th>
+                                <th>Compliance Required</th>
+                                <th>Responsible Authority</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1</td><td>Worker/plant safety</td><td>Factory approvals & inspections</td><td>DOL</td></tr>
+                            <tr><td>2</td><td>Atomic energy</td><td>Radiation equipment inspection</td><td>SLAEB</td></tr>
+                            <tr><td>3</td><td>Medical institutions</td><td>Accreditation</td><td>MOHNIM</td></tr>
+                            <tr><td>4</td><td>Measurement units</td><td>Competent inspections</td><td>MUSSD</td></tr>
+                            <tr><td>5</td><td>Environmental protection</td><td>Pollution monitoring</td><td>CEA</td></tr>
+                            <tr><td>6</td><td>Vehicle emissions</td><td>Annual compliance certificates</td><td>DMT</td></tr>
+                            <tr><td>7</td><td>Solid waste</td><td>Regulatory discharge</td><td>CEA</td></tr>
+                            <tr><td>8</td><td>Energy conservation</td><td>Energy efficiency</td><td>CEB</td></tr>
+                            <tr><td>9</td><td>Pesticides</td><td>Licensing & packaging approval</td><td>ROP</td></tr>
+                            <tr><td>10</td><td>Gems/jewelry</td><td>Licensing</td><td>NGJA</td></tr>
+                            <tr><td>11</td><td>Fuel/lubricants</td><td>Safe transportation</td><td>CEYPETCO/DIEC</td></tr>
+                            <tr><td>12</td><td>Construction</td><td>Contractor registration</td><td>CIDA</td></tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </section>
@@ -656,5 +521,4 @@
         });
     </script>
 </body>
-
 </html>

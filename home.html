@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QI Catalogue Sri Lanka | Quality Infrastructure Directory</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(to right, #1a3a6c, #2c5282);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            font-size: 2.5rem;
+            margin-right: 15px;
+            color: #ffc107;
+        }
+        
+        .logo-text {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+        }
+        
+        .logo-text span {
+            color: #ffc107;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+        
+        nav ul li a:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: url('https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            height: 450px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            text-align: center;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 58, 108, 0.85);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            color: white;
+        }
+        
+        .hero-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: #ffc107;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-text {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: #ffc107;
+            color: #1a3a6c;
+            padding: 12px 28px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .cta-button:hover {
+            background: #ffca2c;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+        }
+        
+        /* Catalogue Section */
+        .catalogue {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #1a3a6c;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto 50px;
+        }
+        
+        .catalogue-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 50px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .catalogue-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .catalogue-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid #e9ecef;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .catalogue-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            border-color: #cbd3da;
+        }
+        
+        .catalogue-icon {
+            font-size: 3.5rem;
+            color: #2c5282;
+            margin-bottom: 20px;
+        }
+        
+        .catalogue-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #1a3a6c;
+        }
+        
+        .catalogue-desc {
+            margin-bottom: 20px;
+            color: #555;
+        }
+        
+        .catalogue-link {
+            display: inline-block;
+            color: #2c5282;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .catalogue-link:hover {
+            color: #ffc107;
+            transform: translateX(5px);
+        }
+        
+        /* Quick Links Section */
+        .quick-links {
+            background: linear-gradient(to right, #1a3a6c 0%, #2c5282 100%);
+            padding: 70px 0;
+            color: white;
+        }
+        
+        .links-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+        
+        .links-column h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .links-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: #ffc107;
+        }
+        
+        .links-list {
+            list-style: none;
+        }
+        
+        .links-list li {
+            margin-bottom: 12px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .links-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #ffc107;
+        }
+        
+        .links-list a {
+            color: #cbd5e0;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .links-list a:hover {
+            color: #ffc107;
+            padding-left: 5px;
+        }
+        
+        /* Services Section */
+        .services {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            border: 1px solid #e9ecef;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #1a3a6c;
+            display: flex;
+            align-items: center;
+        }
+        
+        .service-icon {
+            color: #ffc107;
+            margin-right: 10px;
+            font-size: 1.4rem;
+        }
+        
+        .service-desc {
+            color: #555;
+            margin-bottom: 15px;
+        }
+        
+        /* PDF Upload Section */
+        .pdf-upload {
+            background: linear-gradient(to right, #ffc107 0%, #ffca2c 100%);
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .upload-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .upload-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #1a3a6c;
+        }
+        
+        .upload-desc {
+            color: #555;
+            margin-bottom: 30px;
+        }
+        
+        .upload-btn {
+            display: inline-block;
+            background: #1a3a6c;
+            color: white;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .upload-btn:hover {
+            background: #2c5282;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Footer */
+        footer {
+            background: #1a3a6c;
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: #ffc107;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: #cbd5e0;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #ffc107;
+            padding-left: 5px;
+        }
+        
+        .contact-info {
+            list-style: none;
+        }
+        
+        .contact-info li {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        
+        .contact-info i {
+            margin-right: 10px;
+            color: #ffc107;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #2c5282;
+            color: #cbd5e0;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <div class="logo-text">QI <span>Catalogue</span> Sri Lanka</div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="#"><i class="fas fa-layer-group"></i> QI Framework</a></li>
+                        <li><a href="#"><i class="fas fa-building"></i> SME Policy</a></li>
+                        <li><a href="#"><i class="fas fa-chess-knight"></i> NQI Strategy</a></li>
+                        <li><a href="#"><i class="fas fa-cogs"></i> Quality Services</a></li>
+                        <li><a href="#"><i class="fas fa-landmark"></i> Institutions</a></li>
+                        <li><a href="#"><i class="fas fa-award"></i> Quality Awards</a></li>
+                        <li><a href="#"><i class="fas fa-comment-alt"></i> Feedback</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">QI Catalogue Sri Lanka</h1>
+            <div class="hero-subtitle">A directory for understanding the National Quality Infrastructure and services for SMEs in Sri Lanka</div>
+            <a href="#" class="cta-button">Explore NQI Framework <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+    <!-- Catalogue Section -->
+    <section class="catalogue">
+        <div class="container">
+            <h2 class="section-title">National Quality Infrastructure Directory</h2>
+            <p class="section-subtitle">Comprehensive resources for Sri Lankan SMEs to access quality infrastructure services</p>
+            
+            <p class="catalogue-intro">
+                The QI Catalogue provides a structured directory of quality infrastructure services available to Sri Lankan SMEs. 
+                This comprehensive resource helps businesses navigate the national quality ecosystem, access essential services, 
+                and comply with international standards to enhance competitiveness in global markets.
+            </p>
+            
+            <div class="catalogue-grid">
+                <div class="catalogue-card">
+                    <div class="catalogue-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3 class="catalogue-title">QI Framework</h3>
+                    <p class="catalogue-desc">Understand the comprehensive framework that defines Sri Lanka's quality infrastructure ecosystem.</p>
+                    <a href="#" class="catalogue-link">Explore Framework <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="catalogue-card">
+                    <div class="catalogue-icon">
+                        <i class="fas fa-file-contract"></i>
+                    </div>
+                    <h3 class="catalogue-title">SME Policy</h3>
+                    <p class="catalogue-desc">Government policies and support mechanisms for small and medium enterprises.</p>
+                    <a href="#" class="catalogue-link">View Policies <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="catalogue-card">
+                    <div class="catalogue-icon">
+                        <i class="fas fa-chess"></i>
+                    </div>
+                    <h3 class="catalogue-title">NQI Strategy</h3>
+                    <p class="catalogue-desc">National Quality Infrastructure development strategy and implementation roadmap.</p>
+                    <a href="#" class="catalogue-link">View Strategy <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="catalogue-card">
+                    <div class="catalogue-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3 class="catalogue-title">Quality Services</h3>
+                    <p class="catalogue-desc">Comprehensive directory of testing, certification, and calibration services.</p>
+                    <a href="#" class="catalogue-link">Browse Services <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="catalogue-card">
+                    <div class="catalogue-icon">
+                        <i class="fas fa-landmark"></i>
+                    </div>
+                    <h3 class="catalogue-title">Institutions</h3>
+                    <p class="catalogue-desc">Directory of institutions supporting quality infrastructure in Sri Lanka.</p>
+                    <a href="#" class="catalogue-link">View Institutions <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="catalogue-card">
+                    <div class="catalogue-icon">
+                        <i class="fas fa-medal"></i>
+                    </div>
+                    <h3 class="catalogue-title">Quality Awards</h3>
+                    <p class="catalogue-desc">National recognition programs for excellence in quality management.</p>
+                    <a href="#" class="catalogue-link">Explore Awards <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Links Section -->
+    <section class="quick-links">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Quick Links</h2>
+            <p class="section-subtitle" style="color: #cbd5e0;">Access important resources and information quickly</p>
+            
+            <div class="links-container">
+                <div class="links-column">
+                    <h3>Resources</h3>
+                    <ul class="links-list">
+                        <li><a href="#">National Quality Policy</a></li>
+                        <li><a href="#">SME Development Strategy</a></li>
+                        <li><a href="#">Export Quality Standards</a></li>
+                        <li><a href="#">QI Implementation Guide</a></li>
+                        <li><a href="#">Compliance Handbook</a></li>
+                    </ul>
+                </div>
+                
+                <div class="links-column">
+                    <h3>Support Programs</h3>
+                    <ul class="links-list">
+                        <li><a href="#">Quality Certification Support</a></li>
+                        <li><a href="#">Export Readiness Program</a></li>
+                        <li><a href="#">Technology Upgrading Scheme</a></li>
+                        <li><a href="#">SME Training Programs</a></li>
+                        <li><a href="#">Market Access Initiatives</a></li>
+                    </ul>
+                </div>
+                
+                <div class="links-column">
+                    <h3>Institutions</h3>
+                    <ul class="links-list">
+                        <li><a href="#">Sri Lanka Standards Institution</a></li>
+                        <li><a href="#">Industrial Development Board</a></li>
+                        <li><a href="#">National Enterprise Development Authority</a></li>
+                        <li><a href="#">Export Development Board</a></li>
+                        <li><a href="#">Ministry of Industry</a></li>
+                    </ul>
+                </div>
+                
+                <div class="links-column">
+                    <h3>Tools</h3>
+                    <ul class="links-list">
+                        <li><a href="#">QI Self-Assessment Tool</a></li>
+                        <li><a href="#">Compliance Checker</a></li>
+                        <li><a href="#">Standards Database</a></li>
+                        <li><a href="#">Service Provider Directory</a></li>
+                        <li><a href="#">Export Market Finder</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <p class="section-subtitle">Essential quality infrastructure services for Sri Lankan SMEs</p>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3 class="service-title"><i class="fas fa-flask service-icon"></i> Testing Services</h3>
+                    <p class="service-desc">Comprehensive product testing to ensure compliance with national and international standards.</p>
+                    <a href="#" class="catalogue-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="service-card">
+                    <h3 class="service-title"><i class="fas fa-certificate service-icon"></i> Certification</h3>
+                    <p class="service-desc">ISO and product certification services to enhance market credibility and access.</p>
+                    <a href="#" class="catalogue-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="service-card">
+                    <h3 class="service-title"><i class="fas fa-ruler-combined service-icon"></i> Calibration</h3>
+                    <p class="service-desc">Precision calibration services for measurement and testing equipment.</p>
+                    <a href="#" class="catalogue-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="service-card">
+                    <h3 class="service-title"><i class="fas fa-graduation-cap service-icon"></i> Training</h3>
+                    <p class="service-desc">Quality management training programs for SMEs at all development stages.</p>
+                    <a href="#" class="catalogue-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="service-card">
+                    <h3 class="service-title"><i class="fas fa-search service-icon"></i> Inspection</h3>
+                    <p class="service-desc">Product and process inspection services to ensure quality compliance.</p>
+                    <a href="#" class="catalogue-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="service-card">
+                    <h3 class="service-title"><i class="fas fa-lightbulb service-icon"></i> Consulting</h3>
+                    <p class="service-desc">Expert consulting for quality system implementation and improvement.</p>
+                    <a href="#" class="catalogue-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PDF Upload Section -->
+    <section class="pdf-upload">
+        <div class="container">
+            <div class="upload-container">
+                <h2 class="upload-title">Upload QI Documents</h2>
+                <p class="upload-desc">Contribute to the National Quality Infrastructure knowledge base by uploading relevant documents, standards, or policy papers. All submissions will be reviewed by our quality experts.</p>
+                
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 25px; border: 2px dashed #cbd3da;">
+                    <i class="fas fa-cloud-upload-alt" style="font-size: 3rem; color: #2c5282; margin-bottom: 15px;"></i>
+                    <p style="margin-bottom: 15px; color: #555;">Drag and drop PDF files here or click to browse</p>
+                    <p style="font-size: 0.9rem; color: #777;">Maximum file size: 10MB | Supported format: PDF</p>
+                </div>
+                
+                <a href="#" class="upload-btn"><i class="fas fa-upload"></i> Upload Document</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>QI Catalogue Sri Lanka</h3>
+                    <p>Empowering Sri Lankan SMEs with comprehensive quality infrastructure resources and directory services.</p>
+                    <div style="margin-top: 20px;">
+                        <a href="#" style="color: white; margin-right: 15px; font-size: 1.5rem;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="color: white; margin-right: 15px; font-size: 1.5rem;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: white; margin-right: 15px; font-size: 1.5rem;"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">QI Framework</a></li>
+                        <li><a href="#">SME Policy</a></li>
+                        <li><a href="#">NQI Strategy</a></li>
+                        <li><a href="#">Quality Services</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Publications</a></li>
+                        <li><a href="#">Research Papers</a></li>
+                        <li><a href="#">Case Studies</a></li>
+                        <li><a href="#">Quality Standards</a></li>
+                        <li><a href="#">Compliance Guides</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> National Quality Centre, Colombo 07, Sri Lanka</li>
+                        <li><i class="fas fa-phone"></i> +94 11 765 4321</li>
+                        <li><i class="fas fa-envelope"></i> info@qicatalogue.lk</li>
+                        <li><i class="fas fa-clock"></i> Mon-Fri: 8:30 AM - 4:30 PM</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2023 QI Catalogue Sri Lanka. All Rights Reserved. | Part of the National Quality Infrastructure Initiative
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
