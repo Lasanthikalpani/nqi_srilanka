@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My NQI Stakeholder Submissions</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Light gray background */
+        }
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 1.5rem;
+            background-color: #ffffff;
+            border-radius: 0.75rem; /* Rounded corners */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb; /* Light border for rows */
+        }
+        th {
+            background-color: #f9fafb; /* Slightly darker header background */
+            font-weight: 600; /* Semi-bold */
+            color: #374151; /* Darker text for headers */
+            text-transform: uppercase;
+            font-size: 0.875rem; /* Small font size */
+        }
+        tr:last-child td {
+            border-bottom: none; /* No border for the last row */
+        }
+        .status-pending {
+            color: #f59e0b; /* Amber */
+            background-color: #fffbeb; /* Light amber background */
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+        }
+        .status-approved {
+            color: #10b981; /* Green */
+            background-color: #ecfdf5; /* Light green background */
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+        }
+        .status-rejected {
+            color: #ef4444; /* Red */
+            background-color: #fef2f2; /* Light red background */
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="container">
+        <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">My NQI Stakeholder Submissions</h1>
+        
+        <div id="loadingMessage" class="text-center text-gray-600 mb-4">
+            Loading your submissions...
+        </div>
+
+        <div id="errorMessage" class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative mb-4" role="alert">
+            <strong class="font-bold">Error!</strong>
+            <span class="block sm:inline" id="errorText"></span>
+        </div>
+
+        <div class="overflow-x-auto rounded-lg shadow-md">
+            <table class="min-w-full bg-white">
+                <thead>
+                    <tr>
+                        <th class="py-3 px-4 border-b border-gray-200">ID</th>
+                        <th class="py-3 px-4 border-b border-gray-200">Organization Name</th>
+                        <th class="py-3 px-4 border-b border-gray-200">Organization Type</th>
+                        <th class="py-3 px-4 border-b border-gray-200">Contact Person</th>
+                        <th class="py-3 px-4 border-b border-gray-200">Email</th>
+                        <th class="py-3 px-4 border-b border-gray-200">Phone</th>
+                        <th class="py-3 px-4 border-b border-gray-200">Submitted At</th>
+                        <th class="py-3 px-4 border-b border-gray-200">Approval Status</th>
+                    </tr>
+                </thead>
+                <tbody id="stakeholdersTableBody">
+                    <!-- Data will be inserted here by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <p id="noDataMessage" class="hidden text-center text-gray-600 mt-6">
+            No stakeholder submissions found for your account.
+        </p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loadingMessage = document.getElementById('loadingMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            const errorText = document.getElementById('errorText');
+            const stakeholdersTableBody = document.getElementById('stakeholdersTableBody');
+            const noDataMessage = document.getElementById('noDataMessage');
+
+            // Function to fetch data from the PHP backend
+            async function fetchStakeholders() {
+                try {
+                    const response = await fetch('get_stakeholders.php');
+                    const data = await response.json();
+
+                    loadingMessage.classList.add('hidden'); // Hide loading message
+
+                    if (data.error) {
+                        errorMessage.classList.remove('hidden');
+                        errorText.textContent = data.error;
+                        return;
+                    }
+
+                    if (data.length === 0) {
+                        noDataMessage.classList.remove('hidden');
+                        return;
+                    }
+
+                    // Populate the table with fetched data
+                    data.forEach(stakeholder => {
+                        const row = document.createElement('tr');
+                        row.classList.add('hover:bg-gray-50'); // Hover effect
+
+                        // Determine status class for styling
+                        let statusClass = '';
+                        if (stakeholder.approval_status === 'pending') {
+                            statusClass = 'status-pending';
+                        } else if (stakeholder.approval_status === 'approved') {
+                            statusClass = 'status-approved';
+                        } else if (stakeholder.approval_status === 'rejected') {
+                            statusClass = 'status-rejected';
+                        }
+
+                        row.innerHTML = `
+                            <td class="py-3 px-4">${stakeholder.id}</td>
+                            <td class="py-3 px-4">${stakeholder.organization_name || 'N/A'}</td>
+                            <td class="py-3 px-4">${stakeholder.organization_type || 'N/A'}</td>
+                            <td class="py-3 px-4">${stakeholder.contact_person || 'N/A'}</td>
+                            <td class="py-3 px-4">${stakeholder.email || 'N/A'}</td>
+                            <td class="py-3 px-4">${stakeholder.phone || 'N/A'}</td>
+                            <td class="py-3 px-4">${new Date(stakeholder.submitted_at).toLocaleString() || 'N/A'}</td>
+                            <td class="py-3 px-4">
+                                <span class="${statusClass}">${stakeholder.approval_status || 'N/A'}</span>
+                            </td>
+                        `;
+                        stakeholdersTableBody.appendChild(row);
+                    });
+
+                } catch (error) {
+                    loadingMessage.classList.add('hidden');
+                    errorMessage.classList.remove('hidden');
+                    errorText.textContent = 'Failed to fetch data. Please check your network connection and server setup.';
+                    console.error('Error fetching stakeholders:', error);
+                }
+            }
+
+            fetchStakeholders(); // Call the function to fetch data when the page loads
+        });
+    </script>
+</body>
+</html>
