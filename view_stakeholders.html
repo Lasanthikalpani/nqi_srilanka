@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,66 +8,202 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f3f4f6; /* Light gray background */
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #1abc9c;
+            --light: #ecf0f1;
+            --dark: #34495e;
         }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
         .container {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
             max-width: 1200px;
             margin: 2rem auto;
-            padding: 1.5rem;
-            background-color: #ffffff;
-            border-radius: 0.75rem; /* Rounded corners */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        th, td {
+
+        .logo-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+            text-align: center;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        th,
+        td {
             padding: 0.75rem 1rem;
             text-align: left;
-            border-bottom: 1px solid #e5e7eb; /* Light border for rows */
+            border-bottom: 1px solid #e5e7eb;
         }
+
         th {
-            background-color: #f9fafb; /* Slightly darker header background */
-            font-weight: 600; /* Semi-bold */
-            color: #374151; /* Darker text for headers */
+            background-color: var(--light);
+            font-weight: 600;
+            color: var(--dark);
             text-transform: uppercase;
-            font-size: 0.875rem; /* Small font size */
+            font-size: 0.875rem;
         }
+
         tr:last-child td {
-            border-bottom: none; /* No border for the last row */
+            border-bottom: none;
         }
+
         .status-pending {
-            color: #f59e0b; /* Amber */
-            background-color: #fffbeb; /* Light amber background */
+            color: #f59e0b;
+            background-color: #fffbeb;
             padding: 0.25rem 0.5rem;
             border-radius: 0.375rem;
             font-weight: 500;
         }
+
         .status-approved {
-            color: #10b981; /* Green */
-            background-color: #ecfdf5; /* Light green background */
+            color: #10b981;
+            background-color: #ecfdf5;
             padding: 0.25rem 0.5rem;
             border-radius: 0.375rem;
             font-weight: 500;
         }
+
         .status-rejected {
-            color: #ef4444; /* Red */
-            background-color: #fef2f2; /* Light red background */
+            color: #ef4444;
+            background-color: #fef2f2;
             padding: 0.25rem 0.5rem;
             border-radius: 0.375rem;
             font-weight: 500;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px 0;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-top: 30px;
+        }
+
+        .search-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .search-btn:hover {
+            background: #16a085;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(26, 188, 156, 0.4);
+        }
+
+        .back-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        /* New button styles */
+        .action-btn {
+            padding: 0.4rem 0.8rem;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .update-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+        }
+
+        .update-btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-1px);
+        }
+
+        .delete-btn {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+        }
+
+        .delete-btn:hover {
+            background-color: #c0392b;
+            transform: translateY(-1px);
         }
     </style>
 </head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+
+<body>
     <div class="container">
-        <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">My NQI Stakeholder Submissions</h1>
-        
-        <div id="loadingMessage" class="text-center text-gray-600 mb-4">
-            Loading your submissions...
+        <div class="logo-header">
+            <div class="logo">
+                <i class="fas fa-landmark"></i>
+            </div>
+            <h1>My NQI Stakeholder Submissions</h1>
+            <p class="subtitle">View your submitted organizations and their approval status</p>
         </div>
 
-        <div id="errorMessage" class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative mb-4" role="alert">
+        <div id="loadingMessage" class="text-center text-gray-600 mb-4">
+            <i class="fas fa-spinner fa-spin mr-2"></i> Loading your submissions...
+        </div>
+
+        <div id="errorMessage"
+            class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative mb-4"
+            role="alert">
             <strong class="font-bold">Error!</strong>
             <span class="block sm:inline" id="errorText"></span>
         </div>
@@ -83,6 +220,7 @@
                         <th class="py-3 px-4 border-b border-gray-200">Phone</th>
                         <th class="py-3 px-4 border-b border-gray-200">Submitted At</th>
                         <th class="py-3 px-4 border-b border-gray-200">Approval Status</th>
+                        <th class="py-3 px-4 border-b border-gray-200">Actions</th>
                     </tr>
                 </thead>
                 <tbody id="stakeholdersTableBody">
@@ -94,10 +232,54 @@
         <p id="noDataMessage" class="hidden text-center text-gray-600 mt-6">
             No stakeholder submissions found for your account.
         </p>
+
+        <div class="back-container">
+            <a href="search.html" class="search-btn">
+                <i class="fas fa-arrow-left"></i> Back to Search
+            </a>
+        </div>
+
+        <footer>
+            <p>National Quality Infrastructure (NQI) Stakeholders Directory &copy; 2023</p>
+        </footer>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        // Global functions accessible to buttons
+        function updateStakeholder(id) {
+            window.location.href = `update_stakeholder.html?id=${id}`;
+        }
+
+        async function deleteStakeholder(id) {
+            if (!confirm('Are you sure you want to delete this stakeholder record? This action cannot be undone.')) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`delete_stakeholder.php?id=${id}`, {
+                    method: 'DELETE'
+                });
+                const result = await response.json();
+
+                if (result.success) {
+                    // Remove the row from UI
+                    document.querySelector(`tr[data-id="${id}"]`).remove();
+                    alert('Stakeholder record deleted successfully!');
+
+                    // Show no data message if table is empty
+                    if (document.querySelectorAll('#stakeholdersTableBody tr').length === 0) {
+                        document.getElementById('noDataMessage').classList.remove('hidden');
+                    }
+                } else {
+                    alert(`Error: ${result.message}`);
+                }
+            } catch (error) {
+                console.error('Delete error:', error);
+                alert('Failed to delete stakeholder record. Please try again.');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
             const loadingMessage = document.getElementById('loadingMessage');
             const errorMessage = document.getElementById('errorMessage');
             const errorText = document.getElementById('errorText');
@@ -127,6 +309,7 @@
                     data.forEach(stakeholder => {
                         const row = document.createElement('tr');
                         row.classList.add('hover:bg-gray-50'); // Hover effect
+                        row.setAttribute('data-id', stakeholder.id); // Add data-id attribute
 
                         // Determine status class for styling
                         let statusClass = '';
@@ -149,6 +332,16 @@
                             <td class="py-3 px-4">
                                 <span class="${statusClass}">${stakeholder.approval_status || 'N/A'}</span>
                             </td>
+                            <td class="py-3 px-4 flex space-x-2">
+                                <button onclick="updateStakeholder(${stakeholder.id})" 
+                                        class="action-btn update-btn">
+                                    <i class="fas fa-edit"></i> Edit
+                                </button>
+                                <button onclick="deleteStakeholder(${stakeholder.id})" 
+                                        class="action-btn delete-btn">
+                                    <i class="fas fa-trash-alt"></i> Delete
+                                </button>
+                            </td>
                         `;
                         stakeholdersTableBody.appendChild(row);
                     });
@@ -165,4 +358,5 @@
         });
     </script>
 </body>
+
 </html>
