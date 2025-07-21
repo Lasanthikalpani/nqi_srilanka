@@ -57,7 +57,8 @@ if ($insertStmt->execute()) {
     }
     
     // Log the reset link (for debugging)
-    $resetLink = "http://$host/forgot-password.html?token=$token";
+    // Replace the reset link generation with:
+$resetLink = "http://{$_SERVER['HTTP_HOST']}/nqi_srilanka/forgot-password.html?token=$token";
     error_log("Password reset link for user $userId: $resetLink");
     
     echo json_encode($response);
