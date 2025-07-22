@@ -1,0 +1,5 @@
+Email: admin@nqi.lk
+
+Password: SecurePassword123 (you should change this in the script before running it)
+
+
