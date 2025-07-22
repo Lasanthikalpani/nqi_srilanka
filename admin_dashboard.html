@@ -54,6 +54,18 @@
             color: white;
             font-weight: 600;
         }
+
+        /* Toast notification styles */
+        .toast-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1100;
+        }
+
+        .toast {
+            transition: opacity 0.3s ease;
+        }
     </style>
 </head>
 
@@ -105,6 +117,9 @@
         </div>
     </div>
 
+    <!-- Toast notification container -->
+    <div class="toast-container"></div>
+
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
@@ -153,9 +168,9 @@
                                         <button class="btn btn-sm btn-primary edit-user" data-id="${user.id}">
                                             <i class="fas fa-edit"></i> Edit
                                         </button>
-                                       <button class="btn btn-sm btn-danger delete-user" data-id="${user.id}">
-    <i class="fas fa-trash"></i> Delete
-</button>
+                                        <button class="btn btn-sm btn-danger delete-user" data-id="${user.id}">
+                                            <i class="fas fa-trash"></i> Delete
+                                        </button>
                                     </td>
                                 </tr>
                             `;
@@ -166,18 +181,83 @@
                         if (xhr.status === 403) {
                             window.location.href = 'admin_login.html?error=session_expired';
                         } else {
-                            alert('Error loading users: ' + xhr.statusText);
+                            showToast('Error loading users: ' + xhr.statusText, 'danger');
                         }
                     }
                 });
             }
 
+            // Delete user handler
+            // Delete user handler
+            $(document).on('click', '.delete-user', function () {
+                const userId = $(this).data('id');
+                const row = $(this).closest('tr');
+                const userName = row.find('td:eq(1)').text();
+
+                if (confirm(`Are you sure you want to delete ${userName}? This action cannot be undone.`)) {
+                    $.ajax({
+                        url: 'admin_delete_user.php',
+                        type: 'POST',
+                        data: JSON.stringify({ id: userId }),
+                        contentType: 'application/json',
+                        dataType: 'json',
+                        success: function (response) {
+                            if (response.success) {
+                                row.fadeOut(300, function () {
+                                    $(this).remove();
+                                    showToast(response.message || 'User deleted successfully');
+                                });
+                            } else {
+                                showToast(response.message || 'Error deleting user', 'danger');
+                            }
+                        },
+                        error: function (xhr) {
+                            if (xhr.status === 403) {
+                                window.location.href = 'admin_login.html?error=session_expired';
+                            } else {
+                                const errorMsg = xhr.responseJSON?.message || xhr.statusText;
+                                showToast('Error deleting user: ' + errorMsg, 'danger');
+                            }
+                        }
+                    });
+                }
+            });
             // Handle logout
             $('.nav-link').eq(2).click(function (e) {
                 e.preventDefault();
                 localStorage.removeItem('admin_token');
                 window.location.href = 'admin_login.html';
             });
+
+            // Toast notification function
+            function showToast(message, type = 'success') {
+                const toastId = 'toast-' + Date.now();
+                const toast = $(`
+                    <div id="${toastId}" class="toast show" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
+                        <div class="toast-header bg-${type} text-white">
+                            <strong class="mr-auto">Notification</strong>
+                            <button type="button" class="ml-2 mb-1 close text-white" data-dismiss="toast" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="toast-body">
+                            ${message}
+                        </div>
+                    </div>
+                `);
+
+                $('.toast-container').append(toast);
+
+                // Auto-hide after 5 seconds
+                setTimeout(() => {
+                    $(`#${toastId}`).remove();
+                }, 5000);
+
+                // Manual close handler
+                toast.find('.close').click(function () {
+                    $(`#${toastId}`).remove();
+                });
+            }
         });
     </script>
 </body>
