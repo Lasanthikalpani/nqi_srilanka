@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stakeholder Management - NQI Sri Lanka</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #1abc9c;
+            --light: #ecf0f1;
+            --dark: #34495e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            background: linear-gradient(135deg, var(--primary), #1a3c5a);
+            color: white;
+            min-height: 100vh;
+            position: fixed;
+            width: 250px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-content {
+            margin-left: 250px;
+            padding: 30px;
+            min-height: 100vh;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            padding: 12px 20px;
+            margin: 5px 15px;
+            border-radius: 8px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.15);
+            transform: translateX(5px);
+        }
+
+        .nav-link i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            color: white;
+            padding: 18px 25px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .card-header i {
+            margin-right: 10px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        th {
+            background-color: var(--light);
+            font-weight: 600;
+            color: var(--dark);
+            text-transform: uppercase;
+            font-size: 0.875rem;
+        }
+
+        tr:hover {
+            background-color: #f8fafc;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px rgba(52, 152, 219, 0.3);
+        }
+
+        .btn-danger {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+        }
+
+        .btn-danger:hover {
+            background-color: #c0392b;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px rgba(231, 76, 60, 0.3);
+        }
+
+        .btn-success {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+        }
+
+        .btn-success:hover {
+            background-color: #16a085;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px rgba(26, 188, 156, 0.3);
+        }
+
+        .logo-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .sidebar h4 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        /* Toast notification styles */
+        .toast-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1100;
+        }
+
+        .toast {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.3s;
+            margin-bottom: 15px;
+            max-width: 350px;
+        }
+
+        .toast-header {
+            padding: 12px 15px;
+            font-weight: 600;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .toast-success .toast-header {
+            background-color: var(--accent);
+        }
+
+        .toast-error .toast-header {
+            background-color: #e74c3c;
+        }
+
+        .toast-body {
+            padding: 15px;
+            color: var(--dark);
+        }
+
+        .close {
+            cursor: pointer;
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+
+        .close:hover {
+            opacity: 1;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            width: 80%;
+            max-width: 800px;
+        }
+
+        .modal-header {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h2 {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .modal-body {
+            padding: 10px 0;
+        }
+
+        .modal-footer {
+            padding: 10px 0;
+            border-top: 1px solid #eee;
+            margin-top: 20px;
+            text-align: right;
+        }
+
+        .close-modal {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-modal:hover {
+            color: black;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .form-control:focus {
+            border-color: var(--secondary);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-pending {
+            background-color: #f39c12;
+            color: white;
+        }
+
+        .status-approved {
+            background-color: var(--accent);
+            color: white;
+        }
+
+        .status-rejected {
+            background-color: #e74c3c;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="logo-header">
+            <div class="logo">
+                <i class="fas fa-landmark"></i>
+            </div>
+            <h4>NQI Sri Lanka</h4>
+        </div>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link" href="#" id="dashboardLink"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"><i class="fas fa-users"></i> Users</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="#"><i class="fas fa-building"></i> Stakeholders</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-building"></i> Stakeholder Management
+                </div>
+                <div class="card-body">
+                    <div class="overflow-x-auto rounded-lg">
+                        <table id="stakeholdersTable" class="min-w-full">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Organization</th>
+                                    <th>Type</th>
+                                    <th>Contact Person</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Stakeholders will be loaded here via JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stakeholder Detail Modal -->
+    <div id="stakeholderModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Stakeholder Details</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="stakeholderForm">
+                    <input type="hidden" id="stakeholderId">
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="form-group">
+                            <label for="organization_name">Organization Name</label>
+                            <input type="text" class="form-control" id="organization_name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="organization_type">Organization Type</label>
+                            <select class="form-control" id="organization_type" required>
+                                <option value="">Select Type</option>
+                                <option value="🏛️ NQI Body (e.g., SLSI, SLAB, MUSSD)">🏛️ NQI Body</option>
+                                <option value="⚖️ Regulatory Authority">⚖️ Regulatory Authority</option>
+                                <option value="📜 Certification Body">📜 Certification Body</option>
+                                <option value="🔬 Testing Laboratory">🔬 Testing Laboratory</option>
+                                <option value="🎓 Educational/Research Institute">🎓 Educational/Research Institute
+                                </option>
+                                <option value="🏭 Industry/Enterprise">🏭 Industry/Enterprise</option>
+                                <option value="📝 Other">📝 Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" id="otherTypeGroup" style="display: none;">
+                            <label for="organization_type_other">Other Organization Type</label>
+                            <input type="text" class="form-control" id="organization_type_other">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contact_person">Contact Person</label>
+                            <input type="text" class="form-control" id="contact_person" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="designation">Designation</label>
+                            <input type="text" class="form-control" id="designation" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="text" class="form-control" id="phone" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="website">Website</label>
+                            <input type="url" class="form-control" id="website">
+                        </div>
+
+                        <div class="form-group col-span-2">
+                            <label for="core_services">Core Services</label>
+                            <textarea class="form-control" id="core_services" rows="2"></textarea>
+                        </div>
+
+                        <div class="form-group col-span-2">
+                            <label>Services Offered</label>
+                            <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+                                <div><input type="checkbox" id="service_standards" value="📘 Standards Development">
+                                    <label for="service_standards">📘 Standards Development</label>
+                                </div>
+                                <div><input type="checkbox" id="service_calibration" value="🧪 Calibration"> <label
+                                        for="service_calibration">🧪 Calibration</label></div>
+                                <div><input type="checkbox" id="service_certification" value="🛡️ Certification"> <label
+                                        for="service_certification">🛡️ Certification</label></div>
+                                <div><input type="checkbox" id="service_testing" value="🔬 Laboratory Testing"> <label
+                                        for="service_testing">🔬 Laboratory Testing</label></div>
+                                <div><input type="checkbox" id="service_inspection" value="🔎 Inspection"> <label
+                                        for="service_inspection">🔎 Inspection</label></div>
+                                <div><input type="checkbox" id="service_training" value="🎯 Training"> <label
+                                        for="service_training">🎯 Training</label></div>
+                                <div><input type="checkbox" id="service_metrology" value="📏 Metrology"> <label
+                                        for="service_metrology">📏 Metrology</label></div>
+                                <div><input type="checkbox" id="service_regulatory" value="⚖️ Regulatory Oversight">
+                                    <label for="service_regulatory">⚖️ Regulatory Oversight</label>
+                                </div>
+                                <div><input type="checkbox" id="service_rd" value="🧠 R&D"> <label for="service_rd">🧠
+                                        R&D</label></div>
+                                <div><input type="checkbox" id="service_other" value="📝 Other"> <label
+                                        for="service_other">📝 Other</label></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" id="otherServiceGroup" style="display: none;">
+                            <label for="services_other">Other Services</label>
+                            <input type="text" class="form-control" id="services_other">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Accreditation Status</label>
+                            <select class="form-control" id="accreditation">
+                                <option value="🔴 No">🔴 No</option>
+                                <option value="🟢 Yes (SLAB)">🟢 Yes (SLAB)</option>
+                                <option value="🌐 Yes (Other)">🌐 Yes (Other)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="accreditation_details">Accreditation Details</label>
+                            <textarea class="form-control" id="accreditation_details" rows="2"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Compliance Updates</label>
+                            <select class="form-control" id="compliance_update">
+                                <option value="✅ Yes">✅ Yes</option>
+                                <option value="❌ No">❌ No</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Regional Branches</label>
+                            <select class="form-control" id="regional_branches">
+                                <option value="✅ Yes">✅ Yes</option>
+                                <option value="❌ No">❌ No</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="regional_branch_list">Regional Branch List</label>
+                            <textarea class="form-control" id="regional_branch_list" rows="2"></textarea>
+                        </div>
+
+                        <div class="form-group col-span-2">
+                            <label for="comments">Comments</label>
+                            <textarea class="form-control" id="comments" rows="2"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Approval Status</label>
+                            <select class="form-control" id="approval_status">
+                                <option value="pending">Pending</option>
+                                <option value="approved">Approved</option>
+                                <option value="rejected">Rejected</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="cancelBtn">Cancel</button>
+                <button type="button" class="btn btn-primary" id="saveBtn">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast notification container -->
+    <div class="toast-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+    <script>
+        // Handle dashboard navigation
+        $('#dashboardLink').click(function (e) {
+            e.preventDefault();
+            window.location.href = 'admin_dashboard.html';
+        });
+        $(document).ready(function () {
+            // Check for token on page load
+            const token = localStorage.getItem('admin_token');
+            if (!token) {
+                window.location.href = 'admin_login.html?error=login_required';
+                return;
+            }
+
+            // Set token in headers for all AJAX requests
+            $.ajaxSetup({
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            });
+
+            // Load stakeholders data
+            loadStakeholders();
+
+            // Handle organization type change
+            $('#organization_type').change(function () {
+                if ($(this).val() === '📝 Other') {
+                    $('#otherTypeGroup').show();
+                } else {
+                    $('#otherTypeGroup').hide();
+                }
+            });
+
+            // Handle services checkbox change
+            $('input[type="checkbox"][value="📝 Other"]').change(function () {
+                if ($(this).is(':checked')) {
+                    $('#otherServiceGroup').show();
+                } else {
+                    $('#otherServiceGroup').hide();
+                }
+            });
+
+            // Modal close handlers
+            $('.close-modal, #cancelBtn').click(function () {
+                $('#stakeholderModal').hide();
+            });
+
+            // Click outside modal to close
+            $(window).click(function (event) {
+                if (event.target == document.getElementById('stakeholderModal')) {
+                    $('#stakeholderModal').hide();
+                }
+            });
+
+            // Save stakeholder handler
+            $('#saveBtn').click(function () {
+                const id = $('#stakeholderId').val();
+                const url = id ? 'admin_update_stakeholder.php' : 'admin_add_stakeholder.php';
+                const method = id ? 'PUT' : 'POST';
+
+                // Get selected services
+                const services = [];
+                $('input[type="checkbox"]:checked').each(function () {
+                    if ($(this).val() !== '📝 Other') {
+                        services.push($(this).val());
+                    }
+                });
+
+                // If "Other" is checked and has value, add it
+                if ($('input[type="checkbox"][value="📝 Other"]').is(':checked') && $('#services_other').val()) {
+                    services.push($('#services_other').val());
+                }
+
+                const data = {
+                    id: id,
+                    organization_name: $('#organization_name').val(),
+                    organization_type: $('#organization_type').val(),
+                    organization_type_other: $('#organization_type_other').val(),
+                    contact_person: $('#contact_person').val(),
+                    designation: $('#designation').val(),
+                    email: $('#email').val(),
+                    phone: $('#phone').val(),
+                    website: $('#website').val(),
+                    core_services: $('#core_services').val(),
+                    services: services.join(', '),
+                    services_other: $('#services_other').val(),
+                    accreditation: $('#accreditation').val(),
+                    accreditation_details: $('#accreditation_details').val(),
+                    compliance_update: $('#compliance_update').val(),
+                    regional_branches: $('#regional_branches').val(),
+                    regional_branch_list: $('#regional_branch_list').val(),
+                    comments: $('#comments').val(),
+                    approval_status: $('#approval_status').val()
+                };
+
+                $.ajax({
+                    url: url,
+                    type: method,
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.success) {
+                            showToast(response.message || (id ? 'Stakeholder updated successfully' : 'Stakeholder added successfully'), 'success');
+                            loadStakeholders();
+                            $('#stakeholderModal').hide();
+                        } else {
+                            showToast(response.message || (id ? 'Error updating stakeholder' : 'Error adding stakeholder'), 'error');
+                        }
+                    },
+                    error: function (xhr) {
+                        if (xhr.status === 403) {
+                            window.location.href = 'admin_login.html?error=session_expired';
+                        } else {
+                            const errorMsg = xhr.responseJSON?.message || xhr.statusText;
+                            showToast('Error: ' + errorMsg, 'error');
+                        }
+                    }
+                });
+            });
+
+            // Load stakeholders function
+            function loadStakeholders() {
+                $.ajax({
+                    url: 'admin_get_stakeholders.php',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.status === 'error' && data.message === 'Access denied. Invalid or missing token.') {
+                            window.location.href = 'admin_login.html?error=session_expired';
+                            return;
+                        }
+
+                        let tableBody = $('#stakeholdersTable tbody');
+                        tableBody.empty();
+
+                        data.data.forEach(function (stakeholder) {
+                            let statusClass = '';
+                            if (stakeholder.approval_status === 'approved') {
+                                statusClass = 'status-approved';
+                            } else if (stakeholder.approval_status === 'rejected') {
+                                statusClass = 'status-rejected';
+                            } else {
+                                statusClass = 'status-pending';
+                            }
+
+                            let row = `
+                                <tr data-id="${stakeholder.id}">
+                                    <td>${stakeholder.id}</td>
+                                    <td>${stakeholder.organization_name}</td>
+                                    <td>${stakeholder.organization_type}</td>
+                                    <td>${stakeholder.contact_person}</td>
+                                    <td>${stakeholder.email}</td>
+                                    <td>${stakeholder.phone}</td>
+                                    <td><span class="status-badge ${statusClass}">${stakeholder.approval_status}</span></td>
+                                    <td class="flex space-x-2">
+                                        <button class="btn btn-primary edit-stakeholder" data-id="${stakeholder.id}">
+                                            <i class="fas fa-edit mr-1"></i> Edit
+                                        </button>
+                                        <button class="btn btn-danger delete-stakeholder" data-id="${stakeholder.id}">
+                                            <i class="fas fa-trash-alt mr-1"></i> Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            `;
+                            tableBody.append(row);
+                        });
+                    },
+                    error: function (xhr) {
+                        if (xhr.status === 403) {
+                            window.location.href = 'admin_login.html?error=session_expired';
+                        } else {
+                            showToast('Error loading stakeholders: ' + xhr.statusText, 'error');
+                        }
+                    }
+                });
+            }
+
+            // Edit stakeholder handler
+            $(document).on('click', '.edit-stakeholder', function () {
+                const stakeholderId = $(this).data('id');
+
+                $.ajax({
+                    url: 'admin_get_stakeholder.php?id=' + stakeholderId,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (stakeholder) {
+                        // Populate form fields
+                        $('#stakeholderId').val(stakeholder.id);
+                        $('#organization_name').val(stakeholder.organization_name);
+                        $('#organization_type').val(stakeholder.organization_type);
+
+                        if (stakeholder.organization_type === '📝 Other' && stakeholder.organization_type_other) {
+                            $('#otherTypeGroup').show();
+                            $('#organization_type_other').val(stakeholder.organization_type_other);
+                        } else {
+                            $('#otherTypeGroup').hide();
+                        }
+
+                        $('#contact_person').val(stakeholder.contact_person);
+                        $('#designation').val(stakeholder.designation);
+                        $('#email').val(stakeholder.email);
+                        $('#phone').val(stakeholder.phone);
+                        $('#website').val(stakeholder.website);
+                        $('#core_services').val(stakeholder.core_services);
+
+                        // Reset checkboxes
+                        $('input[type="checkbox"]').prop('checked', false);
+
+                        // Check services
+                        if (stakeholder.services) {
+                            const services = stakeholder.services.split(', ');
+                            services.forEach(service => {
+                                const checkbox = $(`input[type="checkbox"][value="${service}"]`);
+                                if (checkbox.length) {
+                                    checkbox.prop('checked', true);
+                                } else {
+                                    // Handle "Other" services
+                                    $('input[type="checkbox"][value="📝 Other"]').prop('checked', true);
+                                    $('#otherServiceGroup').show();
+                                    $('#services_other').val(service);
+                                }
+                            });
+                        }
+
+                        $('#accreditation').val(stakeholder.accreditation);
+                        $('#accreditation_details').val(stakeholder.accreditation_details);
+                        $('#compliance_update').val(stakeholder.compliance_update);
+                        $('#regional_branches').val(stakeholder.regional_branches);
+                        $('#regional_branch_list').val(stakeholder.regional_branch_list);
+                        $('#comments').val(stakeholder.comments);
+                        $('#approval_status').val(stakeholder.approval_status);
+
+                        // Show modal
+                        $('#stakeholderModal').show();
+                    },
+                    error: function (xhr) {
+                        if (xhr.status === 403) {
+                            window.location.href = 'admin_login.html?error=session_expired';
+                        } else {
+                            showToast('Error loading stakeholder details: ' + xhr.statusText, 'error');
+                        }
+                    }
+                });
+            });
+
+            // Delete stakeholder handler
+            $(document).on('click', '.delete-stakeholder', function () {
+                const stakeholderId = $(this).data('id');
+                const row = $(this).closest('tr');
+                const orgName = row.find('td:eq(1)').text();
+
+                if (confirm(`Are you sure you want to delete ${orgName}? This action cannot be undone.`)) {
+                    $.ajax({
+                        url: 'admin_delete_stakeholder.php',
+                        type: 'DELETE',
+                        data: JSON.stringify({ id: stakeholderId }),
+                        contentType: 'application/json',
+                        dataType: 'json',
+                        success: function (response) {
+                            if (response.success) {
+                                row.fadeOut(300, function () {
+                                    $(this).remove();
+                                    showToast(response.message || 'Stakeholder deleted successfully', 'success');
+                                });
+                            } else {
+                                showToast(response.message || 'Error deleting stakeholder', 'error');
+                            }
+                        },
+                        error: function (xhr) {
+                            if (xhr.status === 403) {
+                                window.location.href = 'admin_login.html?error=session_expired';
+                            } else {
+                                const errorMsg = xhr.responseJSON?.message || xhr.statusText;
+                                showToast('Error deleting stakeholder: ' + errorMsg, 'error');
+                            }
+                        }
+                    });
+                }
+            });
+
+            // Handle logout
+            $('.nav-link').eq(3).click(function (e) {
+                e.preventDefault();
+                localStorage.removeItem('admin_token');
+                window.location.href = 'admin_login.html';
+            });
+
+            // Toast notification function
+            function showToast(message, type = 'success') {
+                const toastId = 'toast-' + Date.now();
+                const toast = $(`
+                    <div id="${toastId}" class="toast toast-${type} show">
+                        <div class="toast-header">
+                            <strong>Notification</strong>
+                            <span class="close">&times;</span>
+                        </div>
+                        <div class="toast-body">
+                            ${message}
+                        </div>
+                    </div>
+                `);
+
+                $('.toast-container').append(toast);
+
+                // Auto-hide after 5 seconds
+                setTimeout(() => {
+                    $(`#${toastId}`).fadeOut(300, function () {
+                        $(this).remove();
+                    });
+                }, 5000);
+
+                // Manual close handler
+                toast.find('.close').click(function () {
+                    $(`#${toastId}`).fadeOut(300, function () {
+                        $(this).remove();
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
