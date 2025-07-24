@@ -181,6 +181,60 @@
             color: white;
         }
 
+        /* Search Section Styles */
+        .search-section {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .search-form {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .search-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+
+        .search-select {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            background-color: white;
+        }
+
+        .search-btn {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .search-btn:hover {
+            background-color: #16a085;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px rgba(26, 188, 156, 0.3);
+        }
+
         /* Toast notification styles */
         .toast-container {
             position: fixed;
@@ -362,6 +416,27 @@
 
     <div class="main-content">
         <div class="container-fluid">
+            <!-- Search Section -->
+            <div class="search-section">
+                <form id="searchForm" class="search-form">
+                    <input type="text" id="searchInput" class="search-input" placeholder="Search stakeholders...">
+                    <select id="searchField" class="search-select">
+                        <option value="all">All Fields</option>
+                        <option value="organization_name">Organization Name</option>
+                        <option value="organization_type">Organization Type</option>
+                        <option value="contact_person">Contact Person</option>
+                        <option value="email">Email</option>
+                        <option value="approval_status">Status</option>
+                    </select>
+                    <button type="submit" class="search-btn">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                    <button type="button" id="resetSearch" class="btn btn-danger">
+                        <i class="fas fa-times"></i> Reset
+                    </button>
+                </form>
+            </div>
+
             <div class="card">
                 <div class="card-header">
                     <i class="fas fa-building"></i> Stakeholder Management
@@ -607,6 +682,84 @@
                 }
             });
 
+            // Search form handler
+            $('#searchForm').submit(function(e) {
+                e.preventDefault();
+                loadStakeholders();
+            });
+
+            // Reset search handler
+            $('#resetSearch').click(function() {
+                $('#searchInput').val('');
+                $('#searchField').val('all');
+                loadStakeholders();
+            });
+
+            // Modified loadStakeholders function with search functionality
+            function loadStakeholders() {
+                const searchTerm = $('#searchInput').val();
+                const searchField = $('#searchField').val();
+                
+                let url = 'admin_get_stakeholders.php';
+                if (searchTerm) {
+                    url += `?search=${encodeURIComponent(searchTerm)}&field=${encodeURIComponent(searchField)}`;
+                }
+
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.status === 'error' && data.message === 'Access denied. Invalid or missing token.') {
+                            window.location.href = 'admin_login.html?error=session_expired';
+                            return;
+                        }
+
+                        let tableBody = $('#stakeholdersTable tbody');
+                        tableBody.empty();
+
+                        data.data.forEach(function (stakeholder) {
+                            let statusClass = '';
+                            if (stakeholder.approval_status === 'approved') {
+                                statusClass = 'status-approved';
+                            } else if (stakeholder.approval_status === 'rejected') {
+                                statusClass = 'status-rejected';
+                            } else {
+                                statusClass = 'status-pending';
+                            }
+
+                            let row = `
+                                <tr data-id="${stakeholder.id}">
+                                    <td>${stakeholder.id}</td>
+                                    <td>${stakeholder.organization_name}</td>
+                                    <td>${stakeholder.organization_type}</td>
+                                    <td>${stakeholder.contact_person}</td>
+                                    <td>${stakeholder.email}</td>
+                                    <td>${stakeholder.phone}</td>
+                                    <td><span class="status-badge ${statusClass}">${stakeholder.approval_status}</span></td>
+                                    <td class="flex space-x-2">
+                                        <button class="btn btn-primary edit-stakeholder" data-id="${stakeholder.id}">
+                                            <i class="fas fa-edit mr-1"></i> Edit
+                                        </button>
+                                        <button class="btn btn-danger delete-stakeholder" data-id="${stakeholder.id}">
+                                            <i class="fas fa-trash-alt mr-1"></i> Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            `;
+                            tableBody.append(row);
+                        });
+                    },
+                    error: function (xhr) {
+                        if (xhr.status === 403) {
+                            window.location.href = 'admin_login.html?error=session_expired';
+                        } else {
+                            showToast('Error loading stakeholders: ' + xhr.statusText, 'error');
+                        }
+                    }
+                });
+            }
+
             // Save stakeholder handler
             $('#saveBtn').click(function () {
                 const id = $('#stakeholderId').val();
@@ -673,63 +826,6 @@
                     }
                 });
             });
-
-            // Load stakeholders function
-            function loadStakeholders() {
-                $.ajax({
-                    url: 'admin_get_stakeholders.php',
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function (data) {
-                        if (data.status === 'error' && data.message === 'Access denied. Invalid or missing token.') {
-                            window.location.href = 'admin_login.html?error=session_expired';
-                            return;
-                        }
-
-                        let tableBody = $('#stakeholdersTable tbody');
-                        tableBody.empty();
-
-                        data.data.forEach(function (stakeholder) {
-                            let statusClass = '';
-                            if (stakeholder.approval_status === 'approved') {
-                                statusClass = 'status-approved';
-                            } else if (stakeholder.approval_status === 'rejected') {
-                                statusClass = 'status-rejected';
-                            } else {
-                                statusClass = 'status-pending';
-                            }
-
-                            let row = `
-                                <tr data-id="${stakeholder.id}">
-                                    <td>${stakeholder.id}</td>
-                                    <td>${stakeholder.organization_name}</td>
-                                    <td>${stakeholder.organization_type}</td>
-                                    <td>${stakeholder.contact_person}</td>
-                                    <td>${stakeholder.email}</td>
-                                    <td>${stakeholder.phone}</td>
-                                    <td><span class="status-badge ${statusClass}">${stakeholder.approval_status}</span></td>
-                                    <td class="flex space-x-2">
-                                        <button class="btn btn-primary edit-stakeholder" data-id="${stakeholder.id}">
-                                            <i class="fas fa-edit mr-1"></i> Edit
-                                        </button>
-                                        <button class="btn btn-danger delete-stakeholder" data-id="${stakeholder.id}">
-                                            <i class="fas fa-trash-alt mr-1"></i> Delete
-                                        </button>
-                                    </td>
-                                </tr>
-                            `;
-                            tableBody.append(row);
-                        });
-                    },
-                    error: function (xhr) {
-                        if (xhr.status === 403) {
-                            window.location.href = 'admin_login.html?error=session_expired';
-                        } else {
-                            showToast('Error loading stakeholders: ' + xhr.statusText, 'error');
-                        }
-                    }
-                });
-            }
 
             // Edit stakeholder handler
             $(document).on('click', '.edit-stakeholder', function () {
