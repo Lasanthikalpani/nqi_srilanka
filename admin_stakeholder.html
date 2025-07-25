@@ -683,13 +683,13 @@
             });
 
             // Search form handler
-            $('#searchForm').submit(function(e) {
+            $('#searchForm').submit(function (e) {
                 e.preventDefault();
                 loadStakeholders();
             });
 
             // Reset search handler
-            $('#resetSearch').click(function() {
+            $('#resetSearch').click(function () {
                 $('#searchInput').val('');
                 $('#searchField').val('all');
                 loadStakeholders();
@@ -699,7 +699,7 @@
             function loadStakeholders() {
                 const searchTerm = $('#searchInput').val();
                 const searchField = $('#searchField').val();
-                
+
                 let url = 'admin_get_stakeholders.php';
                 if (searchTerm) {
                     url += `?search=${encodeURIComponent(searchTerm)}&field=${encodeURIComponent(searchField)}`;
@@ -828,6 +828,7 @@
             });
 
             // Edit stakeholder handler
+            // Edit stakeholder handler
             $(document).on('click', '.edit-stakeholder', function () {
                 const stakeholderId = $(this).data('id');
 
@@ -835,7 +836,14 @@
                     url: 'admin_get_stakeholder.php?id=' + stakeholderId,
                     type: 'GET',
                     dataType: 'json',
-                    success: function (stakeholder) {
+                    success: function (response) {
+                        if (response.status === 'error') {
+                            showToast(response.message, 'error');
+                            return;
+                        }
+
+                        const stakeholder = response.data;
+
                         // Populate form fields
                         $('#stakeholderId').val(stakeholder.id);
                         $('#organization_name').val(stakeholder.organization_name);
