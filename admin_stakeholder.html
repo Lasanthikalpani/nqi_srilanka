@@ -808,10 +808,10 @@
                     contentType: 'application/json',
                     dataType: 'json',
                     success: function (response) {
-                        if (response.success) {
+                        if (response.status === 'success') {  // Changed from response.success
                             showToast(response.message || (id ? 'Stakeholder updated successfully' : 'Stakeholder added successfully'), 'success');
                             loadStakeholders();
-                            $('#stakeholderModal').hide();
+                            $('#stakeholderModal').hide();  // This will close the modal
                         } else {
                             showToast(response.message || (id ? 'Error updating stakeholder' : 'Error adding stakeholder'), 'error');
                         }
