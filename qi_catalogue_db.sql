@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 24, 2025 at 04:09 PM
+-- Generation Time: Jul 25, 2025 at 04:28 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -70,11 +70,13 @@ CREATE TABLE `nqi_stakeholders` (
 --
 
 INSERT INTO `nqi_stakeholders` (`id`, `organization_name`, `organization_type`, `organization_type_other`, `contact_person`, `designation`, `email`, `phone`, `website`, `core_services`, `services`, `services_other`, `accreditation`, `accreditation_details`, `compliance_update`, `regional_branches`, `regional_branch_list`, `comments`, `submitted_at`, `approval_status`, `user_id`) VALUES
-(3, 'laasa', '🔬 Testing Laboratory', '', 'Lasanthi Kalpani', 'kaals', 'lasanthikalpani@gmail.com', '0717208416', '', 'dvdv', '📘 Standards Development, 🧪 Calibration, 🛡️ Certification, 🔬 Laboratory Testing', '', '🟢 Yes (SLAB)', '', '✅ Yes', '✅ Yes', '', '', '2025-07-16 00:46:07', 'approved', NULL),
-(4, 'IBM', '🎓 Educational/Research Institute', '', 'adminuser', 'manager', 'lasanthikalpani@gmail.com', '0717208416', '', 'adminuser', '📘 Standards Development, 🧪 Calibration, 🛡️ Certification, 🔬 Laboratory Testing', '', '🟢 Yes (SLAB)', '', '✅ Yes', '✅ Yes', '', '', '2025-07-16 01:00:48', 'approved', NULL),
-(6, 'Stakeholder', '📜 Certification Body', '', 'Lasanthi Kalpani', 'manager', 'lasanthikalpani@gmail.com', '0717208416', 'http://localhost/nqi_srilanka/nqi_form.html', 'To create a new Git branch for updating stakeholder information, follow these steps in your terminal or command prompt:', '📘 Standards Development, 🧪 Calibration, 🛡️ Certification, 🔬 Laboratory Testing, 🔎 Inspection, 🎯 Training', '', '🟢 Yes (SLAB)', 'To create a new Git branch for updating stakeholder information, follow these steps in your terminal or command prompt:', '✅ Yes', '✅ Yes', 'To create a new Git branch for updating stakeholder information, follow these steps in your terminal or command prompt:', 'To create a new Git branch for updating stakeholder information, follow these steps in your terminal or command prompt:', '2025-07-17 00:02:49', 'pending', NULL),
+(3, 'Tech Solutions', '⚖️ Regulatory Authority', '', 'Michael Brown', 'IT Manager', 'michael.b@techsol.com', '0717208416', '', 'dvdv', '📘 Standards Development, 🧪 Calibration, 🛡️ Certification, 🔬 Laboratory Testing, 🎯 Training, ⚖️ Regulatory Oversight, 🧠 R&D', '', '🟢 Yes (SLAB)', 'Weekly,2023-10-18,Needs detailed reports', '✅ Yes', '✅ Yes', 'Weekly,2023-10-18,Needs detailed reports', 'Weekly,2023-10-18,Needs detailed reports', '2025-07-16 00:46:07', 'rejected', NULL),
+(4, 'IBM', '🎓 Educational/Research Institute', '', 'adminuser', 'manager', 'lasanthikalpani@gmail.com', '0717208416', '', 'adminuser', '📘 Standards Development, 🧪 Calibration, 🛡️ Certification, 🔬 Laboratory Testing', '', '🟢 Yes (SLAB)', '', '✅ Yes', '✅ Yes', '', '', '2025-07-16 01:00:48', 'pending', NULL),
+(6, 'Community Rep', '🏭 Industry/Enterprise', '', 'Maria Garcia', 'Local NGO', 'maria.g@localngo.org', '+1 (555) 345-6789', 'http://localhost/nqi_srilanka/nqi_form.html', 'Strict on deadlines', '📘 Standards Development, 🧪 Calibration, 🛡️ Certification, 🔬 Laboratory Testing, 🔎 Inspection, 🎯 Training, 📏 Metrology, ⚖️ Regulatory Oversight, 🧠 R&D', '', '🟢 Yes (SLAB)', 'Strict on deadlines', '✅ Yes', '✅ Yes', 'To create a new Git branch for updating stakeholder information, follow these steps in your terminal or command prompt:', 'To create a new Git branch for updating stakeholder information, follow these steps in your terminal or command prompt:', '2025-07-17 00:02:49', 'approved', NULL),
 (8, 'IBM', '🔬 Testing Laboratory', '', 'Lasanthi Kalpani', 'manager', 'lasanthikalpani@gmail.com', '0717208416', 'http://localhost/nqi_srilanka/nqi_form.html', '', '📘 Standards Development, 🧪 Calibration, 🛡️ Certification, 🎯 Training, 🧠 R&D', '', '🟢 Yes (SLAB)', '', '✅ Yes', '✅ Yes', '', '', '2025-07-17 11:41:15', 'approved', NULL),
-(9, 'Early skyscrapers', '📜 Certification Body', '', 'Lasanthi Kalpani', 'CEO', 'lasanthikalpani@gmail.com', '0717208416', 'https://www.amnesty.org/en/what-we-do/united-nations/?utm_source=google&amp;utm_medium=cpc&amp;gad_source=1&amp;gad_campaignid=1357523470&amp;gbraid=0AAAAADiFSPQQh1QNNzhF24m79SQ5VuVAG&amp;gclid=Cj0KCQjwm93DBhD_ARIsADR_DjGEXk8khhTrJ2JmfLZ5iBYT99Sh09IQeXidY', 'Early skyscrapers', '📘 Standards Development, 🧪 Calibration, 🛡️ Certification, 🔬 Laboratory Testing, 🔎 Inspection, 🎯 Training, 📏 Metrology, ⚖️ Regulatory Oversight, 🧠 R&D, 📝 Other', 'Early skyscrapers', '🟢 Yes (SLAB)', 'Early skyscrapers', '✅ Yes', '✅ Yes', 'Early skyscrapers', 'Early skyscrapers', '2025-07-17 23:41:41', 'pending', NULL);
+(14, 'External Consultant,Innovate Ltd', '🏛️ NQI Body (e.g., SLSI, SLAB, MUSSD)', '', 'David Wilson', 'External Consultant', 'wilson@innovate.com', '0717208416', 'https://sourceforge.net/projects/xampp/', '', '📘 Standards Development, 🧪 Calibration, 🎯 Training, 📏 Metrology', '', '🟢 Yes (SLAB)', 'wilson@innovate.com', '✅ Yes', '✅ Yes', 'wilson@innovate.com', 'wilson@innovate.com', '2025-07-25 14:10:52', 'pending', 16),
+(15, 'Global Enterprises', 'Other', 'Global Enterprises', 'Emily Chen', 'Product Owner', 'lisa.park@nextgen.com', '+1 (555) 987-6543', '', '+1 (555) 987-6543', 'Standards Development, Calibration, Certification, Laboratory Testing, Inspection, Training', '+1 (555) 987-6543', 'Yes (SLAB)', '+1 (555) 987-6543', 'Yes', 'Yes', '+1 (555) 987-6543', '+1 (555) 987-6543', '2025-07-25 14:22:33', 'pending', 16),
+(16, 'Innovate Ltd,david', NULL, '', 'Lasanthi Kalpani', 'External Consultant', 'lasanthikalpani@gmail.com', '0717208416', 'https://sourceforge.net/projects/xampp/', '', 'Metrology', 'Metrology', NULL, 'Innovate Ltd,david', NULL, NULL, 'Innovate Ltd,david', 'Innovate Ltd,david', '2025-07-25 14:25:03', 'approved', 16);
 
 -- --------------------------------------------------------
 
@@ -165,7 +167,7 @@ ALTER TABLE `feedback`
 -- AUTO_INCREMENT for table `nqi_stakeholders`
 --
 ALTER TABLE `nqi_stakeholders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `password_reset_tokens`

@@ -5,135 +5,111 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NQI Stakeholder Form – Sri Lanka</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:400,700|Sen:400,700,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #0d47a1;
-            --secondary-color: #ff6f00;
-            --light-color: #f8f9fa;
-            --dark-color: #212529;
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #1abc9c;
+            --light: #ecf0f1;
+            --dark: #34495e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
             color: #333;
-            background-color: #f5f7fa;
+            line-height: 1.6;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
         }
 
         .main-content {
             flex: 1;
-        }
-
-        .header_section {
-            background-color: var(--primary-color);
-            padding: 15px 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .navbar-light .navbar-nav .nav-link {
-            color: rgba(255, 255, 255, 0.85);
-            font-weight: 500;
-            padding: 10px 15px;
-            transition: all 0.3s;
-        }
-
-        .navbar-light .navbar-nav .nav-link:hover,
-        .navbar-light .navbar-nav .active>.nav-link {
-            color: white;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-        }
-
-        .navbar-brand {
-            font-family: 'Sen', sans-serif;
-            font-weight: 800;
-            font-size: 1.8rem;
-            color: white;
-            letter-spacing: 0.5px;
-        }
-
-        .banner_section {
-            background: linear-gradient(135deg, var(--primary-color), #1a73e8);
-            color: white;
-            padding: 80px 0 60px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .banner_section::before {
-            content: "";
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            top: -50%;
-            left: -50%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
-            transform: rotate(30deg);
-        }
-
-        .banner_section h1 {
-            font-family: 'Sen', sans-serif;
-            font-weight: 800;
-            font-size: 3rem;
-            margin-bottom: 20px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-
-        .banner_section p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto 30px;
-            opacity: 0.9;
-        }
-
-        .form-section {
-            background-color: white;
-            padding: 60px 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .form-container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: #fff;
+            background: white;
+            border-radius: 12px;
             padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-logo {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 15px;
         }
 
         .form-title {
-            text-align: center;
-            margin-bottom: 30px;
-            color: var(--primary-color);
-            font-family: 'Sen', sans-serif;
-            font-weight: 700;
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .form-subtitle {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin: 25px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
         }
 
         .form-group label {
             font-weight: 600;
-            color: #555;
-            margin-bottom: 8px;
+            color: var(--dark);
             display: block;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .form-control {
-            border: 2px solid #e1e5eb;
-            border-radius: 6px;
-            padding: 12px 15px;
-            transition: all 0.3s;
             width: 100%;
+            padding: 14px 20px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s;
         }
 
         .form-control:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 0.2rem rgba(13, 71, 161, 0.25);
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+            outline: none;
         }
 
         textarea.form-control {
@@ -141,402 +117,288 @@
             resize: vertical;
         }
 
-        .btn-submit {
-            background: linear-gradient(135deg, var(--primary-color), #1a73e8);
-            border: none;
-            color: white;
-            padding: 12px 30px;
-            font-size: 1.1rem;
-            border-radius: 6px;
-            transition: all 0.3s;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            display: block;
-            margin: 30px auto 0;
-            width: 200px;
-            cursor: pointer;
-        }
-
-        .btn-submit:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(13, 71, 161, 0.3);
-        }
-
         .checkbox-group {
             background: #f8f9fa;
             padding: 15px;
-            border-radius: 6px;
+            border-radius: 10px;
             border: 1px solid #e1e5eb;
-            margin-top: 10px;
         }
 
         .form-check {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .form-check-input {
-            margin-top: 0.3rem;
+            width: 18px;
+            height: 18px;
+        }
+
+        .btn-submit {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin: 30px auto 0;
+            width: 100%;
+            max-width: 250px;
+        }
+
+        .btn-submit:hover {
+            background: #16a085;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(26, 188, 156, 0.4);
         }
 
         .section-divider {
-            border-top: 2px solid #e1e5eb;
+            border-top: 1px solid #eee;
             margin: 30px 0;
-            padding-top: 20px;
         }
 
-        .section-title {
-            font-family: 'Sen', sans-serif;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--secondary-color);
-            display: inline-block;
-        }
-
-        .footer_section {
-            background: linear-gradient(135deg, #0a3a7a, var(--primary-color));
-            color: white;
-            padding: 60px 0 20px;
-        }
-
-        .footer_section h5 {
-            font-family: 'Sen', sans-serif;
-            font-weight: 700;
-            margin-bottom: 25px;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer_section h5::after {
-            content: "";
-            position: absolute;
-            width: 40px;
-            height: 3px;
-            background: var(--secondary-color);
-            bottom: 0;
-            left: 0;
-        }
-
-        .footer_section ul {
-            padding-left: 0;
-            list-style: none;
-        }
-
-        .footer_section ul li {
-            margin-bottom: 12px;
-        }
-
-        .footer_section ul li a {
-            color: rgba(255, 255, 255, 0.8);
-            transition: all 0.3s;
-            text-decoration: none;
-        }
-
-        .footer_section ul li a:hover {
-            color: white;
-            padding-left: 5px;
-        }
-
-        .footer_section .contact_info li {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 15px;
-        }
-
-        .copyright_section {
-            background: rgba(0, 0, 0, 0.2);
-            padding: 15px 0;
-            font-size: 0.9rem;
+        footer {
             text-align: center;
+            padding: 30px 20px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            background: white;
+            border-top: 1px solid #eee;
         }
 
-        .copyright_section p {
-            margin: 0;
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        @media (max-width: 767px) {
-            .banner_section {
-                padding: 60px 0 40px;
-            }
-
-            .banner_section h1 {
-                font-size: 2rem;
-            }
-
+        @media (max-width: 768px) {
             .form-container {
                 padding: 25px;
+            }
+
+            .form-title {
+                font-size: 1.6rem;
+            }
+
+            .form-subtitle {
+                font-size: 1rem;
             }
         }
     </style>
 </head>
 
 <body>
-    
-
     <div class="main-content">
-        <!-- Banner Section -->
-        <section class="banner_section">
-            <div class="container text-center">
-                <h1>NQI Stakeholder Information Update</h1>
-                <p>Help us maintain an up-to-date National Quality Infrastructure stakeholder database in Sri Lanka</p>
-            </div>
-        </section>
-
-        <!-- Form Section -->
-        <section class="form-section">
-            <div class="container">
-                <div class="form-container">
-                    <h2 class="form-title">🇱🇰 NQI Stakeholder Information Update – Sri Lanka</h2>
-                    <p class="text-center mb-4">This form collects up-to-date contact, services, and accreditation details from NQI bodies and stakeholders in Sri Lanka.</p>
-
-                    <form action="submit_nqi_form.php" method="POST">
-                        <!-- Section 1: Organization Details -->
-                        <h5 class="section-title">🏢 Organization Details</h5>
-                        
-                        <div class="form-group">
-                            <label for="organization_name">Organization Name *</label>
-                            <input type="text" class="form-control" id="organization_name" name="organization_name" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="organization_type">Type of Organization *</label>
-                            <select class="form-control" id="organization_type" name="organization_type" required>
-                                <option>🏛️ NQI Body (e.g., SLSI, SLAB, MUSSD)</option>
-                                <option>⚖️ Regulatory Authority</option>
-                                <option>🔬 Testing Laboratory</option>
-                                <option>📜 Certification Body</option>
-                                <option>🎓 Educational/Research Institute</option>
-                                <option>🏭 Industry/Enterprise</option>
-                                <option>🏢 Industry Association/Chamber</option>
-                                <option>📝 Other</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="organization_type_other">✏️ If Other, please specify</label>
-                            <input type="text" class="form-control" id="organization_type_other" name="organization_type_other">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="contact_person">👤 Contact Person Name</label>
-                            <input type="text" class="form-control" id="contact_person" name="contact_person">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="designation">💼 Designation/Position</label>
-                            <input type="text" class="form-control" id="designation" name="designation">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="email">📧 Email Address *</label>
-                            <input type="email" class="form-control" id="email" name="email" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="phone">📞 Phone Number *</label>
-                            <input type="text" class="form-control" id="phone" name="phone" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="website">🌐 Official Website</label>
-                            <input type="url" class="form-control" id="website" name="website">
-                        </div>
-
-                        <div class="section-divider"></div>
-                        
-                        <!-- Section 2: Services -->
-                        <h5 class="section-title">📝 Services</h5>
-                        
-                        <div class="form-group">
-                            <label for="core_services">Describe your core activities and services</label>
-                            <textarea class="form-control" id="core_services" name="core_services" rows="4"></textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <label>☑️ Services Offered *</label>
-                            <div class="checkbox-group">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="services[]" value="📘 Standards Development" id="service1">
-                                    <label class="form-check-label" for="service1">Standards Development</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="services[]" value="🧪 Calibration" id="service2">
-                                    <label class="form-check-label" for="service2">Calibration</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="services[]" value="🛡️ Certification" id="service3">
-                                    <label class="form-check-label" for="service3">Product/System Certification</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="services[]" value="🔬 Laboratory Testing" id="service4">
-                                    <label class="form-check-label" for="service4">Laboratory Testing</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="services[]" value="🔎 Inspection" id="service5">
-                                    <label class="form-check-label" for="service5">Inspection</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="services[]" value="🎯 Training" id="service6">
-                                    <label class="form-check-label" for="service6">Training</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="services[]" value="📏 Metrology" id="service7">
-                                    <label class="form-check-label" for="service7">Metrology</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="services[]" value="⚖️ Regulatory Oversight" id="service8">
-                                    <label class="form-check-label" for="service8">Regulatory Oversight</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="services[]" value="🧠 R&D" id="service9">
-                                    <label class="form-check-label" for="service9">Research & Development</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="services[]" value="📝 Other" id="service10">
-                                    <label class="form-check-label" for="service10">Other</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="services_other">✏️ If Other, please specify additional services</label>
-                            <input type="text" class="form-control" id="services_other" name="services_other">
-                        </div>
-
-                        <div class="section-divider"></div>
-                        
-                        <!-- Section 3: Accreditation -->
-                        <h5 class="section-title">🏅 Accreditation</h5>
-                        
-                        <div class="form-group">
-                            <label for="accreditation">Accreditation Status *</label>
-                            <select class="form-control" id="accreditation" name="accreditation" required>
-                                <option>🟢 Yes (SLAB)</option>
-                                <option>🌐 Yes (Other)</option>
-                                <option>🔴 No</option>
-                                <option>🚫 Not Applicable</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="accreditation_details">📋 Accreditation Details</label>
-                            <textarea class="form-control" id="accreditation_details" name="accreditation_details" rows="3"></textarea>
-                        </div>
-
-                        <div class="section-divider"></div>
-                        
-                        <!-- Section 4: Compliance & Regional -->
-                        <h5 class="section-title">🔄 Compliance & Regional Information</h5>
-                        
-                        <div class="form-group">
-                            <label for="compliance_update">Update Regulatory Compliance? *</label>
-                            <select class="form-control" id="compliance_update" name="compliance_update" required>
-                                <option>✅ Yes</option>
-                                <option>❌ No</option>
-                                <option>🤔 Not Sure</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="regional_branches">🏢 Regional Branches/Labs? *</label>
-                            <select class="form-control" id="regional_branches" name="regional_branches" required>
-                                <option>✅ Yes</option>
-                                <option>❌ No</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="regional_branch_list">📍 List of branches</label>
-                            <textarea class="form-control" id="regional_branch_list" name="regional_branch_list" rows="3"></textarea>
-                        </div>
-
-                        <div class="section-divider"></div>
-                        
-                        <!-- Section 5: Additional Notes -->
-                        <h5 class="section-title">🗒️ Additional Information</h5>
-                        
-                        <div class="form-group">
-                            <label for="comments">Additional Remarks or Comments</label>
-                            <textarea class="form-control" id="comments" name="comments" rows="4"></textarea>
-                        </div>
-
-                        <button type="submit" class="btn-submit">Submit Information</button>
-                    </form>
+        <div class="form-container">
+            <div class="form-header">
+                <div class="form-logo">
+                    <i class="fas fa-landmark"></i>
                 </div>
+                <h1 class="form-title">NQI Stakeholder Information Update</h1>
+                <p class="form-subtitle">Help us maintain an up-to-date National Quality Infrastructure stakeholder
+                    database in Sri Lanka</p>
             </div>
-        </section>
+
+            <form action="submit_nqi_form.php" method="POST">
+                <!-- Section 1: Organization Details -->
+                <h3 class="section-title"><i class="fas fa-building"></i> Organization Details</h3>
+
+                <div class="form-group">
+                    <label for="organization_name"><i class="fas fa-signature"></i> Organization Name *</label>
+                    <input type="text" class="form-control" id="organization_name" name="organization_name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="organization_type"><i class="fas fa-tag"></i> Type of Organization *</label>
+                    <select class="form-control" id="organization_type" name="organization_type" required>
+                        <option>NQI Body (e.g., SLSI, SLAB, MUSSD)</option>
+                        <option>Regulatory Authority</option>
+                        <option>Testing Laboratory</option>
+                        <option>Certification Body</option>
+                        <option>Educational/Research Institute</option>
+                        <option>Industry/Enterprise</option>
+                        <option>Industry Association/Chamber</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="organization_type_other"><i class="fas fa-edit"></i> If Other, please specify</label>
+                    <input type="text" class="form-control" id="organization_type_other" name="organization_type_other">
+                </div>
+
+                <div class="form-group">
+                    <label for="contact_person"><i class="fas fa-user"></i> Contact Person Name</label>
+                    <input type="text" class="form-control" id="contact_person" name="contact_person">
+                </div>
+
+                <div class="form-group">
+                    <label for="designation"><i class="fas fa-briefcase"></i> Designation/Position</label>
+                    <input type="text" class="form-control" id="designation" name="designation">
+                </div>
+
+                <div class="form-group">
+                    <label for="email"><i class="fas fa-envelope"></i> Email Address *</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone"><i class="fas fa-phone"></i> Phone Number *</label>
+                    <input type="text" class="form-control" id="phone" name="phone" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="website"><i class="fas fa-globe"></i> Official Website</label>
+                    <input type="url" class="form-control" id="website" name="website">
+                </div>
+
+                <div class="section-divider"></div>
+
+                <!-- Section 2: Services -->
+                <h3 class="section-title"><i class="fas fa-tasks"></i> Services</h3>
+
+                <div class="form-group">
+                    <label for="core_services"><i class="fas fa-info-circle"></i> Describe your core activities and
+                        services</label>
+                    <textarea class="form-control" id="core_services" name="core_services" rows="4"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-check-circle"></i> Services Offered *</label>
+                    <div class="checkbox-group">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="services[]"
+                                value="Standards Development" id="service1">
+                            <label class="form-check-label" for="service1">Standards Development</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="services[]" value="Calibration"
+                                id="service2">
+                            <label class="form-check-label" for="service2">Calibration</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="services[]" value="Certification"
+                                id="service3">
+                            <label class="form-check-label" for="service3">Product/System Certification</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="services[]" value="Laboratory Testing"
+                                id="service4">
+                            <label class="form-check-label" for="service4">Laboratory Testing</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="services[]" value="Inspection"
+                                id="service5">
+                            <label class="form-check-label" for="service5">Inspection</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="services[]" value="Training"
+                                id="service6">
+                            <label class="form-check-label" for="service6">Training</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="services[]" value="Metrology"
+                                id="service7">
+                            <label class="form-check-label" for="service7">Metrology</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="services[]"
+                                value="Regulatory Oversight" id="service8">
+                            <label class="form-check-label" for="service8">Regulatory Oversight</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="services[]" value="R&D" id="service9">
+                            <label class="form-check-label" for="service9">Research & Development</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="services[]" value="Other"
+                                id="service10">
+                            <label class="form-check-label" for="service10">Other</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="services_other"><i class="fas fa-edit"></i> If Other, please specify additional
+                        services</label>
+                    <input type="text" class="form-control" id="services_other" name="services_other">
+                </div>
+
+                <div class="section-divider"></div>
+
+                <!-- Section 3: Accreditation -->
+                <h3 class="section-title"><i class="fas fa-award"></i> Accreditation</h3>
+
+                <div class="form-group">
+                    <label for="accreditation"><i class="fas fa-certificate"></i> Accreditation Status *</label>
+                    <select class="form-control" id="accreditation" name="accreditation" required>
+                        <option>Yes (SLAB)</option>
+                        <option>Yes (Other)</option>
+                        <option>No</option>
+                        <option>Not Applicable</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="accreditation_details"><i class="fas fa-info-circle"></i> Accreditation Details</label>
+                    <textarea class="form-control" id="accreditation_details" name="accreditation_details"
+                        rows="3"></textarea>
+                </div>
+
+                <div class="section-divider"></div>
+
+                <!-- Section 4: Compliance & Regional -->
+                <h3 class="section-title"><i class="fas fa-check-double"></i> Compliance & Regional Information</h3>
+
+                <div class="form-group">
+                    <label for="compliance_update"><i class="fas fa-shield-alt"></i> Update Regulatory Compliance?
+                        *</label>
+                    <select class="form-control" id="compliance_update" name="compliance_update" required>
+                        <option>Yes</option>
+                        <option>No</option>
+                        <option>Not Sure</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="regional_branches"><i class="fas fa-map-marker-alt"></i> Regional Branches/Labs?
+                        *</label>
+                    <select class="form-control" id="regional_branches" name="regional_branches" required>
+                        <option>Yes</option>
+                        <option>No</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="regional_branch_list"><i class="fas fa-list"></i> List of branches</label>
+                    <textarea class="form-control" id="regional_branch_list" name="regional_branch_list"
+                        rows="3"></textarea>
+                </div>
+
+                <div class="section-divider"></div>
+
+                <!-- Section 5: Additional Notes -->
+                <h3 class="section-title"><i class="fas fa-comment-alt"></i> Additional Information</h3>
+
+                <div class="form-group">
+                    <label for="comments"><i class="fas fa-edit"></i> Additional Remarks or Comments</label>
+                    <textarea class="form-control" id="comments" name="comments" rows="4"></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit">
+                    <i class="fas fa-paper-plane"></i> Submit Information
+                </button>
+            </form>
+        </div>
     </div>
 
-    <!-- Footer Section -->
-    <footer class="footer_section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                    <h5>Quick Links</h5>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="introduction.html">Introduction to NQI</a></li>
-                        <li><a href="sme-policy.html">SME Development</a></li>
-                        <li><a href="standards.html">Standards</a></li>
-                        <li><a href="metrology.html">Metrology</a></li>
-                        <li><a href="accreditation.html">Accreditation</a></li>
-                        <li><a href="awards.html">Quality Awards</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                    <h5>Contact Information</h5>
-                    <ul class="contact_info">
-                        <li>
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Ministry of Industry & Commerce, Colombo 01, Sri Lanka</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-phone"></i>
-                            <span>+94 11 2 675 675</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-envelope"></i>
-                            <span>info@nqi-srilanka.gov.lk</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-clock"></i>
-                            <span>Monday-Friday: 8:30 AM - 4:30 PM</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="col-lg-4 col-md-12">
-                    <h5>About NQI Sri Lanka</h5>
-                    <p>The National Quality Infrastructure (NQI) is the backbone for quality assurance in Sri Lanka,
-                        providing the technical framework for standards, metrology, accreditation, and conformity
-                        assessment services to enhance the competitiveness of Sri Lankan products and services in global
-                        markets.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="copyright_section">
-            <div class="container">
-                <p>&copy; 2025 NQI Sri Lanka. All rights reserved. | Developed for SMEs in Sri Lanka</p>
-            </div>
-        </div>
+    <footer>
+        <p>National Quality Infrastructure (NQI) Stakeholders Form &copy; 2023</p>
     </footer>
-
-    <!-- JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            // Add active class to current page in navigation
-            $('.navbar-nav li a').filter(function() {
-                return this.href == location.href;
-            }).parent().addClass('active').siblings().removeClass('active');
-        });
-    </script>
 </body>
 
 </html>
