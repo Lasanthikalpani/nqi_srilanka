@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 25, 2025 at 04:28 PM
+-- Generation Time: Jul 29, 2025 at 06:40 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -20,6 +20,36 @@ SET time_zone = "+00:00";
 --
 -- Database: `qi_catalogue_db`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `documents`
+--
+
+CREATE TABLE `documents` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `category` varchar(50) NOT NULL,
+  `description` text DEFAULT NULL,
+  `file_path` varchar(255) DEFAULT NULL,
+  `file_name` varchar(255) DEFAULT NULL,
+  `version` varchar(50) DEFAULT NULL,
+  `effective_date` date DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `documents`
+--
+
+INSERT INTO `documents` (`id`, `title`, `category`, `description`, `file_path`, `file_name`, `version`, `effective_date`, `created_at`, `updated_at`) VALUES
+(1, 'abc', 'metrology', 'fdfd', 'uploads/documents/1753801497_SonarQube1.pdf', 'SonarQube (1).pdf', '121', '2025-07-31', '2025-07-29 15:04:57', '2025-07-29 15:04:57'),
+(2, 'abc', 'accreditation', 'kkjf', 'uploads/documents/1753801534_SonarQube.pdf', 'SonarQube.pdf', '121', '2025-08-01', '2025-07-29 15:05:34', '2025-07-29 15:05:34'),
+(3, 'abc', 'accreditation', 'kk', 'uploads/documents/1753802699_SonarQube1.pdf', 'SonarQube (1).pdf', '', '2025-07-31', '2025-07-29 15:24:59', '2025-07-29 15:24:59'),
+(4, 'pos', 'training', 'pddpo', 'uploads/documents/1753803557_SonarQube1.pdf', 'SonarQube (1).pdf', '121', '2025-07-31', '2025-07-29 15:39:17', '2025-07-29 15:39:17'),
+(5, 'abc', 'policy', '', 'uploads/documents/1753804131_SonarQube1.pdf', 'SonarQube (1).pdf', '', '2025-07-31', '2025-07-29 15:48:51', '2025-07-29 15:48:51');
 
 -- --------------------------------------------------------
 
@@ -72,11 +102,7 @@ CREATE TABLE `nqi_stakeholders` (
 INSERT INTO `nqi_stakeholders` (`id`, `organization_name`, `organization_type`, `organization_type_other`, `contact_person`, `designation`, `email`, `phone`, `website`, `core_services`, `services`, `services_other`, `accreditation`, `accreditation_details`, `compliance_update`, `regional_branches`, `regional_branch_list`, `comments`, `submitted_at`, `approval_status`, `user_id`) VALUES
 (3, 'Tech Solutions', '⚖️ Regulatory Authority', '', 'Michael Brown', 'IT Manager', 'michael.b@techsol.com', '0717208416', '', 'dvdv', '📘 Standards Development, 🧪 Calibration, 🛡️ Certification, 🔬 Laboratory Testing, 🎯 Training, ⚖️ Regulatory Oversight, 🧠 R&D', '', '🟢 Yes (SLAB)', 'Weekly,2023-10-18,Needs detailed reports', '✅ Yes', '✅ Yes', 'Weekly,2023-10-18,Needs detailed reports', 'Weekly,2023-10-18,Needs detailed reports', '2025-07-16 00:46:07', 'rejected', NULL),
 (4, 'IBM', '🎓 Educational/Research Institute', '', 'adminuser', 'manager', 'lasanthikalpani@gmail.com', '0717208416', '', 'adminuser', '📘 Standards Development, 🧪 Calibration, 🛡️ Certification, 🔬 Laboratory Testing', '', '🟢 Yes (SLAB)', '', '✅ Yes', '✅ Yes', '', '', '2025-07-16 01:00:48', 'pending', NULL),
-(6, 'Community Rep', '🏭 Industry/Enterprise', '', 'Maria Garcia', 'Local NGO', 'maria.g@localngo.org', '+1 (555) 345-6789', 'http://localhost/nqi_srilanka/nqi_form.html', 'Strict on deadlines', '📘 Standards Development, 🧪 Calibration, 🛡️ Certification, 🔬 Laboratory Testing, 🔎 Inspection, 🎯 Training, 📏 Metrology, ⚖️ Regulatory Oversight, 🧠 R&D', '', '🟢 Yes (SLAB)', 'Strict on deadlines', '✅ Yes', '✅ Yes', 'To create a new Git branch for updating stakeholder information, follow these steps in your terminal or command prompt:', 'To create a new Git branch for updating stakeholder information, follow these steps in your terminal or command prompt:', '2025-07-17 00:02:49', 'approved', NULL),
-(8, 'IBM', '🔬 Testing Laboratory', '', 'Lasanthi Kalpani', 'manager', 'lasanthikalpani@gmail.com', '0717208416', 'http://localhost/nqi_srilanka/nqi_form.html', '', '📘 Standards Development, 🧪 Calibration, 🛡️ Certification, 🎯 Training, 🧠 R&D', '', '🟢 Yes (SLAB)', '', '✅ Yes', '✅ Yes', '', '', '2025-07-17 11:41:15', 'approved', NULL),
-(14, 'External Consultant,Innovate Ltd', '🏛️ NQI Body (e.g., SLSI, SLAB, MUSSD)', '', 'David Wilson', 'External Consultant', 'wilson@innovate.com', '0717208416', 'https://sourceforge.net/projects/xampp/', '', '📘 Standards Development, 🧪 Calibration, 🎯 Training, 📏 Metrology', '', '🟢 Yes (SLAB)', 'wilson@innovate.com', '✅ Yes', '✅ Yes', 'wilson@innovate.com', 'wilson@innovate.com', '2025-07-25 14:10:52', 'pending', 16),
-(15, 'Global Enterprises', 'Other', 'Global Enterprises', 'Emily Chen', 'Product Owner', 'lisa.park@nextgen.com', '+1 (555) 987-6543', '', '+1 (555) 987-6543', 'Standards Development, Calibration, Certification, Laboratory Testing, Inspection, Training', '+1 (555) 987-6543', 'Yes (SLAB)', '+1 (555) 987-6543', 'Yes', 'Yes', '+1 (555) 987-6543', '+1 (555) 987-6543', '2025-07-25 14:22:33', 'pending', 16),
-(16, 'Innovate Ltd,david', NULL, '', 'Lasanthi Kalpani', 'External Consultant', 'lasanthikalpani@gmail.com', '0717208416', 'https://sourceforge.net/projects/xampp/', '', 'Metrology', 'Metrology', NULL, 'Innovate Ltd,david', NULL, NULL, 'Innovate Ltd,david', 'Innovate Ltd,david', '2025-07-25 14:25:03', 'approved', 16);
+(6, 'Community Rep', '🏭 Industry/Enterprise', '', 'Maria Garcia', 'Local NGO', 'maria.g@localngo.org', '+1 (555) 345-6789', 'http://localhost/nqi_srilanka/nqi_form.html', 'Strict on deadlines', '📘 Standards Development, 🧪 Calibration, 🛡️ Certification, 🔬 Laboratory Testing, 🔎 Inspection, 🎯 Training, 📏 Metrology, ⚖️ Regulatory Oversight, 🧠 R&D', '', '🟢 Yes (SLAB)', 'Strict on deadlines', '✅ Yes', '✅ Yes', 'To create a new Git branch for updating stakeholder information, follow these steps in your terminal or command prompt:', 'To create a new Git branch for updating stakeholder information, follow these steps in your terminal or command prompt:', '2025-07-17 00:02:49', 'approved', NULL);
 
 -- --------------------------------------------------------
 
@@ -90,6 +116,13 @@ CREATE TABLE `password_reset_tokens` (
   `token` varchar(64) NOT NULL,
   `expiration` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `password_reset_tokens`
+--
+
+INSERT INTO `password_reset_tokens` (`id`, `user_id`, `token`, `expiration`) VALUES
+(15, 16, '81a78ae1f65f3c7c587c6c79b22677da42f3df8ffdeff2da386b4da1cbd6d6d4', '2025-07-28 17:25:54');
 
 -- --------------------------------------------------------
 
@@ -115,7 +148,6 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password_hash`, `organization`, `user_type`, `is_admin`, `newsletter_subscription`, `created_at`) VALUES
-(5, 'sadun', 'janaka', 'sadun@gmail.com', '$2y$10$rSt.O5VX1OBePFlCRNRhXeWUyUdlFkHg7s4hGsUtHCdkgMjF/eGxu', 'abc', 'researcher', 0, 1, '2025-07-17 09:34:17'),
 (6, 'janaka', 'Heshan', 'janaka@gmail.com', '$2y$10$o5svnsAmM/mq.9wl/EoU4u.F.HcHu2C1Xks0EZdCsCTPoo3rEm6wC', '', 'researcher', 0, 1, '2025-07-17 10:17:40'),
 (12, 'Admin', 'User', 'admin@nqi.lk', '$2y$10$gu8slhOUbPjJEduBDs4ueOLlLUnciIDBKrIhulyu1QCAww4yBCYNW', NULL, 'other', 1, 0, '2025-07-22 15:15:31'),
 (16, 'Gillian', 'Anderson', 'Anderson@gmail.com', '$2y$10$Pp1Dg2mOD7qHPOadd5E9AuolxXLcFeP3zWBMoUHF3wikc7iB8uEqS', 'lass', 'quality_professional', 0, 1, '2025-07-22 17:35:42'),
@@ -124,6 +156,12 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password_hash`, 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `documents`
+--
+ALTER TABLE `documents`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `feedback`
@@ -158,6 +196,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `documents`
+--
+ALTER TABLE `documents`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `feedback`
 --
 ALTER TABLE `feedback`
@@ -173,7 +217,7 @@ ALTER TABLE `nqi_stakeholders`
 -- AUTO_INCREMENT for table `password_reset_tokens`
 --
 ALTER TABLE `password_reset_tokens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `users`
