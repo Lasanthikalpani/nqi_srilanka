@@ -252,6 +252,103 @@
             font-size: 0.9rem;
             margin-top: 30px;
         }
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: nowrap;
+        }
+
+        .action-btn {
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            min-width: 36px;
+            height: 36px;
+        }
+
+        .action-btn i {
+            margin: 0;
+        }
+
+        /* Tooltip styles */
+        .action-btn {
+            position: relative;
+        }
+
+        .action-btn:hover::after {
+            content: attr(title);
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            z-index: 10;
+        }
+
+        .action-btn:hover::before {
+            content: "";
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 5px solid #333;
+            z-index: 11;
+        }
+
+        /* Remove text from buttons */
+        .action-btn span {
+            display: none;
+        }
+
+        /* Keep colors and hover effects */
+        .download-btn {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        .download-btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+        }
+
+        .upload-btn {
+            background-color: #ff9800;
+            color: white;
+        }
+
+        .upload-btn:hover {
+            background-color: #e68a00;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(255, 152, 0, 0.3);
+        }
+
+        .view-submissions-btn {
+            background-color: #9c27b0;
+            color: white;
+        }
+
+        .view-submissions-btn:hover {
+            background-color: #7b1fa2;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(156, 39, 176, 0.3);
+        }
     </style>
 </head>
 
@@ -355,17 +452,19 @@
                             <td>${doc.description || ''}</td>
                             <td>${doc.version || ''}</td>
                             <td>${doc.effective_date || ''}</td>
-                            <td>
-                                <a href="${doc.file_path}" class="action-btn download-btn" download="${doc.file_name}">
-                                    <i class="fas fa-download"></i> Download
-                                </a>
-                                <a class="action-btn upload-btn" onclick="openUploadModal(${doc.id})">
-                                    <i class="fas fa-upload"></i> Upload Edited
-                                </a>
-                                <a class="action-btn view-submissions-btn" onclick="viewSubmissions(${doc.id})">
-                                    <i class="fas fa-eye"></i> View Submissions
-                                </a>
-                            </td>
+                           <td>
+    <div class="action-buttons">
+        <a href="${doc.file_path}" class="action-btn download-btn" download="${doc.file_name}" title="Download">
+            <i class="fas fa-download"></i>
+        </a>
+        <a class="action-btn upload-btn" onclick="openUploadModal(${doc.id})" title="Upload Edited">
+            <i class="fas fa-upload"></i>
+        </a>
+        <a class="action-btn view-submissions-btn" onclick="viewSubmissions(${doc.id})" title="View Submissions">
+            <i class="fas fa-eye"></i>
+        </a>
+    </div>
+</td>
                         `;
                             tbody.appendChild(row);
                         });
