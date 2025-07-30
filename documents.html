@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Catalogue</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #1abc9c;
+            --light: #ecf0f1;
+            --dark: #34495e;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            text-align: center;
+        }
+        
+        .filter-section {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+        
+        select, input {
+            padding: 12px 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 16px;
+            flex: 1;
+            min-width: 200px;
+            transition: all 0.3s;
+        }
+        
+        select:focus, input:focus {
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+            outline: none;
+        }
+        
+        button {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        button:hover {
+            background: #16a085;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(26, 188, 156, 0.4);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e1e5e9;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            color: var(--dark);
+            font-weight: 600;
+        }
+        
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .action-btn {
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s;
+        }
+        
+        .download-btn {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .download-btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-1px);
+        }
+        
+        .upload-btn {
+            background-color: #ff9800;
+            color: white;
+            margin-left: 8px;
+        }
+        
+        .upload-btn:hover {
+            background-color: #e68a00;
+            transform: translateY(-1px);
+        }
+        
+        .view-submissions-btn {
+            background-color: #9c27b0;
+            color: white;
+            margin-left: 8px;
+        }
+        
+        .view-submissions-btn:hover {
+            background-color: #7b1fa2;
+            transform: translateY(-1px);
+        }
+        
+        /* Modal styles */
+        #uploadModal, #submissionsModal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(3px);
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            animation: modalopen 0.3s;
+        }
+        
+        @keyframes modalopen {
+            from {opacity: 0; transform: translateY(-50px)}
+            to {opacity: 1; transform: translateY(0)}
+        }
+        
+        .close {
+            color: #aaa;
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close:hover {
+            color: #777;
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .form-control-file {
+            width: 100%;
+            padding: 10px;
+            border: 2px dashed #e1e5e9;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 20px 0;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="logo">
+            <i class="fas fa-file-alt"></i>
+        </div>
+        <h1>Document Catalogue</h1>
+        
+        <div class="filter-section">
+            <select id="categoryFilter">
+                <option value="">All Categories</option>
+                <option value="standards">Standards</option>
+                <option value="policy">Policy</option>
+            </select>
+            <input type="text" id="searchInput" placeholder="Search documents...">
+            <button onclick="loadDocuments()">
+                <i class="fas fa-filter"></i> Filter
+            </button>
+        </div>
+        
+        <table id="documentsTable">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Version</th>
+                    <th>Effective Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="documentsBody">
+                <!-- Documents will be loaded here -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Upload Modal -->
+    <div id="uploadModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('uploadModal')">&times;</span>
+            <h2 class="modal-title">Upload Edited Document</h2>
+            <form id="uploadForm" enctype="multipart/form-data">
+                <input type="hidden" id="uploadDocumentId">
+                <div class="form-group">
+                    <label for="documentFile">
+                        <i class="fas fa-file-upload"></i> Select File
+                    </label>
+                    <input type="file" id="documentFile" name="documentFile" class="form-control-file" required>
+                </div>
+                <button type="button" onclick="submitDocument()">
+                    <i class="fas fa-upload"></i> Upload
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Submissions Modal -->
+    <div id="submissionsModal">
+        <div class="modal-content" style="width: 80%; max-width: 800px;">
+            <span class="close" onclick="closeModal('submissionsModal')">&times;</span>
+            <h2 class="modal-title">User Submissions</h2>
+            <div id="submissionsContent">
+                <!-- Submissions will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Document Management System &copy; 2023</p>
+    </footer>
+
+    <script>
+        // Load documents when page loads
+        document.addEventListener('DOMContentLoaded', loadDocuments);
+
+        function loadDocuments() {
+            const category = document.getElementById('categoryFilter').value;
+            const searchTerm = document.getElementById('searchInput').value;
+            
+            fetch('documents.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `category=${encodeURIComponent(category)}&search=${encodeURIComponent(searchTerm)}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                const tbody = document.getElementById('documentsBody');
+                tbody.innerHTML = '';
+                
+                if (data.status === 'success') {
+                    data.documents.forEach(doc => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${doc.title}</td>
+                            <td>${doc.category}</td>
+                            <td>${doc.description || ''}</td>
+                            <td>${doc.version || ''}</td>
+                            <td>${doc.effective_date || ''}</td>
+                            <td>
+                                <a href="${doc.file_path}" class="action-btn download-btn" download="${doc.file_name}">
+                                    <i class="fas fa-download"></i> Download
+                                </a>
+                                <a class="action-btn upload-btn" onclick="openUploadModal(${doc.id})">
+                                    <i class="fas fa-upload"></i> Upload Edited
+                                </a>
+                                <a class="action-btn view-submissions-btn" onclick="viewSubmissions(${doc.id})">
+                                    <i class="fas fa-eye"></i> View Submissions
+                                </a>
+                            </td>
+                        `;
+                        tbody.appendChild(row);
+                    });
+                } else {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `<td colspan="6" style="text-align: center; padding: 30px;">${data.message}</td>`;
+                    tbody.appendChild(row);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                const tbody = document.getElementById('documentsBody');
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 30px;">Error loading documents. Please try again.</td></tr>';
+            });
+        }
+
+        function openUploadModal(documentId) {
+            document.getElementById('uploadDocumentId').value = documentId;
+            document.getElementById('uploadModal').style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        function submitDocument() {
+            const documentId = document.getElementById('uploadDocumentId').value;
+            const fileInput = document.getElementById('documentFile');
+            const file = fileInput.files[0];
+            
+            if (!file) {
+                alert('Please select a file to upload');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('documentId', documentId);
+            formData.append('documentFile', file);
+
+            fetch('submit_document.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    alert('Document submitted successfully!');
+                    closeModal('uploadModal');
+                } else {
+                    alert('Error: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while submitting the document');
+            });
+        }
+
+        function viewSubmissions(documentId) {
+            fetch('get_submissions.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `document_id=${encodeURIComponent(documentId)}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                const content = document.getElementById('submissionsContent');
+                if (data.status === 'success') {
+                    let html = '<table style="width:100%;border-collapse:collapse;margin-top:20px;">';
+                    html += '<tr><th>User</th><th>File Name</th><th>Submitted At</th><th>Action</th></tr>';
+                    
+                    if (data.submissions.length > 0) {
+                        data.submissions.forEach(sub => {
+                            html += `
+                                <tr>
+                                    <td>${sub.user_name}</td>
+                                    <td>${sub.file_name}</td>
+                                    <td>${sub.submitted_at}</td>
+                                    <td>
+                                        <a href="${sub.file_path}" class="action-btn download-btn" download="${sub.file_name}">
+                                            <i class="fas fa-download"></i> Download
+                                        </a>
+                                    </td>
+                                </tr>
+                            `;
+                        });
+                    } else {
+                        html += '<tr><td colspan="4" style="text-align: center; padding: 20px;">No submissions found for this document</td></tr>';
+                    }
+                    
+                    html += '</table>';
+                    content.innerHTML = html;
+                } else {
+                    content.innerHTML = `<p style="text-align: center;">${data.message}</p>`;
+                }
+                document.getElementById('submissionsModal').style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('submissionsContent').innerHTML = '<p style="text-align: center;">Error loading submissions</p>';
+                document.getElementById('submissionsModal').style.display = 'block';
+            });
+        }
+    </script>
+</body>
+</html>
