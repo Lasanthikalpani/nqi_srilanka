@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,14 +14,14 @@
             --light: #ecf0f1;
             --dark: #34495e;
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         body {
             background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
             color: #333;
@@ -28,7 +29,7 @@
             padding: 20px;
             min-height: 100vh;
         }
-        
+
         .container {
             background: white;
             border-radius: 12px;
@@ -38,29 +39,30 @@
             max-width: 1200px;
             margin: 0 auto;
         }
-        
+
         .logo {
             font-size: 2.5rem;
             color: var(--primary);
             margin-bottom: 10px;
             text-align: center;
         }
-        
+
         h1 {
             font-size: 2rem;
             margin-bottom: 20px;
             color: var(--primary);
             text-align: center;
         }
-        
+
         .filter-section {
             display: flex;
             gap: 15px;
             margin-bottom: 25px;
             flex-wrap: wrap;
         }
-        
-        select, input {
+
+        select,
+        input {
             padding: 12px 15px;
             border: 2px solid #e1e5e9;
             border-radius: 8px;
@@ -69,13 +71,14 @@
             min-width: 200px;
             transition: all 0.3s;
         }
-        
-        select:focus, input:focus {
+
+        select:focus,
+        input:focus {
             border-color: var(--secondary);
             box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
             outline: none;
         }
-        
+
         button {
             background: var(--accent);
             color: white;
@@ -90,36 +93,37 @@
             align-items: center;
             gap: 8px;
         }
-        
+
         button:hover {
             background: #16a085;
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(26, 188, 156, 0.4);
         }
-        
+
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
-        
-        th, td {
+
+        th,
+        td {
             padding: 15px;
             text-align: left;
             border-bottom: 1px solid #e1e5e9;
         }
-        
+
         th {
             background-color: #f8f9fa;
             color: var(--dark);
             font-weight: 600;
         }
-        
+
         tr:hover {
             background-color: #f8f9fa;
         }
-        
+
         .action-btn {
             padding: 8px 15px;
             border-radius: 6px;
@@ -131,41 +135,42 @@
             gap: 5px;
             transition: all 0.2s;
         }
-        
+
         .download-btn {
             background-color: var(--secondary);
             color: white;
         }
-        
+
         .download-btn:hover {
             background-color: #2980b9;
             transform: translateY(-1px);
         }
-        
+
         .upload-btn {
             background-color: #ff9800;
             color: white;
             margin-left: 8px;
         }
-        
+
         .upload-btn:hover {
             background-color: #e68a00;
             transform: translateY(-1px);
         }
-        
+
         .view-submissions-btn {
             background-color: #9c27b0;
             color: white;
             margin-left: 8px;
         }
-        
+
         .view-submissions-btn:hover {
             background-color: #7b1fa2;
             transform: translateY(-1px);
         }
-        
+
         /* Modal styles */
-        #uploadModal, #submissionsModal {
+        #uploadModal,
+        #submissionsModal {
             display: none;
             position: fixed;
             z-index: 100;
@@ -176,7 +181,7 @@
             background-color: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(3px);
         }
-        
+
         .modal-content {
             background-color: white;
             margin: 10% auto;
@@ -188,12 +193,19 @@
             position: relative;
             animation: modalopen 0.3s;
         }
-        
+
         @keyframes modalopen {
-            from {opacity: 0; transform: translateY(-50px)}
-            to {opacity: 1; transform: translateY(0)}
+            from {
+                opacity: 0;
+                transform: translateY(-50px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
         }
-        
+
         .close {
             color: #aaa;
             position: absolute;
@@ -203,28 +215,28 @@
             font-weight: bold;
             cursor: pointer;
         }
-        
+
         .close:hover {
             color: #777;
         }
-        
+
         .modal-title {
             font-size: 1.5rem;
             margin-bottom: 20px;
             color: var(--primary);
         }
-        
+
         .form-group {
             margin-bottom: 20px;
         }
-        
+
         .form-group label {
             display: block;
             margin-bottom: 8px;
             font-weight: 600;
             color: var(--dark);
         }
-        
+
         .form-control-file {
             width: 100%;
             padding: 10px;
@@ -232,7 +244,7 @@
             border-radius: 8px;
             background-color: #f8f9fa;
         }
-        
+
         footer {
             text-align: center;
             padding: 30px 20px 0;
@@ -249,7 +261,7 @@
             <i class="fas fa-file-alt"></i>
         </div>
         <h1>Document Catalogue</h1>
-        
+
         <div class="filter-section">
             <select id="categoryFilter">
                 <option value="">All Categories</option>
@@ -261,7 +273,7 @@
                 <i class="fas fa-filter"></i> Filter
             </button>
         </div>
-        
+
         <table id="documentsTable">
             <thead>
                 <tr>
@@ -321,7 +333,7 @@
         function loadDocuments() {
             const category = document.getElementById('categoryFilter').value;
             const searchTerm = document.getElementById('searchInput').value;
-            
+
             fetch('documents.php', {
                 method: 'POST',
                 headers: {
@@ -329,15 +341,15 @@
                 },
                 body: `category=${encodeURIComponent(category)}&search=${encodeURIComponent(searchTerm)}`
             })
-            .then(response => response.json())
-            .then(data => {
-                const tbody = document.getElementById('documentsBody');
-                tbody.innerHTML = '';
-                
-                if (data.status === 'success') {
-                    data.documents.forEach(doc => {
-                        const row = document.createElement('tr');
-                        row.innerHTML = `
+                .then(response => response.json())
+                .then(data => {
+                    const tbody = document.getElementById('documentsBody');
+                    tbody.innerHTML = '';
+
+                    if (data.status === 'success') {
+                        data.documents.forEach(doc => {
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
                             <td>${doc.title}</td>
                             <td>${doc.category}</td>
                             <td>${doc.description || ''}</td>
@@ -355,19 +367,19 @@
                                 </a>
                             </td>
                         `;
+                            tbody.appendChild(row);
+                        });
+                    } else {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `<td colspan="6" style="text-align: center; padding: 30px;">${data.message}</td>`;
                         tbody.appendChild(row);
-                    });
-                } else {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `<td colspan="6" style="text-align: center; padding: 30px;">${data.message}</td>`;
-                    tbody.appendChild(row);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                const tbody = document.getElementById('documentsBody');
-                tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 30px;">Error loading documents. Please try again.</td></tr>';
-            });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    const tbody = document.getElementById('documentsBody');
+                    tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 30px;">Error loading documents. Please try again.</td></tr>';
+                });
         }
 
         function openUploadModal(documentId) {
@@ -383,7 +395,7 @@
             const documentId = document.getElementById('uploadDocumentId').value;
             const fileInput = document.getElementById('documentFile');
             const file = fileInput.files[0];
-            
+
             if (!file) {
                 alert('Please select a file to upload');
                 return;
@@ -397,20 +409,21 @@
                 method: 'POST',
                 body: formData
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    alert('Document submitted successfully!');
-                    closeModal('uploadModal');
-                } else {
-                    alert('Error: ' + data.message);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('An error occurred while submitting the document');
-            });
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        alert('Document submitted successfully!');
+                        closeModal('uploadModal');
+                    } else {
+                        alert('Error: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred while submitting the document');
+                });
         }
+
 
         function viewSubmissions(documentId) {
             fetch('get_submissions.php', {
@@ -420,45 +433,46 @@
                 },
                 body: `document_id=${encodeURIComponent(documentId)}`
             })
-            .then(response => response.json())
-            .then(data => {
-                const content = document.getElementById('submissionsContent');
-                if (data.status === 'success') {
-                    let html = '<table style="width:100%;border-collapse:collapse;margin-top:20px;">';
-                    html += '<tr><th>User</th><th>File Name</th><th>Submitted At</th><th>Action</th></tr>';
-                    
-                    if (data.submissions.length > 0) {
-                        data.submissions.forEach(sub => {
-                            html += `
-                                <tr>
-                                    <td>${sub.user_name}</td>
-                                    <td>${sub.file_name}</td>
-                                    <td>${sub.submitted_at}</td>
-                                    <td>
-                                        <a href="${sub.file_path}" class="action-btn download-btn" download="${sub.file_name}">
-                                            <i class="fas fa-download"></i> Download
-                                        </a>
-                                    </td>
-                                </tr>
-                            `;
-                        });
+                .then(response => response.json())
+                .then(data => {
+                    const content = document.getElementById('submissionsContent');
+                    if (data.status === 'success') {
+                        let html = '<table style="width:100%;border-collapse:collapse;margin-top:20px;">';
+                        html += '<tr><th>File Name</th><th>Submitted At</th><th>Action</th></tr>';
+
+                        if (data.submissions.length > 0) {
+                            data.submissions.forEach(sub => {
+                                html += `
+                        <tr>
+                            <td>${sub.file_name}</td>
+                            <td>${sub.submitted_at}</td>
+                            <td>
+                                <a href="${sub.file_path}" class="action-btn download-btn" download="${sub.file_name}">
+                                    <i class="fas fa-download"></i> Download
+                                </a>
+                            </td>
+                        </tr>
+                    `;
+                            });
+                        } else {
+                            html += '<tr><td colspan="3" style="text-align: center; padding: 20px;">No submissions found for this document</td></tr>';
+                        }
+
+                        html += '</table>';
+                        content.innerHTML = html;
                     } else {
-                        html += '<tr><td colspan="4" style="text-align: center; padding: 20px;">No submissions found for this document</td></tr>';
+                        content.innerHTML = `<p style="text-align: center;">${data.message}</p>`;
                     }
-                    
-                    html += '</table>';
-                    content.innerHTML = html;
-                } else {
-                    content.innerHTML = `<p style="text-align: center;">${data.message}</p>`;
-                }
-                document.getElementById('submissionsModal').style.display = 'block';
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                document.getElementById('submissionsContent').innerHTML = '<p style="text-align: center;">Error loading submissions</p>';
-                document.getElementById('submissionsModal').style.display = 'block';
-            });
+                    document.getElementById('submissionsModal').style.display = 'block';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('submissionsContent').innerHTML = '<p style="text-align: center;">Error loading submissions</p>';
+                    document.getElementById('submissionsModal').style.display = 'block';
+                });
         }
+
     </script>
 </body>
+
 </html>
