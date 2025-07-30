@@ -633,39 +633,63 @@
             $(document).on('click', '.delete-document', function () {
                 currentDocumentId = $(this).data('id');
                 const documentTitle = $(this).data('title');
+                const documentCard = $(this).closest('.document-card'); // Store reference to the card
+
                 $('#confirmMessage').text(`Are you sure you want to delete "${documentTitle}"?`);
                 confirmModal.show();
-            });
 
-            // Confirm deletion
-            confirmDeleteBtn.click(function () {
-                if (!currentDocumentId) return;
+                // Update confirm delete handler
+                confirmDeleteBtn.off('click').on('click', function () {
+                    if (!currentDocumentId) return;
 
-                $.ajax({
-                    url: 'admin_delete_document.php',
-                    type: 'POST',
-                    data: JSON.stringify({ id: currentDocumentId }),
-                    contentType: 'application/json',
-                    dataType: 'json',
-                    success: function (response) {
-                        if (response.success) {
-                            showToast(response.message || 'Document deleted successfully', 'success');
-                            confirmModal.hide();
-                            loadDocuments();
-                        } else {
-                            showToast(response.message || 'Error deleting document', 'error');
+                    // Disable buttons during deletion
+                    confirmDeleteBtn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin mr-1"></i> Deleting...');
+                    cancelDeleteBtn.prop('disabled', true);
+
+                    $.ajax({
+                        url: 'admin_delete_document.php',
+                        type: 'POST',
+                        data: JSON.stringify({ id: currentDocumentId }),
+                        contentType: 'application/json',
+                        dataType: 'json',
+                        success: function (response) {
+                            if (response.status === 'success' || response.success) {
+                                showToast(response.message || 'Document deleted successfully', 'success');
+                                confirmModal.hide();
+
+                                // Immediately remove the document card with animation
+                                documentCard.fadeOut(300, function () {
+                                    $(this).remove();
+
+                                    // Check if category container is now empty
+                                    const categoryContainer = documentCard.parent();
+                                    if (categoryContainer.children().length === 0) {
+                                        categoryContainer.html('<p class="text-gray-500">No documents found</p>');
+                                    }
+                                });
+                            } else {
+                                showToast(response.message || 'Error deleting document', 'error');
+                            }
+                        },
+                        error: function (xhr) {
+                            if (xhr.status === 403) {
+                                window.location.href = 'admin_login.html?error=session_expired';
+                            } else {
+                                const errorMsg = xhr.responseJSON?.message || xhr.statusText;
+                                showToast('Error deleting document: ' + errorMsg, 'error');
+                            }
+                        },
+                        complete: function () {
+                            // Re-enable buttons
+                            confirmDeleteBtn.prop('disabled', false).html('<i class="fas fa-trash-alt mr-1"></i> Delete');
+                            cancelDeleteBtn.prop('disabled', false);
                         }
-                    },
-                    error: function (xhr) {
-                        if (xhr.status === 403) {
-                            window.location.href = 'admin_login.html?error=session_expired';
-                        } else {
-                            const errorMsg = xhr.responseJSON?.message || xhr.statusText;
-                            showToast('Error deleting document: ' + errorMsg, 'error');
-                        }
-                    }
+                    });
                 });
             });
+
+
+
 
             // Handle document editing
             $(document).on('click', '.edit-document', function () {
