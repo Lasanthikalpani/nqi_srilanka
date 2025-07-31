@@ -243,6 +243,10 @@
                 <a class="nav-link" href="#" id="documentsLink"><i class="fas fa-file-alt"></i> Documents</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="#" id="responsesLink"><i class="fas fa-clipboard-check"></i> User
+                    Responses</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="admin_logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a>
             </li>
         </ul>
@@ -394,8 +398,14 @@
                 window.location.href = 'admin_documents.html';
             });
 
-            // Handle logout
-            $('.nav-link').eq(4).click(function (e) { // Changed index to 4 since it's now the 5th item
+            // Handle responses navigation
+            $('#responsesLink').click(function (e) {
+                e.preventDefault();
+                window.location.href = 'admin_responses.html';
+            });
+
+            // Handle logout - updated index to 5 (was 4 before adding User Responses)
+            $('.nav-link').eq(5).click(function (e) {
                 e.preventDefault();
                 $.ajax({
                     url: 'admin_logout.php',
