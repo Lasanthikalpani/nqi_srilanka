@@ -11,16 +11,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,700|Sen:400,700,800&display=swap" rel="stylesheet">
+
     <style>
         :root {
             --primary-color: #0d47a1;
             --secondary-color: #a13e0d;
-            --stakeholder-color: #0d47a1;
-            /* Professional green */
-            --stakeholder-light: #468bf1;
-            /* Lighter green */
+            --stakeholder-color: #1B5E20;
+            --stakeholder-light: #4CAF50;
             --light-color: #f8f9fa;
             --dark-color: #212529;
+            --search-color: #4d0da1;
+            --document-color: #1976D2;
         }
 
         body {
@@ -372,8 +373,7 @@
 
         /* Stakeholder Form Highlight - Green Theme */
         .stakeholder-highlight {
-            background: linear-gradient(135deg, #7d4f2e, #1B5E20);
-            /* Professional green gradient */
+            background: linear-gradient(135deg, var(--stakeholder-color), var(--stakeholder-light));
             padding: 60px 0;
             position: relative;
             overflow: hidden;
@@ -485,197 +485,12 @@
         }
 
         .nav-item.stakeholder-nav .nav-link:hover {
-            background-color: #1b5e20;
+            background-color: var(--stakeholder-light);
         }
 
-        @media (max-width: 991px) {
-            .banner_section h1 {
-                font-size: 2.5rem;
-            }
-
-            .key_areas ul {
-                columns: 1;
-            }
-        }
-
-        @media (max-width: 767px) {
-            .banner_section {
-                padding: 60px 0 40px;
-            }
-
-            .banner_section h1 {
-                font-size: 2rem;
-            }
-
-            .feature_section,
-            .content_section {
-                padding: 60px 0;
-            }
-
-            .navbar-brand {
-                font-size: 1.5rem;
-            }
-
-            .footer_section .row>div {
-                margin-bottom: 30px;
-            }
-
-            .stakeholder-highlight {
-                padding: 40px 0;
-            }
-
-            .stakeholder-highlight .highlight-card {
-                padding: 20px;
-            }
-
-            .stakeholder-highlight h3 {
-                font-size: 1.8rem;
-            }
-
-            .stakeholder-highlight .benefits {
-                gap: 15px;
-            }
-
-            .stakeholder-highlight .benefit-item {
-                padding: 15px;
-                max-width: 100%;
-                flex: 1 1 100%;
-            }
-
-            /* Search Highlight Section - Blue Theme */
-            .search-highlight {
-                background: linear-gradient(135deg, #a10d77, #e607cc);
-                padding: 60px 0;
-                position: relative;
-                overflow: hidden;
-                margin: 0;
-                color: white;
-            }
-
-            .search-highlight::before {
-                content: "";
-                position: absolute;
-                width: 200%;
-                height: 200%;
-                top: -50%;
-                left: -50%;
-                background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
-                transform: rotate(30deg);
-            }
-
-            .search-highlight .container {
-                position: relative;
-                z-index: 1;
-                max-width: 900px;
-            }
-
-            .search-highlight .highlight-card {
-                text-align: center;
-                padding: 30px;
-            }
-
-            .search-highlight h3 {
-                font-family: 'Sen', sans-serif;
-                font-weight: 700;
-                margin-bottom: 20px;
-                font-size: 2.2rem;
-                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            }
-
-            .search-highlight p {
-                font-size: 1.15rem;
-                margin-bottom: 20px;
-                max-width: 800px;
-                margin-left: auto;
-                margin-right: auto;
-                line-height: 1.7;
-            }
-
-            .search-highlight .btn-highlight {
-                background: white;
-                color: #0d47a1;
-                border: none;
-                padding: 14px 40px;
-                font-size: 1.1rem;
-                border-radius: 50px;
-                font-weight: 600;
-                transition: all 0.3s;
-                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-                margin-top: 20px;
-                display: inline-block;
-            }
-
-            .search-highlight .btn-highlight:hover {
-                transform: translateY(-3px);
-                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-                background: #f5f5f5;
-            }
-
-            .search-highlight .benefits {
-                display: flex;
-                justify-content: center;
-                flex-wrap: wrap;
-                gap: 30px;
-                margin-top: 40px;
-            }
-
-            .search-highlight .benefit-item {
-                background: rgba(255, 255, 255, 0.15);
-                backdrop-filter: blur(5px);
-                border-radius: 10px;
-                padding: 20px;
-                max-width: 250px;
-                text-align: center;
-                transition: all 0.3s;
-            }
-
-            .search-highlight .benefit-item:hover {
-                transform: translateY(-5px);
-                background: rgba(255, 255, 255, 0.2);
-            }
-
-            .search-highlight .benefit-item i {
-                font-size: 2.5rem;
-                margin-bottom: 15px;
-                color: white;
-            }
-
-            .search-highlight .benefit-item h4 {
-                font-weight: 600;
-                margin-bottom: 10px;
-                font-size: 1.2rem;
-            }
-
-            @media (max-width: 767px) {
-                .search-highlight {
-                    padding: 40px 0;
-                }
-
-                .search-highlight .highlight-card {
-                    padding: 20px;
-                }
-
-                .search-highlight h3 {
-                    font-size: 1.8rem;
-                }
-
-                .search-highlight .benefits {
-                    gap: 15px;
-                }
-
-                .search-highlight .benefit-item {
-                    padding: 15px;
-                    max-width: 100%;
-                    flex: 1 1 100%;
-                }
-            }
-
-
-        }
-
-        /* Search Highlight Section - Blue Theme */
+        /* Search Highlight Section - Purple Theme */
         .search-highlight {
-            background: linear-gradient(135deg, #4d0da1, #bf1ae8);
+            background: linear-gradient(135deg, var(--search-color), #bf1ae8);
             padding: 60px 0;
             position: relative;
             overflow: hidden;
@@ -724,7 +539,7 @@
 
         .search-highlight .btn-highlight {
             background: white;
-            color: #0d47a1;
+            color: var(--search-color);
             border: none;
             padding: 14px 40px;
             font-size: 1.1rem;
@@ -777,30 +592,214 @@
             font-size: 1.2rem;
         }
 
+        /* Document Highlight Section - Blue Theme */
+        .document-highlight {
+            background: linear-gradient(135deg, var(--document-color), #2196F3);
+            padding: 60px 0;
+            position: relative;
+            overflow: hidden;
+            margin: 0;
+            color: white;
+        }
+
+        .document-highlight::before {
+            content: "";
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
+            transform: rotate(30deg);
+        }
+
+        .document-highlight .container {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+        }
+
+        .document-highlight .highlight-card {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .document-highlight h3 {
+            font-family: 'Sen', sans-serif;
+            font-weight: 700;
+            margin-bottom: 20px;
+            font-size: 2.2rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .document-highlight p {
+            font-size: 1.15rem;
+            margin-bottom: 20px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+
+        .document-highlight .btn-highlight {
+            background: white;
+            color: var(--document-color);
+            border: none;
+            padding: 14px 40px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        .document-highlight .btn-highlight:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            background: #f5f5f5;
+        }
+
+        .document-highlight .document-actions {
+            margin: 30px 0;
+        }
+
+        .document-highlight .benefits {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .document-highlight .benefit-item {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 250px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .document-highlight .benefit-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .document-highlight .benefit-item i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .document-highlight .benefit-item h4 {
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .document-highlight .document-features {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 30px;
+            margin-top: 40px;
+        }
+
+        .document-highlight .feature {
+            padding: 20px;
+        }
+
+        .document-highlight .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .document-highlight .feature h5 {
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 991px) {
+            .banner_section h1 {
+                font-size: 2.5rem;
+            }
+
+            .key_areas ul {
+                columns: 1;
+            }
+        }
+
         @media (max-width: 767px) {
-            .search-highlight {
+            .banner_section {
+                padding: 60px 0 40px;
+            }
+
+            .banner_section h1 {
+                font-size: 2rem;
+            }
+
+            .feature_section,
+            .content_section {
+                padding: 60px 0;
+            }
+
+            .navbar-brand {
+                font-size: 1.5rem;
+            }
+
+            .footer_section .row>div {
+                margin-bottom: 30px;
+            }
+
+            .stakeholder-highlight,
+            .search-highlight,
+            .document-highlight {
                 padding: 40px 0;
             }
 
-            .search-highlight .highlight-card {
+            .stakeholder-highlight .highlight-card,
+            .search-highlight .highlight-card,
+            .document-highlight .highlight-card {
                 padding: 20px;
             }
 
-            .search-highlight h3 {
+            .stakeholder-highlight h3,
+            .search-highlight h3,
+            .document-highlight h3 {
                 font-size: 1.8rem;
             }
 
-            .search-highlight .benefits {
+            .stakeholder-highlight .benefits,
+            .search-highlight .benefits,
+            .document-highlight .benefits {
                 gap: 15px;
             }
 
-            .search-highlight .benefit-item {
+            .stakeholder-highlight .benefit-item,
+            .search-highlight .benefit-item,
+            .document-highlight .benefit-item {
                 padding: 15px;
                 max-width: 100%;
                 flex: 1 1 100%;
             }
+
+            .document-highlight .document-actions .btn-highlight {
+                display: block;
+                width: 100%;
+                margin-bottom: 15px;
+            }
+
+            .document-highlight .document-actions .btn-highlight:last-child {
+                margin-bottom: 0;
+            }
         }
     </style>
+
 </head>
 
 <body>
@@ -971,6 +970,69 @@
             </div>
         </section>
 
+        <!-- Document Management Section - Professional Blue Theme -->
+        <section class="document-highlight">
+            <div class="container">
+                <div class="highlight-card">
+                    <h3>Document Management System</h3>
+                    <p>Upload, organize, and manage your quality-related documents in our secure platform. Keep all your
+                        important files accessible while maintaining compliance with national standards.</p>
+
+                    <div class="document-actions">
+                        <a href="upload.html" class="btn btn-highlight">
+                            <i class="fas fa-cloud-upload-alt mr-2"></i>Upload Documents
+                        </a>
+                        <a href="documents.html" class="btn btn-highlight ml-3">
+                            <i class="fas fa-folder-open mr-2"></i>My Documents
+                        </a>
+                    </div>
+
+                    <div class="benefits">
+                        <div class="benefit-item">
+                            <i class="fas fa-lock"></i>
+                            <h4>Secure Storage</h4>
+                            <p>Enterprise-grade encryption for all your documents</p>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-tags"></i>
+                            <h4>Smart Organization</h4>
+                            <p>Categorize by document type, standard, or project</p>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <h4>Compliance Ready</h4>
+                            <p>Maintain audit trails and version history</p>
+                        </div>
+                    </div>
+
+                    <div class="document-features mt-5">
+                        <div class="row">
+                            <div class="col-md-4 feature">
+                                <div class="feature-icon">
+                                    <i class="fas fa-search"></i>
+                                </div>
+                                <h5>Advanced Search</h5>
+                                <p>Find documents quickly with metadata filters</p>
+                            </div>
+                            <div class="col-md-4 feature">
+                                <div class="feature-icon">
+                                    <i class="fas fa-users-cog"></i>
+                                </div>
+                                <h5>Collaboration</h5>
+                                <p>Share documents with team members securely</p>
+                            </div>
+                            <div class="col-md-4 feature">
+                                <div class="feature-icon">
+                                    <i class="fas fa-history"></i>
+                                </div>
+                                <h5>Version Control</h5>
+                                <p>Track changes and maintain document history</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         <!-- Stakeholder Form Highlight Section - Green Theme -->
         <section class="stakeholder-highlight">
             <div class="container">

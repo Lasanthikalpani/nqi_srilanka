@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 25, 2025 at 04:28 PM
+-- Generation Time: Jul 31, 2025 at 05:24 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -20,6 +20,103 @@ SET time_zone = "+00:00";
 --
 -- Database: `qi_catalogue_db`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `documents`
+--
+
+CREATE TABLE `documents` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `category` varchar(50) NOT NULL,
+  `description` text DEFAULT NULL,
+  `file_path` varchar(255) DEFAULT NULL,
+  `file_name` varchar(255) DEFAULT NULL,
+  `version` varchar(50) DEFAULT NULL,
+  `effective_date` date DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `documents`
+--
+
+INSERT INTO `documents` (`id`, `title`, `category`, `description`, `file_path`, `file_name`, `version`, `effective_date`, `created_at`, `updated_at`) VALUES
+(13, 'pos', 'standards', 'dd', 'uploads/documents/1753883752_SonarQube.pdf', 'SonarQube.pdf', '121', '2025-08-09', '2025-07-30 13:55:52', '2025-07-30 13:55:52'),
+(14, 'pos', 'policy', 'sdsd', 'uploads/documents/1753883856_SonarQube.pdf', 'SonarQube.pdf', '121', '2025-08-09', '2025-07-30 13:57:36', '2025-07-30 13:57:36'),
+(16, 'Enhanced', 'forms', 'Enhanced Modal Dialogs: Styled modals to match the theme with animations\\r\\n\\r\\n', 'uploads/documents/1753889882_SonarQube3.pdf', 'SonarQube (3).pdf', '121', '2025-08-08', '2025-07-30 15:38:02', '2025-07-30 15:38:02'),
+(17, 'ksjddj', 'awards', '', 'uploads/documents/1753893026_abc.pdf', 'abc.pdf', '121', '2025-08-09', '2025-07-30 16:30:26', '2025-07-30 16:30:26'),
+(19, 'Enhanced', 'regulatory', 'ss', 'uploads/documents/1753964688_abc.pdf', 'abc.pdf', '121', '2025-08-07', '2025-07-31 12:24:48', '2025-07-31 12:24:48'),
+(20, 'circular 123', 'awards', '', 'uploads/documents/1753972990_circular.pdf', 'circular.pdf', '3333', '2025-08-16', '2025-07-31 14:43:10', '2025-07-31 14:43:10');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `document_responses`
+--
+
+CREATE TABLE `document_responses` (
+  `id` int(11) NOT NULL,
+  `submission_id` int(11) NOT NULL,
+  `response_file_path` varchar(255) NOT NULL,
+  `response_file_name` varchar(255) NOT NULL,
+  `comments` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `document_responses`
+--
+
+INSERT INTO `document_responses` (`id`, `submission_id`, `response_file_path`, `response_file_name`, `comments`, `created_at`) VALUES
+(1, 10, 'uploads/responses/resp_688b7a90502f98.74738190.pdf', '1753803557_SonarQube1.pdf', 'reject', '2025-07-31 14:15:44'),
+(2, 10, 'uploads/responses/resp_688b7848c27383.53209485.pdf', 'SonarQube (3) (3).pdf', 'ddd', '2025-07-31 14:06:00'),
+(3, 10, 'uploads/responses/resp_688b785ad32e64.18411710.pdf', 'abc (1).pdf', 'ddd', '2025-07-31 14:06:18'),
+(4, 10, 'uploads/responses/resp_688b7871665670.69977305.pdf', 'abc.pdf', NULL, '2025-07-31 14:06:41'),
+(5, 9, 'uploads/responses/resp_688b82bf5c3dd1.70573438.pdf', 'response (1).pdf', NULL, '2025-07-31 14:50:39'),
+(6, 9, 'uploads/responses/resp_688b788c2c2705.01781605.pdf', 'SonarQube (4) (1).pdf', NULL, '2025-07-31 14:07:08'),
+(7, 10, 'uploads/responses/resp_688b790dd633f7.56556098.pdf', 'abc (1).pdf', NULL, '2025-07-31 14:09:17'),
+(8, 7, 'uploads/responses/resp_688b7ab200a743.56235880.pdf', 'abc.pdf', 'reject', '2025-07-31 14:16:18'),
+(9, 1, 'uploads/responses/resp_688b7ad63b6310.10239249.pdf', 'abc (1).pdf', NULL, '2025-07-31 14:16:54'),
+(10, 11, 'uploads/responses/resp_688b8186ca7b25.22087307.pdf', 'response.pdf', NULL, '2025-07-31 14:45:26'),
+(11, 12, 'uploads/responses/resp_688b86c699f300.75326688.pdf', 'abc (3).pdf', NULL, '2025-07-31 15:07:50');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `document_submissions`
+--
+
+CREATE TABLE `document_submissions` (
+  `id` int(11) NOT NULL,
+  `document_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `file_path` varchar(255) NOT NULL,
+  `file_name` varchar(255) NOT NULL,
+  `submitted_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `status` enum('pending','approved','rejected') DEFAULT 'pending'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `document_submissions`
+--
+
+INSERT INTO `document_submissions` (`id`, `document_id`, `user_id`, `file_path`, `file_name`, `submitted_at`, `status`) VALUES
+(1, 13, 16, 'uploads/submissions/688a38c5e15d3.pdf', 'SonarQube (3).pdf', '2025-07-30 15:22:45', 'approved'),
+(2, 13, 16, 'uploads/submissions/688a3c0cb0d89.pdf', 'SonarQube (4).pdf', '2025-07-30 15:36:44', 'rejected'),
+(3, 14, 16, 'uploads/submissions/688a40fa61c74.pdf', 'SonarQube (3) (1).pdf', '2025-07-30 15:57:46', 'approved'),
+(4, 13, 6, 'uploads/submissions/688a4122e62b9.pdf', 'SonarQube (5).pdf', '2025-07-30 15:58:26', 'approved'),
+(5, 16, 6, 'uploads/submissions/688a413358ab3.pdf', 'SonarQube (3) (2).pdf', '2025-07-30 15:58:43', 'approved'),
+(6, 13, 12, 'uploads/submissions/688a451aa303b.pdf', 'SonarQube (6).pdf', '2025-07-30 16:15:22', 'rejected'),
+(7, 13, 12, 'uploads/submissions/688a452cc59d5.pdf', 'SonarQube (6).pdf', '2025-07-30 16:15:40', 'rejected'),
+(8, 13, 12, 'uploads/submissions/688a453dc851d.pdf', 'SonarQube (6).pdf', '2025-07-30 16:15:57', 'approved'),
+(9, 13, 6, 'uploads/submissions/688a45e7af0ee.pdf', 'abc.pdf', '2025-07-30 16:18:47', 'approved'),
+(10, 17, 12, 'uploads/submissions/688a48f2801df.pdf', 'abc (1).pdf', '2025-07-30 16:31:46', 'rejected'),
+(11, 20, 16, 'uploads/submissions/688b8141e25ea.pdf', 'question.pdf', '2025-07-31 14:44:17', 'rejected'),
+(12, 20, 6, 'uploads/submissions/688b86947b034.pdf', 'question (2).pdf', '2025-07-31 15:07:00', 'rejected');
 
 -- --------------------------------------------------------
 
@@ -72,11 +169,7 @@ CREATE TABLE `nqi_stakeholders` (
 INSERT INTO `nqi_stakeholders` (`id`, `organization_name`, `organization_type`, `organization_type_other`, `contact_person`, `designation`, `email`, `phone`, `website`, `core_services`, `services`, `services_other`, `accreditation`, `accreditation_details`, `compliance_update`, `regional_branches`, `regional_branch_list`, `comments`, `submitted_at`, `approval_status`, `user_id`) VALUES
 (3, 'Tech Solutions', '⚖️ Regulatory Authority', '', 'Michael Brown', 'IT Manager', 'michael.b@techsol.com', '0717208416', '', 'dvdv', '📘 Standards Development, 🧪 Calibration, 🛡️ Certification, 🔬 Laboratory Testing, 🎯 Training, ⚖️ Regulatory Oversight, 🧠 R&D', '', '🟢 Yes (SLAB)', 'Weekly,2023-10-18,Needs detailed reports', '✅ Yes', '✅ Yes', 'Weekly,2023-10-18,Needs detailed reports', 'Weekly,2023-10-18,Needs detailed reports', '2025-07-16 00:46:07', 'rejected', NULL),
 (4, 'IBM', '🎓 Educational/Research Institute', '', 'adminuser', 'manager', 'lasanthikalpani@gmail.com', '0717208416', '', 'adminuser', '📘 Standards Development, 🧪 Calibration, 🛡️ Certification, 🔬 Laboratory Testing', '', '🟢 Yes (SLAB)', '', '✅ Yes', '✅ Yes', '', '', '2025-07-16 01:00:48', 'pending', NULL),
-(6, 'Community Rep', '🏭 Industry/Enterprise', '', 'Maria Garcia', 'Local NGO', 'maria.g@localngo.org', '+1 (555) 345-6789', 'http://localhost/nqi_srilanka/nqi_form.html', 'Strict on deadlines', '📘 Standards Development, 🧪 Calibration, 🛡️ Certification, 🔬 Laboratory Testing, 🔎 Inspection, 🎯 Training, 📏 Metrology, ⚖️ Regulatory Oversight, 🧠 R&D', '', '🟢 Yes (SLAB)', 'Strict on deadlines', '✅ Yes', '✅ Yes', 'To create a new Git branch for updating stakeholder information, follow these steps in your terminal or command prompt:', 'To create a new Git branch for updating stakeholder information, follow these steps in your terminal or command prompt:', '2025-07-17 00:02:49', 'approved', NULL),
-(8, 'IBM', '🔬 Testing Laboratory', '', 'Lasanthi Kalpani', 'manager', 'lasanthikalpani@gmail.com', '0717208416', 'http://localhost/nqi_srilanka/nqi_form.html', '', '📘 Standards Development, 🧪 Calibration, 🛡️ Certification, 🎯 Training, 🧠 R&D', '', '🟢 Yes (SLAB)', '', '✅ Yes', '✅ Yes', '', '', '2025-07-17 11:41:15', 'approved', NULL),
-(14, 'External Consultant,Innovate Ltd', '🏛️ NQI Body (e.g., SLSI, SLAB, MUSSD)', '', 'David Wilson', 'External Consultant', 'wilson@innovate.com', '0717208416', 'https://sourceforge.net/projects/xampp/', '', '📘 Standards Development, 🧪 Calibration, 🎯 Training, 📏 Metrology', '', '🟢 Yes (SLAB)', 'wilson@innovate.com', '✅ Yes', '✅ Yes', 'wilson@innovate.com', 'wilson@innovate.com', '2025-07-25 14:10:52', 'pending', 16),
-(15, 'Global Enterprises', 'Other', 'Global Enterprises', 'Emily Chen', 'Product Owner', 'lisa.park@nextgen.com', '+1 (555) 987-6543', '', '+1 (555) 987-6543', 'Standards Development, Calibration, Certification, Laboratory Testing, Inspection, Training', '+1 (555) 987-6543', 'Yes (SLAB)', '+1 (555) 987-6543', 'Yes', 'Yes', '+1 (555) 987-6543', '+1 (555) 987-6543', '2025-07-25 14:22:33', 'pending', 16),
-(16, 'Innovate Ltd,david', NULL, '', 'Lasanthi Kalpani', 'External Consultant', 'lasanthikalpani@gmail.com', '0717208416', 'https://sourceforge.net/projects/xampp/', '', 'Metrology', 'Metrology', NULL, 'Innovate Ltd,david', NULL, NULL, 'Innovate Ltd,david', 'Innovate Ltd,david', '2025-07-25 14:25:03', 'approved', 16);
+(6, 'Community Rep', '🏭 Industry/Enterprise', '', 'Maria Garcia', 'Local NGO', 'maria.g@localngo.org', '+1 (555) 345-6789', 'http://localhost/nqi_srilanka/nqi_form.html', 'Strict on deadlines', '📘 Standards Development, 🧪 Calibration, 🛡️ Certification, 🔬 Laboratory Testing, 🔎 Inspection, 🎯 Training, 📏 Metrology, ⚖️ Regulatory Oversight, 🧠 R&D', '', '🟢 Yes (SLAB)', 'Strict on deadlines', '✅ Yes', '✅ Yes', 'To create a new Git branch for updating stakeholder information, follow these steps in your terminal or command prompt:', 'To create a new Git branch for updating stakeholder information, follow these steps in your terminal or command prompt:', '2025-07-17 00:02:49', 'approved', NULL);
 
 -- --------------------------------------------------------
 
@@ -90,6 +183,13 @@ CREATE TABLE `password_reset_tokens` (
   `token` varchar(64) NOT NULL,
   `expiration` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `password_reset_tokens`
+--
+
+INSERT INTO `password_reset_tokens` (`id`, `user_id`, `token`, `expiration`) VALUES
+(15, 16, '81a78ae1f65f3c7c587c6c79b22677da42f3df8ffdeff2da386b4da1cbd6d6d4', '2025-07-28 17:25:54');
 
 -- --------------------------------------------------------
 
@@ -115,7 +215,6 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password_hash`, `organization`, `user_type`, `is_admin`, `newsletter_subscription`, `created_at`) VALUES
-(5, 'sadun', 'janaka', 'sadun@gmail.com', '$2y$10$rSt.O5VX1OBePFlCRNRhXeWUyUdlFkHg7s4hGsUtHCdkgMjF/eGxu', 'abc', 'researcher', 0, 1, '2025-07-17 09:34:17'),
 (6, 'janaka', 'Heshan', 'janaka@gmail.com', '$2y$10$o5svnsAmM/mq.9wl/EoU4u.F.HcHu2C1Xks0EZdCsCTPoo3rEm6wC', '', 'researcher', 0, 1, '2025-07-17 10:17:40'),
 (12, 'Admin', 'User', 'admin@nqi.lk', '$2y$10$gu8slhOUbPjJEduBDs4ueOLlLUnciIDBKrIhulyu1QCAww4yBCYNW', NULL, 'other', 1, 0, '2025-07-22 15:15:31'),
 (16, 'Gillian', 'Anderson', 'Anderson@gmail.com', '$2y$10$Pp1Dg2mOD7qHPOadd5E9AuolxXLcFeP3zWBMoUHF3wikc7iB8uEqS', 'lass', 'quality_professional', 0, 1, '2025-07-22 17:35:42'),
@@ -124,6 +223,27 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password_hash`, 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `documents`
+--
+ALTER TABLE `documents`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `document_responses`
+--
+ALTER TABLE `document_responses`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `submission_id` (`submission_id`);
+
+--
+-- Indexes for table `document_submissions`
+--
+ALTER TABLE `document_submissions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `document_id` (`document_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `feedback`
@@ -158,6 +278,24 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `documents`
+--
+ALTER TABLE `documents`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT for table `document_responses`
+--
+ALTER TABLE `document_responses`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `document_submissions`
+--
+ALTER TABLE `document_submissions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
 -- AUTO_INCREMENT for table `feedback`
 --
 ALTER TABLE `feedback`
@@ -173,7 +311,7 @@ ALTER TABLE `nqi_stakeholders`
 -- AUTO_INCREMENT for table `password_reset_tokens`
 --
 ALTER TABLE `password_reset_tokens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -184,6 +322,19 @@ ALTER TABLE `users`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `document_responses`
+--
+ALTER TABLE `document_responses`
+  ADD CONSTRAINT `document_responses_ibfk_1` FOREIGN KEY (`submission_id`) REFERENCES `document_submissions` (`id`);
+
+--
+-- Constraints for table `document_submissions`
+--
+ALTER TABLE `document_submissions`
+  ADD CONSTRAINT `document_submissions_ibfk_1` FOREIGN KEY (`document_id`) REFERENCES `documents` (`id`),
+  ADD CONSTRAINT `document_submissions_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `nqi_stakeholders`
