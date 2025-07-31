@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 29, 2025 at 06:40 PM
+-- Generation Time: Jul 31, 2025 at 04:39 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -45,11 +45,73 @@ CREATE TABLE `documents` (
 --
 
 INSERT INTO `documents` (`id`, `title`, `category`, `description`, `file_path`, `file_name`, `version`, `effective_date`, `created_at`, `updated_at`) VALUES
-(1, 'abc', 'metrology', 'fdfd', 'uploads/documents/1753801497_SonarQube1.pdf', 'SonarQube (1).pdf', '121', '2025-07-31', '2025-07-29 15:04:57', '2025-07-29 15:04:57'),
-(2, 'abc', 'accreditation', 'kkjf', 'uploads/documents/1753801534_SonarQube.pdf', 'SonarQube.pdf', '121', '2025-08-01', '2025-07-29 15:05:34', '2025-07-29 15:05:34'),
-(3, 'abc', 'accreditation', 'kk', 'uploads/documents/1753802699_SonarQube1.pdf', 'SonarQube (1).pdf', '', '2025-07-31', '2025-07-29 15:24:59', '2025-07-29 15:24:59'),
-(4, 'pos', 'training', 'pddpo', 'uploads/documents/1753803557_SonarQube1.pdf', 'SonarQube (1).pdf', '121', '2025-07-31', '2025-07-29 15:39:17', '2025-07-29 15:39:17'),
-(5, 'abc', 'policy', '', 'uploads/documents/1753804131_SonarQube1.pdf', 'SonarQube (1).pdf', '', '2025-07-31', '2025-07-29 15:48:51', '2025-07-29 15:48:51');
+(13, 'pos', 'standards', 'dd', 'uploads/documents/1753883752_SonarQube.pdf', 'SonarQube.pdf', '121', '2025-08-09', '2025-07-30 13:55:52', '2025-07-30 13:55:52'),
+(14, 'pos', 'policy', 'sdsd', 'uploads/documents/1753883856_SonarQube.pdf', 'SonarQube.pdf', '121', '2025-08-09', '2025-07-30 13:57:36', '2025-07-30 13:57:36'),
+(16, 'Enhanced', 'forms', 'Enhanced Modal Dialogs: Styled modals to match the theme with animations\\r\\n\\r\\n', 'uploads/documents/1753889882_SonarQube3.pdf', 'SonarQube (3).pdf', '121', '2025-08-08', '2025-07-30 15:38:02', '2025-07-30 15:38:02'),
+(17, 'ksjddj', 'awards', '', 'uploads/documents/1753893026_abc.pdf', 'abc.pdf', '121', '2025-08-09', '2025-07-30 16:30:26', '2025-07-30 16:30:26'),
+(19, 'Enhanced', 'regulatory', 'ss', 'uploads/documents/1753964688_abc.pdf', 'abc.pdf', '121', '2025-08-07', '2025-07-31 12:24:48', '2025-07-31 12:24:48');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `document_responses`
+--
+
+CREATE TABLE `document_responses` (
+  `id` int(11) NOT NULL,
+  `submission_id` int(11) NOT NULL,
+  `response_file_path` varchar(255) NOT NULL,
+  `response_file_name` varchar(255) NOT NULL,
+  `comments` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `document_responses`
+--
+
+INSERT INTO `document_responses` (`id`, `submission_id`, `response_file_path`, `response_file_name`, `comments`, `created_at`) VALUES
+(1, 10, 'uploads/responses/resp_688b7a90502f98.74738190.pdf', '1753803557_SonarQube1.pdf', 'reject', '2025-07-31 14:15:44'),
+(2, 10, 'uploads/responses/resp_688b7848c27383.53209485.pdf', 'SonarQube (3) (3).pdf', 'ddd', '2025-07-31 14:06:00'),
+(3, 10, 'uploads/responses/resp_688b785ad32e64.18411710.pdf', 'abc (1).pdf', 'ddd', '2025-07-31 14:06:18'),
+(4, 10, 'uploads/responses/resp_688b7871665670.69977305.pdf', 'abc.pdf', NULL, '2025-07-31 14:06:41'),
+(5, 9, 'uploads/responses/resp_688b787d6dc088.11196082.pdf', 'abc.pdf', NULL, '2025-07-31 14:06:53'),
+(6, 9, 'uploads/responses/resp_688b788c2c2705.01781605.pdf', 'SonarQube (4) (1).pdf', NULL, '2025-07-31 14:07:08'),
+(7, 10, 'uploads/responses/resp_688b790dd633f7.56556098.pdf', 'abc (1).pdf', NULL, '2025-07-31 14:09:17'),
+(8, 7, 'uploads/responses/resp_688b7ab200a743.56235880.pdf', 'abc.pdf', 'reject', '2025-07-31 14:16:18'),
+(9, 1, 'uploads/responses/resp_688b7ad63b6310.10239249.pdf', 'abc (1).pdf', NULL, '2025-07-31 14:16:54');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `document_submissions`
+--
+
+CREATE TABLE `document_submissions` (
+  `id` int(11) NOT NULL,
+  `document_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `file_path` varchar(255) NOT NULL,
+  `file_name` varchar(255) NOT NULL,
+  `submitted_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `status` enum('pending','approved','rejected') DEFAULT 'pending'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `document_submissions`
+--
+
+INSERT INTO `document_submissions` (`id`, `document_id`, `user_id`, `file_path`, `file_name`, `submitted_at`, `status`) VALUES
+(1, 13, 16, 'uploads/submissions/688a38c5e15d3.pdf', 'SonarQube (3).pdf', '2025-07-30 15:22:45', 'approved'),
+(2, 13, 16, 'uploads/submissions/688a3c0cb0d89.pdf', 'SonarQube (4).pdf', '2025-07-30 15:36:44', 'rejected'),
+(3, 14, 16, 'uploads/submissions/688a40fa61c74.pdf', 'SonarQube (3) (1).pdf', '2025-07-30 15:57:46', 'approved'),
+(4, 13, 6, 'uploads/submissions/688a4122e62b9.pdf', 'SonarQube (5).pdf', '2025-07-30 15:58:26', 'approved'),
+(5, 16, 6, 'uploads/submissions/688a413358ab3.pdf', 'SonarQube (3) (2).pdf', '2025-07-30 15:58:43', 'approved'),
+(6, 13, 12, 'uploads/submissions/688a451aa303b.pdf', 'SonarQube (6).pdf', '2025-07-30 16:15:22', 'rejected'),
+(7, 13, 12, 'uploads/submissions/688a452cc59d5.pdf', 'SonarQube (6).pdf', '2025-07-30 16:15:40', 'rejected'),
+(8, 13, 12, 'uploads/submissions/688a453dc851d.pdf', 'SonarQube (6).pdf', '2025-07-30 16:15:57', 'approved'),
+(9, 13, 6, 'uploads/submissions/688a45e7af0ee.pdf', 'abc.pdf', '2025-07-30 16:18:47', 'rejected'),
+(10, 17, 12, 'uploads/submissions/688a48f2801df.pdf', 'abc (1).pdf', '2025-07-30 16:31:46', 'rejected');
 
 -- --------------------------------------------------------
 
@@ -164,6 +226,21 @@ ALTER TABLE `documents`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `document_responses`
+--
+ALTER TABLE `document_responses`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `submission_id` (`submission_id`);
+
+--
+-- Indexes for table `document_submissions`
+--
+ALTER TABLE `document_submissions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `document_id` (`document_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
 -- Indexes for table `feedback`
 --
 ALTER TABLE `feedback`
@@ -199,7 +276,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `documents`
 --
 ALTER TABLE `documents`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `document_responses`
+--
+ALTER TABLE `document_responses`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `document_submissions`
+--
+ALTER TABLE `document_submissions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `feedback`
@@ -228,6 +317,19 @@ ALTER TABLE `users`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `document_responses`
+--
+ALTER TABLE `document_responses`
+  ADD CONSTRAINT `document_responses_ibfk_1` FOREIGN KEY (`submission_id`) REFERENCES `document_submissions` (`id`);
+
+--
+-- Constraints for table `document_submissions`
+--
+ALTER TABLE `document_submissions`
+  ADD CONSTRAINT `document_submissions_ibfk_1` FOREIGN KEY (`document_id`) REFERENCES `documents` (`id`),
+  ADD CONSTRAINT `document_submissions_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `nqi_stakeholders`

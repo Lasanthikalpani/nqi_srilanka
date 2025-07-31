@@ -380,6 +380,20 @@
         .submission-row:hover {
             background-color: #f8f9fa;
         }
+
+        .response-comments {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 5px;
+            font-size: 14px;
+        }
+
+        .response-date {
+            font-size: 12px;
+            color: #6c757d;
+            margin-top: 5px;
+        }
     </style>
 </head>
 
@@ -544,6 +558,7 @@
                     if (data.status === 'success') {
                         alert('Document submitted successfully!');
                         closeModal('uploadModal');
+                        loadDocuments(); // Refresh the document list
                     } else {
                         alert('Error: ' + data.message);
                     }
@@ -551,54 +566,6 @@
                 .catch(error => {
                     console.error('Error:', error);
                     alert('An error occurred while submitting the document');
-                });
-        }
-
-
-        function viewSubmissions(documentId) {
-            fetch('get_submissions.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: `document_id=${encodeURIComponent(documentId)}`
-            })
-                .then(response => response.json())
-                .then(data => {
-                    const content = document.getElementById('submissionsContent');
-                    if (data.status === 'success') {
-                        let html = '<table style="width:100%;border-collapse:collapse;margin-top:20px;">';
-                        html += '<tr><th>File Name</th><th>Submitted At</th><th>Action</th></tr>';
-
-                        if (data.submissions.length > 0) {
-                            data.submissions.forEach(sub => {
-                                html += `
-                        <tr>
-                            <td>${sub.file_name}</td>
-                            <td>${sub.submitted_at}</td>
-                            <td>
-                                <a href="${sub.file_path}" class="action-btn download-btn" download="${sub.file_name}">
-                                    <i class="fas fa-download"></i> Download
-                                </a>
-                            </td>
-                        </tr>
-                    `;
-                            });
-                        } else {
-                            html += '<tr><td colspan="3" style="text-align: center; padding: 20px;">No submissions found for this document</td></tr>';
-                        }
-
-                        html += '</table>';
-                        content.innerHTML = html;
-                    } else {
-                        content.innerHTML = `<p style="text-align: center;">${data.message}</p>`;
-                    }
-                    document.getElementById('submissionsModal').style.display = 'block';
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    document.getElementById('submissionsContent').innerHTML = '<p style="text-align: center;">Error loading submissions</p>';
-                    document.getElementById('submissionsModal').style.display = 'block';
                 });
         }
 
@@ -618,7 +585,6 @@
                             <table style="width:100%; border-collapse: collapse; margin-top: 20px;">
                                 <thead>
                                     <tr style="background-color: #f8f9fa;">
-                                        <th style="padding: 12px; text-align: left;">Document</th>
                                         <th style="padding: 12px; text-align: left;">File Name</th>
                                         <th style="padding: 12px; text-align: left;">Status</th>
                                         <th style="padding: 12px; text-align: left;">Submitted At</th>
@@ -635,7 +601,6 @@
 
                                 html += `
                                     <tr class="submission-row">
-                                        <td style="padding: 12px; border-bottom: 1px solid #e1e5e9;">${sub.document_title}</td>
                                         <td style="padding: 12px; border-bottom: 1px solid #e1e5e9;">${sub.file_name}</td>
                                         <td style="padding: 12px; border-bottom: 1px solid #e1e5e9;">
                                             <span class="status-badge ${statusClass}">${statusText}</span>
@@ -644,19 +609,54 @@
                                             ${new Date(sub.submitted_at).toLocaleString()}
                                         </td>
                                         <td style="padding: 12px; border-bottom: 1px solid #e1e5e9;">
-                                            <a href="${sub.file_path}" 
-                                               class="action-btn download-btn" 
-                                               download="${sub.file_name}"
-                                               title="Download">
-                                                <i class="fas fa-download"></i>
-                                            </a>
-                                        </td>
+                                            <div class="action-buttons">
+                                                <a href="${sub.file_path}" 
+                                                   class="action-btn download-btn" 
+                                                   download="${sub.file_name}"
+                                                   title="Download Submission">
+                                                    <i class="fas fa-download"></i>
+                                                </a>`;
+
+                                // Add response download buttons if responses exist
+                                if (sub.responses && sub.responses.length > 0) {
+                                    sub.responses.forEach((response, index) => {
+                                        html += `
+                                                <a href="${response.response_file_path}" 
+                                                   class="action-btn view-submissions-btn" 
+                                                   download="${response.response_file_name || 'response_' + (index + 1) + '.pdf'}"
+                                                   title="Download Response">
+                                                    <i class="fas fa-file-download"></i>
+                                                </a>`;
+                                    });
+                                }
+
+                                html += `</div></td>
                                     </tr>`;
+
+                                // Add response comments if they exist
+                                if (sub.responses && sub.responses.length > 0) {
+                                    sub.responses.forEach(response => {
+                                        if (response.response_comments) {
+                                            html += `
+                                                <tr>
+                                                    <td colspan="4" style="padding: 12px; border-bottom: 1px solid #e1e5e9;">
+                                                        <div class="response-comments">
+                                                            <strong>Response Comments:</strong> ${response.response_comments}
+                                                            ${response.response_date ? 
+                                                                `<div class="response-date">
+                                                                    Response Date: ${new Date(response.response_date).toLocaleString()}
+                                                                </div>` : ''}
+                                                        </div>
+                                                    </td>
+                                                </tr>`;
+                                        }
+                                    });
+                                }
                             });
                         } else {
                             html += `
                                 <tr>
-                                    <td colspan="5" style="text-align: center; padding: 20px;">
+                                    <td colspan="4" style="text-align: center; padding: 20px;">
                                         No submissions found for this document
                                     </td>
                                 </tr>`;
@@ -681,7 +681,6 @@
                     document.getElementById('submissionsModal').style.display = 'block';
                 });
         }
-
     </script>
 </body>
 
