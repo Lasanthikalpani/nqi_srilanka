@@ -349,6 +349,37 @@
             transform: translateY(-2px);
             box-shadow: 0 2px 8px rgba(156, 39, 176, 0.3);
         }
+
+        .status-badge {
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: capitalize;
+        }
+
+        .status-pending {
+            background-color: #FFC107;
+            color: #000;
+        }
+
+        .status-approved {
+            background-color: #28A745;
+            color: #FFF;
+        }
+
+        .status-rejected {
+            background-color: #DC3545;
+            color: #FFF;
+        }
+
+        .submission-row {
+            transition: all 0.2s;
+        }
+
+        .submission-row:hover {
+            background-color: #f8f9fa;
+        }
     </style>
 </head>
 
@@ -567,6 +598,86 @@
                 .catch(error => {
                     console.error('Error:', error);
                     document.getElementById('submissionsContent').innerHTML = '<p style="text-align: center;">Error loading submissions</p>';
+                    document.getElementById('submissionsModal').style.display = 'block';
+                });
+        }
+
+        function viewSubmissions(documentId) {
+            fetch('get_submissions.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `document_id=${encodeURIComponent(documentId)}`
+            })
+                .then(response => response.json())
+                .then(data => {
+                    const content = document.getElementById('submissionsContent');
+                    if (data.status === 'success') {
+                        let html = `
+                            <table style="width:100%; border-collapse: collapse; margin-top: 20px;">
+                                <thead>
+                                    <tr style="background-color: #f8f9fa;">
+                                        <th style="padding: 12px; text-align: left;">Document</th>
+                                        <th style="padding: 12px; text-align: left;">File Name</th>
+                                        <th style="padding: 12px; text-align: left;">Status</th>
+                                        <th style="padding: 12px; text-align: left;">Submitted At</th>
+                                        <th style="padding: 12px; text-align: left;">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>`;
+
+                        if (data.submissions.length > 0) {
+                            data.submissions.forEach(sub => {
+                                // Determine status class
+                                const statusClass = sub.status ? `status-${sub.status}` : 'status-pending';
+                                const statusText = sub.status || 'pending';
+
+                                html += `
+                                    <tr class="submission-row">
+                                        <td style="padding: 12px; border-bottom: 1px solid #e1e5e9;">${sub.document_title}</td>
+                                        <td style="padding: 12px; border-bottom: 1px solid #e1e5e9;">${sub.file_name}</td>
+                                        <td style="padding: 12px; border-bottom: 1px solid #e1e5e9;">
+                                            <span class="status-badge ${statusClass}">${statusText}</span>
+                                        </td>
+                                        <td style="padding: 12px; border-bottom: 1px solid #e1e5e9;">
+                                            ${new Date(sub.submitted_at).toLocaleString()}
+                                        </td>
+                                        <td style="padding: 12px; border-bottom: 1px solid #e1e5e9;">
+                                            <a href="${sub.file_path}" 
+                                               class="action-btn download-btn" 
+                                               download="${sub.file_name}"
+                                               title="Download">
+                                                <i class="fas fa-download"></i>
+                                            </a>
+                                        </td>
+                                    </tr>`;
+                            });
+                        } else {
+                            html += `
+                                <tr>
+                                    <td colspan="5" style="text-align: center; padding: 20px;">
+                                        No submissions found for this document
+                                    </td>
+                                </tr>`;
+                        }
+
+                        html += `</tbody></table>`;
+                        content.innerHTML = html;
+                    } else {
+                        content.innerHTML = `
+                            <div style="text-align: center; padding: 20px; color: #dc3545;">
+                                ${data.message}
+                            </div>`;
+                    }
+                    document.getElementById('submissionsModal').style.display = 'block';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('submissionsContent').innerHTML = `
+                        <div style="text-align: center; padding: 20px; color: #dc3545;">
+                            Error loading submissions. Please try again.
+                        </div>`;
                     document.getElementById('submissionsModal').style.display = 'block';
                 });
         }

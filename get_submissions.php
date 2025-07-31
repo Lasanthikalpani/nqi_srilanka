@@ -17,10 +17,13 @@ $documentId = $_POST['document_id'] ?? 0;
 $userId = $_SESSION['user_id'];
 
 // Only show submissions for the current user
-$query = "SELECT ds.*, CONCAT(u.first_name, ' ', u.last_name) as user_name 
+$query = "SELECT ds.*, CONCAT(u.first_name, ' ', u.last_name) as user_name, 
+                 d.title as document_title
           FROM document_submissions ds
           JOIN users u ON ds.user_id = u.id
-          WHERE ds.document_id = ? AND ds.user_id = ?";
+          JOIN documents d ON ds.document_id = d.id
+          WHERE ds.document_id = ? AND ds.user_id = ?
+          ORDER BY ds.submitted_at DESC";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("ii", $documentId, $userId);
 
@@ -35,7 +38,7 @@ if ($stmt->execute()) {
 } else {
     echo json_encode([
         'status' => 'error',
-        'message' => 'Failed to retrieve submissions'
+        'message' => 'Failed to retrieve submissions: ' . $conn->error
     ]);
 }
 
