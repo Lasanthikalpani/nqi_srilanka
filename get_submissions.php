@@ -29,7 +29,7 @@ if (!$documentId) {
 $userId = $_SESSION['user_id'];
 
 try {
-    // Get submissions with their responses
+    // Get submissions with only their latest response
     $query = "SELECT 
                 ds.id,
                 ds.file_path,
@@ -37,14 +37,22 @@ try {
                 ds.submitted_at,
                 ds.status,
                 d.title as document_title,
-                dr.id as response_id,
-                dr.response_file_path,
-                dr.response_file_name,
-                dr.comments as response_comments,
-                dr.created_at as response_date
+                latest_response.id as response_id,
+                latest_response.response_file_path,
+                latest_response.response_file_name,
+                latest_response.comments as response_comments,
+                latest_response.created_at as response_date
               FROM document_submissions ds
               JOIN documents d ON ds.document_id = d.id
-              LEFT JOIN document_responses dr ON dr.submission_id = ds.id
+              LEFT JOIN (
+                  SELECT dr1.*
+                  FROM document_responses dr1
+                  INNER JOIN (
+                      SELECT submission_id, MAX(created_at) as max_date
+                      FROM document_responses
+                      GROUP BY submission_id
+                  ) dr2 ON dr1.submission_id = dr2.submission_id AND dr1.created_at = dr2.max_date
+              ) latest_response ON latest_response.submission_id = ds.id
               WHERE ds.document_id = ? AND ds.user_id = ?
               ORDER BY ds.submitted_at DESC";
     
@@ -58,35 +66,29 @@ try {
     $result = $stmt->get_result();
     $submissions = [];
     
-    // Group responses with their submissions
     while ($row = $result->fetch_assoc()) {
-        $submissionId = $row['id'];
+        $submission = [
+            'id' => $row['id'],
+            'file_path' => $row['file_path'],
+            'file_name' => $row['file_name'],
+            'submitted_at' => $row['submitted_at'],
+            'status' => $row['status'],
+            'document_title' => $row['document_title'],
+            'response' => null
+        ];
         
-        if (!isset($submissions[$submissionId])) {
-            $submissions[$submissionId] = [
-                'id' => $submissionId,
-                'file_path' => $row['file_path'],
-                'file_name' => $row['file_name'],
-                'submitted_at' => $row['submitted_at'],
-                'status' => $row['status'],
-                'document_title' => $row['document_title'],
-                'responses' => []
-            ];
-        }
-        
-        // Add response if exists
+        // Add response if exists (only latest one)
         if ($row['response_id']) {
-            $submissions[$submissionId]['responses'][] = [
+            $submission['response'] = [
                 'response_file_path' => $row['response_file_path'],
                 'response_file_name' => $row['response_file_name'],
                 'response_comments' => $row['response_comments'],
                 'response_date' => $row['response_date']
             ];
         }
+        
+        $submissions[] = $submission;
     }
-
-    // Convert to indexed array
-    $submissions = array_values($submissions);
     
     echo json_encode([
         'status' => 'success',
