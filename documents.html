@@ -389,6 +389,33 @@
             font-size: 14px;
         }
 
+        .xml-view-btn {
+            background-color: #795548;
+            color: white;
+        }
+
+        .xml-view-btn:hover {
+            background-color: #5d4037;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(121, 85, 72, 0.3);
+        }
+
+        /* Add tooltip for the new button */
+        .xml-view-btn:hover::after {
+            content: 'View XML Archive';
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            z-index: 10;
+        }
+
         .response-date {
             font-size: 12px;
             color: #6c757d;
@@ -413,6 +440,91 @@
             font-size: 12px;
             color: #6c757d;
             margin-top: 5px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(3px);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            animation: modalopen 0.3s;
+        }
+
+        @keyframes modalopen {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
+        .btn-submit {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-submit:hover {
+            background: #16a085;
+            transform: translateY(-2px);
+        }
+
+        .btn-cancel {
+            background: #f44336;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-cancel:hover {
+            background: #d32f2f;
+        }
+
+        .form-text {
+            color: #666;
+            font-size: 12px;
+            margin-top: 5px;
+            display: block;
         }
     </style>
 </head>
@@ -453,22 +565,38 @@
         </table>
     </div>
 
-    <!-- Upload Modal -->
-    <div id="uploadModal">
+    <!-- Upload Modal - Fix the ID and add proper styling -->
+    <div id="uploadModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('uploadModal')">&times;</span>
-            <h2 class="modal-title">Upload Edited Document</h2>
+            <h2 class="modal-title">
+                <i class="fas fa-upload"></i> Upload Edited Document
+            </h2>
             <form id="uploadForm" enctype="multipart/form-data">
-                <input type="hidden" id="uploadDocumentId">
+                <input type="hidden" id="uploadDocumentId" name="documentId">
+
                 <div class="form-group">
                     <label for="documentFile">
-                        <i class="fas fa-file-upload"></i> Select File
+                        <i class="fas fa-file-pdf"></i> Select PDF File
                     </label>
-                    <input type="file" id="documentFile" name="documentFile" class="form-control-file" required>
+                    <input type="file" id="documentFile" name="documentFile" class="form-control-file"
+                        accept=".pdf,.doc,.docx,.txt" required>
+                    <small class="form-text">Accepted formats: PDF, DOC, DOCX, TXT (Max: 10MB)</small>
                 </div>
-                <button type="button" onclick="submitDocument()">
-                    <i class="fas fa-upload"></i> Upload
-                </button>
+
+                <div class="form-group" id="fileNameDisplay" style="display: none;">
+                    <label>Selected File:</label>
+                    <div id="selectedFileName" style="padding: 8px; background: #f8f9fa; border-radius: 4px;"></div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" onclick="closeModal('uploadModal')" class="btn-cancel">
+                        <i class="fas fa-times"></i> Cancel
+                    </button>
+                    <button type="button" onclick="submitDocument()" class="btn-submit">
+                        <i class="fas fa-upload"></i> Upload Document
+                    </button>
+                </div>
             </form>
         </div>
     </div>
@@ -496,6 +624,19 @@
             const category = document.getElementById('categoryFilter').value;
             const searchTerm = document.getElementById('searchInput').value;
 
+            // Show loading indicator
+            const tbody = document.getElementById('documentsBody');
+            tbody.innerHTML = `
+        <tr>
+            <td colspan="6" style="text-align: center; padding: 40px;">
+                <div style="display: inline-block; text-align: center;">
+                    <i class="fas fa-spinner fa-spin" style="font-size: 24px; color: #3498db; margin-bottom: 10px;"></i>
+                    <p>Loading documents...</p>
+                </div>
+            </td>
+        </tr>
+    `;
+
             fetch('documents.php', {
                 method: 'POST',
                 headers: {
@@ -508,53 +649,201 @@
                     const tbody = document.getElementById('documentsBody');
                     tbody.innerHTML = '';
 
-                    if (data.status === 'success') {
+                    if (data.status === 'success' && data.documents && data.documents.length > 0) {
                         data.documents.forEach(doc => {
                             const row = document.createElement('tr');
                             row.innerHTML = `
-                            <td>${doc.title}</td>
-                            <td>${doc.category}</td>
-                            <td>${doc.description || ''}</td>
-                            <td>${doc.version || ''}</td>
-                            <td>${doc.effective_date || ''}</td>
-                           <td>
-    <div class="action-buttons">
-        <a href="${doc.file_path}" class="action-btn download-btn" download="${doc.file_name}" title="Download">
-            <i class="fas fa-download"></i>
-        </a>
-        <a class="action-btn upload-btn" onclick="openUploadModal(${doc.id})" title="Upload Edited">
-            <i class="fas fa-upload"></i>
-        </a>
-        <a class="action-btn view-submissions-btn" onclick="viewSubmissions(${doc.id})" title="View Submissions">
-            <i class="fas fa-eye"></i>
-        </a>
-    </div>
-</td>
-                        `;
+                    <td>${escapeHtml(doc.title || 'No Title')}</td>
+                    <td><span class="category-badge">${escapeHtml(doc.category || 'Uncategorized')}</span></td>
+                    <td>${escapeHtml(doc.description ? (doc.description.length > 80 ? doc.description.substring(0, 80) + '...' : doc.description) : '')}</td>
+                    <td>${escapeHtml(doc.version || 'N/A')}</td>
+                    <td>${doc.effective_date ? new Date(doc.effective_date).toLocaleDateString() : 'N/A'}</td>
+                    <td>
+                        <div class="action-buttons">
+                            <a href="javascript:void(0)" class="action-btn download-btn" onclick="downloadDocument(${doc.id}, '${escapeSingleQuotes(doc.file_path)}', '${escapeSingleQuotes(doc.file_name)}')" title="Download">
+                                <i class="fas fa-download"></i>
+                            </a>
+                            <a class="action-btn upload-btn" onclick="openUploadModal(${doc.id})" title="Upload Edited Version">
+                                <i class="fas fa-upload"></i>
+                            </a>
+                            <a class="action-btn view-submissions-btn" onclick="viewSubmissions(${doc.id})" title="View Submissions">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <a class="action-btn xml-view-btn" onclick="viewDocumentXML(${doc.id})" title="View XML Archive">
+                                <i class="fas fa-file-code"></i>
+                            </a>
+                        </div>
+                    </td>
+                    `;
                             tbody.appendChild(row);
                         });
+
+                        // Add CSS for new elements if not already present
+                        addDynamicCSS();
+
+                    } else if (data.status === 'success' && (!data.documents || data.documents.length === 0)) {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                    <td colspan="6" style="text-align: center; padding: 40px; color: #666;">
+                        <i class="fas fa-file-alt" style="font-size: 48px; color: #ddd; margin-bottom: 15px;"></i>
+                        <h3 style="color: #777;">No documents found</h3>
+                        <p>Try adjusting your filters or search terms</p>
+                    </td>`;
+                        tbody.appendChild(row);
                     } else {
                         const row = document.createElement('tr');
-                        row.innerHTML = `<td colspan="6" style="text-align: center; padding: 30px;">${data.message}</td>`;
+                        row.innerHTML = `<td colspan="6" style="text-align: center; padding: 30px; color: #dc3545;">
+                    <i class="fas fa-exclamation-triangle"></i> ${escapeHtml(data.message || 'Error loading documents')}
+                </td>`;
                         tbody.appendChild(row);
                     }
                 })
                 .catch(error => {
                     console.error('Error:', error);
                     const tbody = document.getElementById('documentsBody');
-                    tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 30px;">Error loading documents. Please try again.</td></tr>';
+                    tbody.innerHTML = `
+                <tr>
+                    <td colspan="6" style="text-align: center; padding: 40px; color: #dc3545;">
+                        <i class="fas fa-exclamation-circle" style="font-size: 48px; margin-bottom: 15px;"></i>
+                        <h3>Error Loading Documents</h3>
+                        <p>Please check your connection and try again.</p>
+                        <button onclick="loadDocuments()" style="background: var(--accent); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: 10px;">
+                            <i class="fas fa-redo"></i> Retry
+                        </button>
+                    </td>
+                </tr>`;
                 });
         }
 
-        function openUploadModal(documentId) {
-            document.getElementById('uploadDocumentId').value = documentId;
-            document.getElementById('uploadModal').style.display = 'block';
+        // Helper functions
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
         }
 
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
+        function escapeSingleQuotes(text) {
+            return text.replace(/'/g, "\\'");
         }
 
+        // Add dynamic CSS for new elements
+        function addDynamicCSS() {
+            if (!document.getElementById('dynamic-css')) {
+                const style = document.createElement('style');
+                style.id = 'dynamic-css';
+                style.textContent = `
+            .category-badge {
+                display: inline-block;
+                padding: 3px 8px;
+                border-radius: 12px;
+                font-size: 12px;
+                font-weight: 500;
+                background: #e3f2fd;
+                color: #1976d2;
+                text-transform: capitalize;
+            }
+            
+            .xml-view-btn {
+                background-color: #795548;
+                color: white;
+            }
+            
+            .xml-view-btn:hover {
+                background-color: #5d4037;
+                transform: translateY(-2px);
+                box-shadow: 0 2px 8px rgba(121, 85, 72, 0.3);
+            }
+            
+            .action-buttons {
+                display: flex;
+                gap: 8px;
+                flex-wrap: nowrap;
+            }
+            
+            .action-btn {
+                padding: 8px 12px;
+                border-radius: 6px;
+                font-size: 14px;
+                font-weight: 500;
+                text-decoration: none;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.2s;
+                min-width: 36px;
+                height: 36px;
+                position: relative;
+            }
+            
+            .action-btn i {
+                margin: 0;
+            }
+            
+            .action-btn:hover::after {
+                content: attr(title);
+                position: absolute;
+                bottom: -30px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: #333;
+                color: white;
+                padding: 4px 8px;
+                border-radius: 4px;
+                font-size: 12px;
+                white-space: nowrap;
+                z-index: 10;
+            }
+            
+            .action-btn:hover::before {
+                content: "";
+                position: absolute;
+                bottom: -6px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 0;
+                height: 0;
+                border-left: 5px solid transparent;
+                border-right: 5px solid transparent;
+                border-bottom: 5px solid #333;
+                z-index: 11;
+            }
+            
+            .download-btn {
+                background-color: var(--secondary);
+                color: white;
+            }
+            
+            .download-btn:hover {
+                background-color: #2980b9;
+                transform: translateY(-2px);
+                box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+            }
+            
+            .upload-btn {
+                background-color: #ff9800;
+                color: white;
+            }
+            
+            .upload-btn:hover {
+                background-color: #e68a00;
+                transform: translateY(-2px);
+                box-shadow: 0 2px 8px rgba(255, 152, 0, 0.3);
+            }
+            
+            .view-submissions-btn {
+                background-color: #9c27b0;
+                color: white;
+            }
+            
+            .view-submissions-btn:hover {
+                background-color: #7b1fa2;
+                transform: translateY(-2px);
+                box-shadow: 0 2px 8px rgba(156, 39, 176, 0.3);
+            }
+        `;
+                document.head.appendChild(style);
+            }
+        }
         function submitDocument() {
             const documentId = document.getElementById('uploadDocumentId').value;
             const fileInput = document.getElementById('documentFile');
@@ -562,8 +851,15 @@
 
             if (!file) {
                 alert('Please select a file to upload');
+                fileInput.focus();
                 return;
             }
+
+            // Show loading state
+            const submitBtn = document.querySelector('.btn-submit');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
+            submitBtn.disabled = true;
 
             const formData = new FormData();
             formData.append('documentId', documentId);
@@ -573,20 +869,277 @@
                 method: 'POST',
                 body: formData
             })
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
                 .then(data => {
                     if (data.status === 'success') {
-                        alert('Document submitted successfully!');
+                        // Create XML for the uploaded file too
+                        const filePath = data.file_path || 'uploads/submissions/' + data.file_name;
+                        saveUploadToXML(documentId, filePath);
+
+                        alert('✅ Document submitted successfully!');
                         closeModal('uploadModal');
                         loadDocuments(); // Refresh the document list
                     } else {
-                        alert('Error: ' + data.message);
+                        throw new Error(data.message || 'Upload failed');
                     }
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    alert('An error occurred while submitting the document');
+                    alert('❌ Error: ' + error.message);
+                })
+                .finally(() => {
+                    // Restore button state
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
                 });
+        }
+
+        // Helper function to save uploaded documents as XML
+        function saveUploadToXML(documentId, filePath) {
+            fetch('save_to_xml.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `document_id=${encodeURIComponent(documentId)}&action=upload&original_file_path=${encodeURIComponent(filePath)}&extract_content=true`
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Upload saved as XML:', data);
+                })
+                .catch(error => {
+                    console.error('XML save error for upload:', error);
+                });
+        }
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'none';
+
+                // Reset form if it's upload modal
+                if (modalId === 'uploadModal') {
+                    document.getElementById('uploadForm').reset();
+                    document.getElementById('fileNameDisplay').style.display = 'none';
+                }
+            }
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function (event) {
+            const uploadModal = document.getElementById('uploadModal');
+            const submissionsModal = document.getElementById('submissionsModal');
+
+            if (event.target === uploadModal) {
+                closeModal('uploadModal');
+            }
+            if (event.target === submissionsModal) {
+                closeModal('submissionsModal');
+            }
+        }
+        function downloadDocument(documentId, filePath, fileName) {
+            // Save to XML WITH content extraction
+            fetch('save_to_xml.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `document_id=${encodeURIComponent(documentId)}&action=download&original_file_path=${encodeURIComponent(filePath)}&extract_content=true`
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('XML save response:', data);
+
+                    // Proceed with actual download
+                    const link = document.createElement('a');
+                    link.href = filePath;
+                    link.download = fileName;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+
+                    // Optional: Show notification about XML
+                    if (data.status === 'success' && data.has_extracted_content) {
+                        alert('Document saved as XML with extracted text content!');
+                    }
+                })
+                .catch(error => {
+                    console.error('XML save error:', error);
+                    // Still allow download
+                    const link = document.createElement('a');
+                    link.href = filePath;
+                    link.download = fileName;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                });
+        }
+        // XML View Functions
+        function viewDocumentXML(documentId) {
+            // Show loading
+            const tbody = document.getElementById('documentsBody');
+            tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 30px;"><i class="fas fa-spinner fa-spin"></i> Loading XML files...</td></tr>';
+
+            fetch('get_xml_files.php?document_id=' + documentId)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success' && data.xml_files && data.xml_files.length > 0) {
+                        // If only one file, open it directly
+                        if (data.xml_files.length === 1) {
+                            window.open('view_xml.php?file=' + encodeURIComponent(data.xml_files[0].xml_file_path), '_blank');
+                        } else {
+                            // Show selection modal
+                            showXMLSelectionModal(documentId, data.xml_files);
+                        }
+                    } else {
+                        alert('No XML files found for this document yet. Download the document first to create XML archive.');
+                    }
+                    // Reload documents
+                    loadDocuments();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error loading XML files');
+                    loadDocuments();
+                });
+        }
+        function openUploadModal(documentId) {
+            console.log('Opening upload modal for document ID:', documentId);
+
+            // Reset form
+            document.getElementById('uploadForm').reset();
+            document.getElementById('fileNameDisplay').style.display = 'none';
+
+            // Set document ID
+            document.getElementById('uploadDocumentId').value = documentId;
+
+            // Show modal
+            const modal = document.getElementById('uploadModal');
+            modal.style.display = 'block';
+
+            // Add file change listener
+            document.getElementById('documentFile').addEventListener('change', function (e) {
+                const file = e.target.files[0];
+                if (file) {
+                    document.getElementById('fileNameDisplay').style.display = 'block';
+                    document.getElementById('selectedFileName').textContent =
+                        `${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`;
+
+                    // Validate file size (max 10MB)
+                    if (file.size > 10 * 1024 * 1024) {
+                        alert('File size exceeds 10MB limit. Please select a smaller file.');
+                        e.target.value = '';
+                        document.getElementById('fileNameDisplay').style.display = 'none';
+                    }
+
+                    // Validate file type
+                    const allowedTypes = ['application/pdf', 'application/msword',
+                        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                        'text/plain'];
+                    if (!allowedTypes.includes(file.type)) {
+                        alert('Please select a valid file type (PDF, DOC, DOCX, or TXT).');
+                        e.target.value = '';
+                        document.getElementById('fileNameDisplay').style.display = 'none';
+                    }
+                } else {
+                    document.getElementById('fileNameDisplay').style.display = 'none';
+                }
+            });
+        }
+        function showXMLSelectionModal(documentId, xmlFiles) {
+            let html = `
+    <div id="xmlSelectionModal" style="display: block; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5);">
+        <div style="background: white; margin: 10% auto; padding: 20px; width: 80%; max-width: 600px; border-radius: 10px; box-shadow: 0 5px 30px rgba(0,0,0,0.3);">
+            <h2>Select XML Version</h2>
+            <p>Multiple XML archives found for Document ID: ${documentId}</p>
+            <table style="width: 100%; border-collapse: collapse; margin: 15px 0;">
+                <tr style="background: #f5f5f5;">
+                    <th style="padding: 10px; text-align: left;">Action</th>
+                    <th style="padding: 10px; text-align: left;">Created</th>
+                    <th style="padding: 10px; text-align: left;">Size</th>
+                    <th style="padding: 10px; text-align: left;">Actions</th>
+                </tr>`;
+
+            xmlFiles.forEach(file => {
+                const sizeKB = Math.round(file.size_bytes / 1024);
+                const date = new Date(file.created_at).toLocaleString();
+                html += `
+                <tr style="border-bottom: 1px solid #eee;">
+                    <td style="padding: 10px;"><span style="background: ${file.action_type === 'download' ? '#4CAF50' : '#2196F3'}; color: white; padding: 3px 8px; border-radius: 3px; font-size: 12px;">${file.action_type}</span></td>
+                    <td style="padding: 10px;">${date}</td>
+                    <td style="padding: 10px;">${sizeKB} KB</td>
+                    <td style="padding: 10px;">
+                        <button onclick="window.open('view_xml.php?file=${encodeURIComponent(file.xml_file_path)}', '_blank')" style="background: #2196F3; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; margin: 2px;">View</button>
+                        <button onclick="window.open('view_xml.php?file=${encodeURIComponent(file.xml_file_path)}&action=download')" style="background: #4CAF50; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; margin: 2px;">Download</button>
+                    </td>
+                </tr>`;
+            });
+
+            html += `
+            </table>
+            <button onclick="document.getElementById('xmlSelectionModal').style.display='none'" style="background: #f44336; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; float: right;">Close</button>
+        </div>
+    </div>`;
+
+            // Add to body
+            const modalDiv = document.createElement('div');
+            modalDiv.innerHTML = html;
+            document.body.appendChild(modalDiv);
+        }
+        function downloadXmlFile(xmlFilePath, fileName) {
+            const link = document.createElement('a');
+            link.href = decodeURIComponent(xmlFilePath);
+            link.download = fileName;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+        function openXmlViewer(xmlFilePath) {
+            window.open('view_xml.php?file=' + xmlFilePath, '_blank');
+            closeXmlModal();
+        }
+        function closeXmlModal() {
+            const modal = document.getElementById('xmlSelectionModal');
+            if (modal) {
+                modal.remove();
+            }
+        }
+        function downloadXMLVersion(documentId) {
+            fetch('get_xml_files.php?document_id=' + documentId)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success' && data.xml_files.length > 0) {
+                        // Show list of available XML files
+                        let html = '<h3>Available XML Files</h3><ul>';
+                        data.xml_files.forEach(file => {
+                            html += `<li>
+                                ${file.action_type} - ${new Date(file.created_at).toLocaleString()}
+                                <button onclick="downloadFile('${file.xml_file_path}', 'document_${documentId}_${file.action_type}.xml')">
+                                    Download XML
+                                </button>
+                            </li>`;
+                        });
+                        html += '</ul>';
+
+                        // Show in modal or alert
+                        alert(html); // For simplicity, use alert. Better to use modal
+                    } else {
+                        alert('No XML files found for this document');
+                    }
+                });
+        }
+
+        function downloadFile(filePath, fileName) {
+            const link = document.createElement('a');
+            link.href = filePath;
+            link.download = fileName;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
 
         function viewSubmissions(documentId) {
