@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product - NQI Sri Lanka</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800|Sen:400,700,800&display=swap" rel="stylesheet">
+    <!-- Select2 -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #0d47a1;
+            --primary-dark: #0a357a;
+            --primary-light: #1e88e5;
+            --primary-gradient: linear-gradient(135deg, #0d47a1, #1565c0, #1e88e5);
+            --secondary: #ff6f00;
+            --secondary-light: #ff8f00;
+            --secondary-gradient: linear-gradient(135deg, #e65100, #ff6f00);
+            --success: #2e7d32;
+            --success-light: #4caf50;
+            --success-gradient: linear-gradient(135deg, #1b5e20, #2e7d32, #4caf50);
+            --info: #00838f;
+            --info-light: #00acc1;
+            --warning: #ff8f00;
+            --danger: #c62828;
+            --purple: #6a1b9a;
+            --purple-light: #8e24aa;
+            --teal: #00695c;
+            --teal-light: #00897b;
+            --gray-bg: #f5f7fc;
+            --gray-light: #eef2f7;
+            --gray: #64748b;
+            --dark: #1e293b;
+            --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 5px 10px -5px rgba(0, 0, 0, 0.02);
+            --hover-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(145deg, #f0f4fa 0%, #e8edf5 100%);
+            min-height: 100vh;
+        }
+
+        .premium-header {
+            background: var(--primary-gradient);
+            padding: 12px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 8px 25px rgba(13, 71, 161, 0.25);
+        }
+
+        .logo {
+            font-family: 'Sen', sans-serif;
+            font-weight: 800;
+            font-size: 1.5rem;
+            background: linear-gradient(135deg, #fff, #ffcc80);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 1px;
+        }
+
+        .logo i {
+            background: none;
+            -webkit-background-clip: unset;
+            background-clip: unset;
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 5px;
+            list-style: none;
+            margin: 0;
+        }
+
+        .nav-links li a {
+            color: rgba(255, 255, 255, 0.9);
+            padding: 8px 18px;
+            border-radius: 30px;
+            transition: all 0.3s;
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-decoration: none;
+        }
+
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .main-wrapper {
+            margin-top: 85px;
+            padding: 20px 30px 50px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary-gradient);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .stat-icon {
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, rgba(13, 71, 161, 0.1), rgba(30, 136, 229, 0.1));
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.6rem;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        .form-container {
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .form-header {
+            background: var(--primary-gradient);
+            padding: 30px 35px;
+            color: white;
+            position: relative;
+        }
+
+        .form-header::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: white;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .form-header h2 {
+            font-family: 'Sen', sans-serif;
+            font-weight: 800;
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+
+        .form-header p {
+            opacity: 0.9;
+            margin-bottom: 0;
+        }
+
+        .form-body {
+            padding: 35px;
+        }
+
+        .form-section {
+            background: var(--gray-bg);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            transition: all 0.3s ease;
+        }
+
+        .form-section:hover {
+            border-color: var(--primary-light);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.04);
+            background: white;
+        }
+
+        .section-title {
+            font-family: 'Sen', sans-serif;
+            font-weight: 700;
+            font-size: 1.15rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid rgba(13, 71, 161, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title i {
+            width: 34px;
+            height: 34px;
+            background: var(--primary-gradient);
+            color: white;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+
+        .form-group label .required {
+            color: var(--danger);
+            margin-left: 3px;
+        }
+
+        .form-control,
+        .select2-container .select2-selection--single {
+            border-radius: 14px;
+            border: 1.5px solid #e2e8f0;
+            padding: 12px 16px;
+            height: auto;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .form-control:focus,
+        .select2-container--open .select2-selection--single {
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 4px rgba(30, 136, 229, 0.1);
+            outline: none;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            line-height: 1.4;
+            color: var(--dark);
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__arrow {
+            height: 100%;
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn-submit {
+            background: var(--success-gradient);
+            border: none;
+            padding: 16px 45px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(46, 125, 50, 0.35);
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(46, 125, 50, 0.45);
+        }
+
+        .btn-reset {
+            background: white;
+            border: 2px solid #cbd5e1;
+            padding: 14px 35px;
+            font-size: 1rem;
+            font-weight: 500;
+            border-radius: 50px;
+            color: var(--gray);
+            transition: all 0.3s ease;
+        }
+
+        .btn-reset:hover {
+            border-color: var(--danger);
+            color: var(--danger);
+            background: #fff5f5;
+        }
+
+        .toast-notification {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: white;
+            border-radius: 16px;
+            padding: 0;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transform: translateX(420px);
+            transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .toast-notification.show {
+            transform: translateX(0);
+        }
+
+        .toast-success {
+            border-left: 5px solid var(--success);
+        }
+
+        .recent-products {
+            background: white;
+            border-radius: 24px;
+            padding: 25px;
+            margin-top: 30px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid rgba(0, 0, 0, 0.03);
+        }
+
+        .recent-products h4 {
+            font-family: 'Sen', sans-serif;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .recent-products h4 i {
+            color: var(--secondary);
+        }
+
+        .product-table {
+            width: 100%;
+        }
+
+        .product-table th {
+            font-weight: 600;
+            font-size: 0.8rem;
+            color: var(--gray);
+            padding: 14px 0;
+            border-bottom: 2px solid #eef2f7;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .product-table td {
+            padding: 14px 0;
+            border-bottom: 1px solid #f0f4fa;
+            font-size: 0.85rem;
+            color: var(--dark);
+        }
+
+        .status-badge {
+            padding: 5px 14px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .status-pending {
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            color: var(--warning);
+        }
+
+        .status-approved {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            color: var(--success);
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            border-top-color: var(--secondary);
+            border-right-color: var(--primary-light);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .business-badge {
+            background: linear-gradient(135deg, rgba(255, 111, 0, 0.15), rgba(255, 143, 0, 0.1));
+            color: var(--secondary);
+            padding: 8px 22px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .welcome-title {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .footer_section {
+            background: linear-gradient(135deg, #0a3a7a, var(--primary));
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 30px;
+        }
+
+        .footer_section h5 {
+            font-family: 'Sen', sans-serif;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .footer_section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .footer_section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer_section ul li a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .footer_section ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .footer_section .contact_info li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .copyright_section {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 992px) {
+            .main-wrapper {
+                padding: 20px 15px;
+            }
+
+            .form-body {
+                padding: 25px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            .stat-card {
+                margin-bottom: 15px;
+            }
+
+            .form-header h2 {
+                font-size: 1.4rem;
+            }
+
+            .form-header {
+                padding: 20px;
+            }
+
+            .btn-submit,
+            .btn-reset {
+                width: 100%;
+                margin: 5px 0;
+            }
+
+            .btn-reset {
+                margin-left: 0 !important;
+                margin-top: 10px;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.5s ease forwards;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--gray-light);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-light);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Premium Header -->
+    <header class="premium-header">
+        <div class="container-fluid px-4">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="logo">
+                    <i class="fas fa-chart-line"></i> NQI<span style="color: var(--secondary);">Sri Lanka</span>
+                </div>
+                <ul class="nav-links d-none d-lg-flex">
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="add-product.html" class="active"><i class="fas fa-plus-circle"></i> Add Product</a>
+                    </li>
+                    <li><a href="search.html"><i class="fas fa-search"></i> Search</a></li>
+                    <li><a href="documents.html"><i class="fas fa-folder"></i> Documents</a></li>
+                    <li><a href="#" id="logoutLink"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                </ul>
+                <button class="btn btn-light d-lg-none" type="button" data-toggle="collapse" data-target="#mobileMenu"
+                    style="background: rgba(255,255,255,0.2); color: white; border: none;">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="collapse mt-3 d-lg-none" id="mobileMenu">
+                <ul class="nav-links flex-column">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="add-product.html" class="active">Add Product</a></li>
+                    <li><a href="search.html">Search</a></li>
+                    <li><a href="documents.html">Documents</a></li>
+                    <li><a href="#" id="logoutLinkMobile">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-wrapper">
+        <div class="container-fluid">
+
+            <!-- Welcome Row -->
+            <div class="row mb-4 fade-in-up">
+                <div class="col-12">
+                    <div class="d-flex justify-content-between align-items-center flex-wrap">
+                        <div>
+                            <h1 class="h3 mb-1 fw-bold welcome-title">
+                                <i class="fas fa-store" style="color: var(--secondary);"></i> Product Registration
+                                Portal
+                            </h1>
+                            <p class="text-muted">Register your products/services in Sri Lanka's National Quality
+                                Infrastructure</p>
+                        </div>
+                        <div class="business-badge">
+                            <i class="fas fa-building"></i> Business Account
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Dashboard Row -->
+            <div class="row mb-4">
+                <div class="col-xl-3 col-md-6">
+                    <div class="stat-card fade-in-up" style="animation-delay: 0.1s;">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <div class="stat-value" id="totalProducts">0</div>
+                                <div class="stat-label">Total Registered Products</div>
+                            </div>
+                            <div class="stat-icon">
+                                <i class="fas fa-box"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="stat-card fade-in-up" style="animation-delay: 0.2s;">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <div class="stat-value" id="pendingProducts">0</div>
+                                <div class="stat-label">Pending Approval</div>
+                            </div>
+                            <div class="stat-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="stat-card fade-in-up" style="animation-delay: 0.3s;">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <div class="stat-value" id="certifiedProducts">0</div>
+                                <div class="stat-label">Certified Products</div>
+                            </div>
+                            <div class="stat-icon">
+                                <i class="fas fa-certificate"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="stat-card fade-in-up" style="animation-delay: 0.4s;">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <div class="stat-value" id="exportProducts">0</div>
+                                <div class="stat-label">Export Ready Products</div>
+                            </div>
+                            <div class="stat-icon">
+                                <i class="fas fa-globe-asia"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form Row - Full Width -->
+            <div class="row fade-in-up" style="animation-delay: 0.5s;">
+                <div class="col-lg-12">
+                    <div class="form-container">
+                        <div class="form-header">
+                            <h2><i class="fas fa-plus-circle"></i> Register New Product / Service</h2>
+                            <p>Fill in the details below to add your product to the NQI directory</p>
+                        </div>
+                        <div class="form-body">
+                            <form id="productForm">
+                                <!-- Basic Information -->
+                                <div class="form-section">
+                                    <div class="section-title">
+                                        <i class="fas fa-info-circle"></i> Basic Information
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 mb-3">
+                                            <label>Product/Service Name <span class="required">*</span></label>
+                                            <input type="text" class="form-control" id="productName"
+                                                placeholder="e.g., Pure Ceylon Black Tea - BOPF" required>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label>Brand Name</label>
+                                            <input type="text" class="form-control" id="brandName"
+                                                placeholder="e.g., Dilmah, Elephant House">
+                                            <small class="text-muted">Optional - Your product brand name</small>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label>Manufacturer/Provider <span class="required">*</span></label>
+                                            <input type="text" class="form-control" id="manufacturer"
+                                                placeholder="Organization name" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Product Category -->
+                                <div class="form-section">
+                                    <div class="section-title">
+                                        <i class="fas fa-boxes"></i> Product & Industry Classification
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label>Product Category <span class="required">*</span></label>
+                                            <select class="form-control select2" id="productCategory" required>
+                                                <option value="">Select Category</option>
+                                                <option value="Food & Agricultural">🍵 Food & Agricultural Products</option>
+                                                <option value="Tea & Beverages">🍃 Tea & Beverages</option>
+                                                <option value="Spices & Condiments">🌿 Spices & Condiments</option>
+                                                <option value="Dairy Products">🥛 Dairy Products</option>
+                                                <option value="Fish & Seafood">🐟 Fish & Seafood</option>
+                                                <option value="Pharmaceuticals">💊 Pharmaceuticals</option>
+                                                <option value="Cosmetics">💄 Cosmetics</option>
+                                                <option value="Textiles & Apparel">👕 Textiles & Apparel</option>
+                                                <option value="Rubber Products">🧤 Rubber Products</option>
+                                                <option value="Coconut Products">🥥 Coconut Products</option>
+                                                <option value="Construction Materials">🏗️ Construction Materials</option>
+                                                <option value="Electrical & Electronics">⚡ Electrical & Electronics</option>
+                                                <option value="Gems & Jewellery">💎 Gems & Jewellery</option>
+                                                <option value="Chemicals">🧪 Chemicals</option>
+                                                <option value="Services">📋 Services</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label>Industry Sector <span class="required">*</span></label>
+                                            <select class="form-control select2" id="industrySector" required>
+                                                <option value="">Select Industry</option>
+                                                <option value="Agriculture">🌾 Agriculture & Food Processing</option>
+                                                <option value="Textile">👔 Textile & Apparel</option>
+                                                <option value="Rubber">🧤 Rubber & Plastics</option>
+                                                <option value="Chemicals">🧪 Chemicals & Pharmaceuticals</option>
+                                                <option value="Construction">🏗️ Construction</option>
+                                                <option value="Electronics">⚡ Electronics & Electrical</option>
+                                                <option value="Gems">💎 Gems & Jewellery</option>
+                                                <option value="Tea">🍃 Tea Plantation</option>
+                                                <option value="Fisheries">🐟 Fisheries & Aquaculture</option>
+                                                <option value="Services">📋 Services & Consulting</option>
+                                                <option value="Healthcare">🏥 Healthcare</option>
+                                                <option value="Tourism">🏨 Tourism & Hospitality</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Organization & Certification -->
+                                <div class="form-section">
+                                    <div class="section-title">
+                                        <i class="fas fa-building"></i> Organization & Certification
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label>Accredited Organization</label>
+                                            <select class="form-control select2" id="organization">
+                                                <option value="">Select Organization</option>
+                                                <option value="SLSI">🏛️ SLSI - Sri Lanka Standards Institution</option>
+                                                <option value="SLAB">✅ SLAB - Sri Lanka Accreditation Board</option>
+                                                <option value="MUSSD">📏 MUSSD - Measurement Units Standards & Services</option>
+                                                <option value="ITI">🔬 ITI - Industrial Technology Institute</option>
+                                                <option value="SLTB">🍃 SLTB - Sri Lanka Tea Board</option>
+                                                <option value="CDA">🥥 CDA - Coconut Development Authority</option>
+                                                <option value="NGJA">💎 NGJA - National Gem & Jewellery Authority</option>
+                                                <option value="EDB">📊 EDB - Export Development Board</option>
+                                                <option value="NARA">🐟 NARA - National Aquatic Resources Agency</option>
+                                                <option value="NBRO">🏗️ NBRO - National Building Research Organization</option>
+                                                <option value="CEA">🌿 CEA - Central Environmental Authority</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label>Certification Status</label>
+                                            <select class="form-control" id="certified">
+                                                <option value="">Select Status</option>
+                                                <option value="SLS Certified">✅ SLS Certified</option>
+                                                <option value="ISO Certified">✅ ISO Certified</option>
+                                                <option value="Internationally Certified">🌍 Internationally Certified</option>
+                                                <option value="In Progress">⏳ In Progress</option>
+                                                <option value="Not Certified">📋 Not Certified</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Conformity Assessment -->
+                                <div class="form-section">
+                                    <div class="section-title">
+                                        <i class="fas fa-check-double"></i> Conformity Assessment Services
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label>Service Type Required</label>
+                                            <select class="form-control select2" id="conformityService">
+                                                <option value="">Select Service</option>
+                                                <option value="Chemical Testing">🧪 Chemical Testing</option>
+                                                <option value="Microbiological Testing">🔬 Microbiological Testing</option>
+                                                <option value="Mechanical Testing">⚙️ Mechanical Testing</option>
+                                                <option value="Electrical Testing">⚡ Electrical Testing</option>
+                                                <option value="Calibration">📏 Calibration</option>
+                                                <option value="Inspection">🔍 Inspection</option>
+                                                <option value="Product Certification">📜 Product Certification</option>
+                                                <option value="System Certification">📋 System Certification (ISO)</option>
+                                                <option value="Accreditation">✅ Accreditation</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label>Export Status</label>
+                                            <select class="form-control" id="exportStatus">
+                                                <option value="">Select Status</option>
+                                                <option value="Currently Exporting">🚢 Currently Exporting</option>
+                                                <option value="Planning to Export">📋 Planning to Export</option>
+                                                <option value="Domestic Only">🇱🇰 Domestic Only</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Location -->
+                                <div class="form-section">
+                                    <div class="section-title">
+                                        <i class="fas fa-map-marker-alt"></i> Business Location
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <label>Province <span class="required">*</span></label>
+                                            <select class="form-control" id="province" required>
+                                                <option value="">Select Province</option>
+                                                <option value="Western">📍 Western Province</option>
+                                                <option value="Central">📍 Central Province</option>
+                                                <option value="Southern">📍 Southern Province</option>
+                                                <option value="Northern">📍 Northern Province</option>
+                                                <option value="Eastern">📍 Eastern Province</option>
+                                                <option value="North Western">📍 North Western Province</option>
+                                                <option value="North Central">📍 North Central Province</option>
+                                                <option value="Uva">📍 Uva Province</option>
+                                                <option value="Sabaragamuwa">📍 Sabaragamuwa Province</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label>District</label>
+                                            <select class="form-control" id="district">
+                                                <option value="">Select District</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label>City/Town</label>
+                                            <input type="text" class="form-control" id="city"
+                                                placeholder="e.g., Colombo">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Contact -->
+                                <div class="form-section">
+                                    <div class="section-title">
+                                        <i class="fas fa-address-card"></i> Contact Information
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label>Contact Person</label>
+                                            <input type="text" class="form-control" id="contactPerson"
+                                                placeholder="Name of contact person">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label>Phone Number</label>
+                                            <input type="tel" class="form-control" id="phone"
+                                                placeholder="+94 XX XXX XXXX">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label>Email</label>
+                                            <input type="email" class="form-control" id="email"
+                                                placeholder="contact@company.lk">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label>Website</label>
+                                            <input type="url" class="form-control" id="website"
+                                                placeholder="www.company.lk">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Description -->
+                                <div class="form-section">
+                                    <div class="section-title">
+                                        <i class="fas fa-file-alt"></i> Product Description
+                                    </div>
+                                    <textarea class="form-control" id="description" rows="4"
+                                        placeholder="Describe your product, key features, quality standards, certifications, etc."></textarea>
+                                </div>
+
+                                <!-- Submit Buttons -->
+                                <div class="text-center mt-4">
+                                    <button type="submit" class="btn btn-submit text-white">
+                                        <i class="fas fa-save"></i> Register Product
+                                    </button>
+                                    <button type="reset" class="btn btn-reset ml-3">
+                                        <i class="fas fa-undo-alt"></i> Reset Form
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Products Table -->
+            <div class="recent-products fade-in-up" style="animation-delay: 0.6s;">
+                <h4><i class="fas fa-history"></i> Recently Registered Products</h4>
+                <div class="table-responsive">
+                    <table class="product-table">
+                        <thead>
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Category</th>
+                                <th>Manufacturer</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recentProductsList">
+                            <tr>
+                                <td colspan="5" class="text-center text-muted py-4">No products registered yet</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toastNotification" class="toast-notification toast-success">
+        <div class="d-flex align-items-center p-3">
+            <i class="fas fa-check-circle text-success fa-2x mr-3"></i>
+            <div>
+                <strong>Success!</strong>
+                <p class="mb-0 small" id="toastMessage">Product registered successfully</p>
+            </div>
+            <button type="button" class="close ml-4" onclick="closeToast()" style="font-size: 1.5rem;">&times;</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.select2').select2({ width: '100%', placeholder: 'Select an option' });
+
+            // Authentication check
+            if (localStorage.getItem('authenticated') !== 'true') {
+                window.location.href = 'login.html';
+            }
+
+            // Logout
+            $('#logoutLink, #logoutLinkMobile').click(function (e) {
+                e.preventDefault();
+                localStorage.removeItem('authenticated');
+                window.location.href = 'login.html';
+            });
+
+            // Province to District mapping
+            const districts = {
+                'Western': ['Colombo', 'Gampaha', 'Kalutara'],
+                'Central': ['Kandy', 'Matale', 'Nuwara Eliya'],
+                'Southern': ['Galle', 'Matara', 'Hambantota'],
+                'Northern': ['Jaffna', 'Kilinochchi', 'Mannar', 'Vavuniya', 'Mullaitivu'],
+                'Eastern': ['Batticaloa', 'Ampara', 'Trincomalee'],
+                'North Western': ['Kurunegala', 'Puttalam'],
+                'North Central': ['Anuradhapura', 'Polonnaruwa'],
+                'Uva': ['Badulla', 'Monaragala'],
+                'Sabaragamuwa': ['Ratnapura', 'Kegalle']
+            };
+
+            $('#province').change(function () {
+                let province = $(this).val();
+                let districtList = districts[province] || [];
+                let $district = $('#district');
+                $district.empty().append('<option value="">Select District</option>');
+                districtList.forEach(d => $district.append(`<option value="${d}">${d}</option>`));
+            });
+
+            // Function to load products from database via API
+            function loadProductsFromDB() {
+                $.ajax({
+                    url: 'get_products.php',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.success) {
+                            $('#totalProducts').text(response.total);
+                            $('#pendingProducts').text(response.pending);
+                            $('#certifiedProducts').text(response.certified);
+                            $('#exportProducts').text(response.export_ready);
+                            
+                            let recent = response.recent || [];
+                            let tbody = $('#recentProductsList');
+                            if (recent.length === 0) {
+                                tbody.html('<tr><td colspan="5" class="text-center text-muted py-4">No products registered yet</td></tr>');
+                            } else {
+                                tbody.html(recent.map(p => `
+                                    <tr>
+                                        <td><strong>${escapeHtml(p.product_name)}</strong><br><small class="text-muted">${escapeHtml(p.brand_name || 'No Brand')}</small></td>
+                                        <td>${escapeHtml(p.product_category || '—')}</td>
+                                        <td>${escapeHtml(p.manufacturer)}</td>
+                                        <td><span class="status-badge status-pending">⏳ Pending</span></td>
+                                        <td><small>${new Date(p.created_at).toLocaleDateString()}</small></td>
+                                    </tr>
+                                `).join(''));
+                            }
+                        }
+                    },
+                    error: function() {
+                        console.log('Could not load products from database');
+                    }
+                });
+            }
+
+            function escapeHtml(str) { return (str || '').replace(/[&<>]/g, function (m) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;' }[m]; }); }
+
+            // Toast
+            window.closeToast = function () { $('#toastNotification').removeClass('show'); };
+            function showToast(msg, isError = false) { 
+                $('#toastMessage').text(msg); 
+                $('#toastNotification').addClass('show'); 
+                setTimeout(() => $('#toastNotification').removeClass('show'), 3500);
+            }
+
+            // Form Submission - Send to PHP Database
+            $('#productForm').submit(function (e) {
+                e.preventDefault();
+                
+                let formData = {
+                    productName: $('#productName').val(),
+                    brandName: $('#brandName').val(),
+                    manufacturer: $('#manufacturer').val(),
+                    productCategory: $('#productCategory').val(),
+                    industrySector: $('#industrySector').val(),
+                    organization: $('#organization').val(),
+                    conformityService: $('#conformityService').val(),
+                    certified: $('#certified').val(),
+                    exportStatus: $('#exportStatus').val(),
+                    province: $('#province').val(),
+                    district: $('#district').val(),
+                    city: $('#city').val(),
+                    contactPerson: $('#contactPerson').val(),
+                    phone: $('#phone').val(),
+                    email: $('#email').val(),
+                    website: $('#website').val(),
+                    description: $('#description').val()
+                };
+                
+                // Validate required fields
+                if (!formData.productName || !formData.manufacturer || !formData.productCategory || !formData.industrySector || !formData.province) {
+                    showToast('⚠️ Please fill in all required fields (*)');
+                    return;
+                }
+                
+                $('#loadingOverlay').css('display', 'flex');
+                
+                // Send to PHP backend
+                $.ajax({
+                    url: 'add-product.php',
+                    type: 'POST',
+                    data: formData,
+                    dataType: 'json',
+                    success: function(response) {
+                        $('#loadingOverlay').hide();
+                        if (response.success) {
+                            showToast('🎉 ' + response.message);
+                            $('#productForm')[0].reset();
+                            $('.select2').val(null).trigger('change');
+                            // Reload products from database
+                            loadProductsFromDB();
+                        } else {
+                            showToast('❌ ' + response.message);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        $('#loadingOverlay').hide();
+                        showToast('❌ Error: Could not connect to server. Please try again.');
+                        console.error('AJAX Error:', error);
+                        console.error('Response:', xhr.responseText);
+                    }
+                });
+            });
+
+            // Load products on page load
+            loadProductsFromDB();
+        });
+    </script>
+</body>
+
+</html>
