@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index,follow" />
+    <meta name="description" content="Public directory summary of Sri Lanka's National Quality Infrastructure - testing labs, certification bodies, regulatory bodies and more." />
+    <title>QI Sri Lanka - Directory Summary</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,700|Sen:400,700,800&display=swap" rel="stylesheet" />
+
+    <style>
+        :root {
+            --primary-color: #0d47a1;
+            --secondary-color: #a13e0d;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f5f7fa;
+            margin: 0;
+        }
+
+        /* Header */
+        .header_section {
+            background-color: var(--primary-color);
+            padding: 12px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            color: #fff;
+            text-decoration: none;
+            font-family: 'Sen', sans-serif;
+            font-weight: 800;
+            font-size: 1.4rem;
+        }
+        .logo i { font-size: 26px; margin-right: 10px; }
+        .logo:hover { color: #fff; text-decoration: none; }
+
+        .btn-login-header {
+            background: #fff;
+            color: var(--primary-color);
+            font-weight: 600;
+            padding: 8px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+        .btn-login-header:hover {
+            background: #ffd54f;
+            color: #000;
+            text-decoration: none;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), #1a73e8);
+            color: #fff;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .hero h1 {
+            font-family: 'Sen', sans-serif;
+            font-weight: 800;
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+        }
+        .hero p {
+            font-size: 1.05rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Stats */
+        .section-title {
+            font-family: 'Sen', sans-serif;
+            font-weight: 700;
+            font-size: 1.6rem;
+            margin-bottom: 25px;
+            color: #222;
+        }
+
+        .stat-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 25px 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+            text-align: center;
+            transition: all 0.3s;
+            height: 100%;
+            border-top: 4px solid var(--primary-color);
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.13);
+        }
+        .stat-card i {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-bottom: 12px;
+        }
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--secondary-color);
+            font-family: 'Sen', sans-serif;
+            line-height: 1;
+        }
+        .stat-label {
+            color: #555;
+            font-size: 0.9rem;
+            margin-top: 8px;
+            font-weight: 500;
+        }
+
+        /* Gated section */
+        .gated-section {
+            background: #fff;
+            border-radius: 12px;
+            padding: 35px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+        }
+        .gated-section h3 {
+            font-family: 'Sen', sans-serif;
+            font-weight: 700;
+            color: #222;
+        }
+        .gated-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+        .gated-item:last-child { border-bottom: none; }
+        .gated-item strong { color: #222; font-size: 1rem; }
+        .gated-item .desc {
+            color: #777;
+            font-size: 0.85rem;
+            margin-top: 3px;
+        }
+        .lock-badge {
+            background: #eef2f7;
+            color: #556;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .lock-badge i { color: var(--secondary-color); }
+
+        /* CTA */
+        .cta-box {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 2px dashed #ddd;
+        }
+        .cta-login {
+            background: linear-gradient(135deg, var(--primary-color), #1a73e8);
+            color: #fff !important;
+            border: none;
+            padding: 14px 35px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-block;
+            transition: 0.3s;
+            box-shadow: 0 4px 12px rgba(13, 71, 161, 0.35);
+        }
+        .cta-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(13, 71, 161, 0.45);
+            text-decoration: none;
+        }
+        .cta-login i { margin-right: 8px; }
+
+        /* QI Explainer */
+        .qi-pillar {
+            text-align: center;
+            padding: 15px;
+        }
+        .qi-pillar i {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        .qi-pillar h6 {
+            font-weight: 700;
+            color: #222;
+            margin-bottom: 8px;
+        }
+        .qi-pillar p {
+            font-size: 0.85rem;
+            color: #666;
+            margin: 0;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-color);
+            color: #fff;
+            text-align: center;
+            padding: 20px 15px;
+            font-size: 0.85rem;
+            margin-top: 50px;
+        }
+        .footer a { color: #ffd54f; text-decoration: none; }
+
+        /* Responsive */
+        @media (max-width: 576px) {
+            .hero h1 { font-size: 1.5rem; }
+            .hero { padding: 40px 15px; }
+            .gated-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .stat-number { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<div class="header_section">
+    <a class="logo" href="guest-dashboard.html">
+        <i class="fas fa-certificate"></i> NQI Sri Lanka
+    </a>
+    <a href="login.html" class="btn-login-header">
+        <i class="fas fa-sign-in-alt"></i> Login
+    </a>
+</div>
+
+<!-- ============ HERO ============ -->
+<div class="hero">
+    <h1>National Quality Infrastructure — Sri Lanka</h1>
+    <p>
+        A public directory of quality-related institutions for SMEs.
+        Browse summaries below. Log in to view full contact details.
+    </p>
+</div>
+
+<!-- ============ MAIN CONTENT ============ -->
+<div class="container my-5">
+
+    <!-- ---------- Stats Summary ---------- -->
+    <h3 class="section-title">
+        <i class="fas fa-chart-bar text-primary"></i> Directory at a Glance
+    </h3>
+    <div class="row">
+
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="stat-card">
+                <i class="fas fa-flask"></i>
+                <div class="stat-number" id="count-testing">120+</div>
+                <div class="stat-label">Testing &amp; Calibration Labs</div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="stat-card">
+                <i class="fas fa-microscope"></i>
+                <div class="stat-number" id="count-medical">27</div>
+                <div class="stat-label">Medical Testing Labs</div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="stat-card">
+                <i class="fas fa-certificate"></i>
+                <div class="stat-number" id="count-cert">12</div>
+                <div class="stat-label">Certification Bodies</div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="stat-card">
+                <i class="fas fa-search"></i>
+                <div class="stat-number" id="count-inspect">22</div>
+                <div class="stat-label">Inspection Bodies</div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="stat-card">
+                <i class="fas fa-balance-scale"></i>
+                <div class="stat-number" id="count-reg">32</div>
+                <div class="stat-label">Regulatory Bodies</div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="stat-card">
+                <i class="fas fa-university"></i>
+                <div class="stat-number" id="count-chambers">15</div>
+                <div class="stat-label">Chambers of Commerce</div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="stat-card">
+                <i class="fas fa-graduation-cap"></i>
+                <div class="stat-number" id="count-training">8+</div>
+                <div class="stat-label">Training Providers</div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="stat-card">
+                <i class="fas fa-trophy"></i>
+                <div class="stat-number" id="count-awards">9</div>
+                <div class="stat-label">National Quality Awards</div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ---------- Gated Directory ---------- -->
+    <div class="gated-section mt-4">
+        <h3><i class="fas fa-folder-open text-primary"></i> Directory Categories</h3>
+        <p class="text-muted mb-4">
+            Contact details for each organisation are available to registered users.
+        </p>
+
+        <div class="gated-item">
+            <div>
+                <strong>Sri Lanka Standards Institution (SLSI)</strong>
+                <div class="desc">National Standards Body — standards formulation, certification</div>
+            </div>
+            <span class="lock-badge"><i class="fas fa-lock"></i> Login Required</span>
+        </div>
+
+        <div class="gated-item">
+            <div>
+                <strong>Measurement Units, Standards &amp; Services Dept (MUSSd)</strong>
+                <div class="desc">National Metrology Institute — calibration, legal metrology</div>
+            </div>
+            <span class="lock-badge"><i class="fas fa-lock"></i> Login Required</span>
+        </div>
+
+        <div class="gated-item">
+            <div>
+                <strong>Sri Lanka Accreditation Board (SLAB)</strong>
+                <div class="desc">National Accreditation Body — lab, CB, IB accreditation</div>
+            </div>
+            <span class="lock-badge"><i class="fas fa-lock"></i> Login Required</span>
+        </div>
+
+        <div class="gated-item">
+            <div>
+                <strong>Sri Lanka Atomic Energy Board (SLAEB)</strong>
+                <div class="desc">Radiation protection, dosimetry calibration, NDT services</div>
+            </div>
+            <span class="lock-badge"><i class="fas fa-lock"></i> Login Required</span>
+        </div>
+
+        <div class="gated-item">
+            <div>
+                <strong>Conformity Assessment Bodies (CABs)</strong>
+                <div class="desc">120+ testing, medical, calibration labs &amp; certification/inspection bodies</div>
+            </div>
+            <span class="lock-badge"><i class="fas fa-lock"></i> Login Required</span>
+        </div>
+
+        <div class="gated-item">
+            <div>
+                <strong>Regulatory Bodies</strong>
+                <div class="desc">CEA, CAA, DAPH, DFAR, NMRA, ROP, SLTB, SLTDA, and more</div>
+            </div>
+            <span class="lock-badge"><i class="fas fa-lock"></i> Login Required</span>
+        </div>
+
+        <div class="gated-item">
+            <div>
+                <strong>Chambers of Commerce</strong>
+                <div class="desc">CCC, NCCSL, FCCISL, CNCI, AMCHAM, ECCSL, and more</div>
+            </div>
+            <span class="lock-badge"><i class="fas fa-lock"></i> Login Required</span>
+        </div>
+
+        <div class="gated-item">
+            <div>
+                <strong>Education &amp; Training Providers</strong>
+                <div class="desc">NIBM, NCPC, SLSI Training Division, TVEC, UGC</div>
+            </div>
+            <span class="lock-badge"><i class="fas fa-lock"></i> Login Required</span>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-box">
+            <a href="login.html" class="cta-login">
+                <i class="fas fa-sign-in-alt"></i> Login to View Full Details
+            </a>
+            <p class="text-muted mt-3 mb-0" style="font-size:0.9rem;">
+                Don't have an account?
+                <a href="signup.html" style="color: var(--primary-color); font-weight: 600;">
+                    Sign Up Now
+                </a>
+            </p>
+        </div>
+    </div>
+
+    <!-- ---------- QI Explainer ---------- -->
+    <div class="gated-section mt-4">
+        <h3><i class="fas fa-info-circle text-primary"></i> What is Quality Infrastructure?</h3>
+        <p style="color:#555;">
+            The <strong>National Quality Infrastructure (NQI)</strong> is the framework of institutions
+            (public and private) required to establish and implement <strong>standardization</strong>,
+            <strong>metrology</strong>, <strong>accreditation</strong>, and
+            <strong>conformity assessment services</strong> — testing, inspection, and certification.
+            It ensures products and services meet defined requirements, whether imposed by regulators
+            (technical regulations, SPS measures) or by the market.
+        </p>
+
+        <div class="row mt-4">
+            <div class="col-md-3 col-sm-6 qi-pillar">
+                <i class="fas fa-book"></i>
+                <h6>Standardization</h6>
+                <p>SLSI formulates national standards — 2,600+ standards, of which ~1,350 are ISO/IEC/ASTM/EN adoptions.</p>
+            </div>
+            <div class="col-md-3 col-sm-6 qi-pillar">
+                <i class="fas fa-ruler-combined"></i>
+                <h6>Metrology</h6>
+                <p>MUSSd maintains national measurement standards traceable to SI units across 9 metrological fields.</p>
+            </div>
+            <div class="col-md-3 col-sm-6 qi-pillar">
+                <i class="fas fa-check-circle"></i>
+                <h6>Accreditation</h6>
+                <p>SLAB accredits labs, certification bodies, and inspection bodies under ISO/IEC 17025, 17020, 17021, 17065.</p>
+            </div>
+            <div class="col-md-3 col-sm-6 qi-pillar">
+                <i class="fas fa-clipboard-check"></i>
+                <h6>Conformity Assessment</h6>
+                <p>Testing, inspection, and certification services provided by accredited conformity assessment bodies.</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- ============ FOOTER ============ -->
+<div class="footer">
+    © 2025 NQI Sri Lanka. All rights reserved.
+    <br>
+    <small>Source: QI Catalogue Sri Lanka (PTB / MoIC, 2019)</small>
+</div>
+
+<!-- ============ OPTIONAL: Load dynamic counts ============ -->
+<script>
+    // If api/summary.php exists, load live counts from the database.
+    // If not, the static values above will remain.
+    fetch('api/summary.php')
+        .then(res => res.ok ? res.json() : null)
+        .then(data => {
+            if (!data || !data.success) return;
+            const s = data.summary;
+            const set = (id, val) => {
+                const el = document.getElementById(id);
+                if (el && val != null) el.textContent = val;
+            };
+            set('count-testing', s.testing_labs);
+            set('count-medical', s.medical_labs);
+            set('count-cert',    s.certification_bodies);
+            set('count-inspect', s.inspection_bodies);
+            set('count-reg',     s.regulatory_bodies);
+            set('count-chambers', s.chambers);
+        })
+        .catch(() => { /* silently ignore if API not ready */ });
+</script>
+
+</body>
+</html>
