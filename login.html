@@ -12,7 +12,9 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Sen:wght@700;800&display=swap" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Sen:wght@700;800&display=swap"
+        rel="stylesheet" />
 
     <style>
         :root {
@@ -73,12 +75,14 @@
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.06);
         }
+
         .brand-panel::before {
             width: 400px;
             height: 400px;
             top: -150px;
             right: -150px;
         }
+
         .brand-panel::after {
             width: 300px;
             height: 300px;
@@ -98,10 +102,12 @@
             position: relative;
             z-index: 2;
         }
+
         .brand-logo:hover {
             color: #fff;
             text-decoration: none;
         }
+
         .brand-logo i {
             font-size: 1.8rem;
             color: var(--accent);
@@ -134,6 +140,7 @@
             padding: 0;
             margin: 0;
         }
+
         .brand-features li {
             display: flex;
             align-items: center;
@@ -142,6 +149,7 @@
             font-size: 0.95rem;
             opacity: 0.95;
         }
+
         .brand-features li i {
             width: 24px;
             height: 24px;
@@ -181,6 +189,7 @@
         .form-header {
             margin-bottom: 30px;
         }
+
         .form-header h2 {
             font-family: 'Sen', sans-serif;
             font-weight: 800;
@@ -188,6 +197,7 @@
             color: var(--text);
             margin-bottom: 8px;
         }
+
         .form-header p {
             color: var(--text-muted);
             font-size: 0.95rem;
@@ -198,6 +208,7 @@
         .form-group {
             margin-bottom: 20px;
         }
+
         .form-group label {
             display: block;
             font-weight: 500;
@@ -209,6 +220,7 @@
         .input-wrap {
             position: relative;
         }
+
         .input-wrap .input-icon {
             position: absolute;
             left: 16px;
@@ -220,6 +232,7 @@
             transition: color 0.2s;
             z-index: 2;
         }
+
         .input-wrap input {
             width: 100%;
             height: 52px;
@@ -232,13 +245,15 @@
             background: #fafbfc;
             color: var(--text);
         }
+
         .input-wrap input:focus {
             outline: none;
             border-color: var(--primary-color);
             background: #fff;
             box-shadow: 0 0 0 4px rgba(13, 71, 161, 0.08);
         }
-        .input-wrap input:focus ~ .input-icon {
+
+        .input-wrap input:focus~.input-icon {
             color: var(--primary-color);
         }
 
@@ -257,6 +272,7 @@
             transition: color 0.2s;
             z-index: 2;
         }
+
         .password-toggle:hover {
             color: var(--primary-color);
         }
@@ -271,6 +287,7 @@
             flex-wrap: wrap;
             gap: 10px;
         }
+
         .form-check-custom {
             display: flex;
             align-items: center;
@@ -280,6 +297,7 @@
             color: #4b5563;
             margin: 0;
         }
+
         .form-check-custom input {
             width: 16px;
             height: 16px;
@@ -287,11 +305,13 @@
             cursor: pointer;
             margin: 0;
         }
+
         .forgot-link {
             color: var(--primary-color);
             font-weight: 500;
             text-decoration: none;
         }
+
         .forgot-link:hover {
             color: var(--primary-dark);
             text-decoration: underline;
@@ -312,13 +332,16 @@
             transition: all 0.25s;
             box-shadow: 0 4px 14px rgba(13, 71, 161, 0.3);
         }
+
         .btn-submit:hover:not(:disabled) {
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(13, 71, 161, 0.4);
         }
+
         .btn-submit:active:not(:disabled) {
             transform: translateY(0);
         }
+
         .btn-submit:disabled {
             opacity: 0.75;
             cursor: not-allowed;
@@ -335,14 +358,26 @@
             margin-bottom: 20px;
             display: none;
         }
+
         .alert-error.show {
             display: block;
             animation: shake 0.4s;
         }
+
         @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-6px); }
-            75% { transform: translateX(6px); }
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-6px);
+            }
+
+            75% {
+                transform: translateX(6px);
+            }
         }
 
         /* ---------- Divider ---------- */
@@ -354,6 +389,7 @@
             color: var(--text-muted);
             font-size: 0.8rem;
         }
+
         .divider::before,
         .divider::after {
             content: "";
@@ -361,6 +397,7 @@
             height: 1px;
             background: var(--border);
         }
+
         .divider span {
             padding: 0 12px;
         }
@@ -371,6 +408,7 @@
             gap: 12px;
             margin-bottom: 24px;
         }
+
         .social-btn {
             flex: 1;
             height: 46px;
@@ -388,18 +426,29 @@
             font-weight: 500;
             transition: all 0.2s;
         }
+
         .social-btn:hover {
             border-color: var(--primary-color);
             color: var(--primary-color);
             text-decoration: none;
             transform: translateY(-1px);
         }
+
         .social-btn i {
             font-size: 1.05rem;
         }
-        .social-btn.google i { color: #db4437; }
-        .social-btn.facebook i { color: #4267b2; }
-        .social-btn.linkedin i { color: #0077b5; }
+
+        .social-btn.google i {
+            color: #db4437;
+        }
+
+        .social-btn.facebook i {
+            color: #4267b2;
+        }
+
+        .social-btn.linkedin i {
+            color: #0077b5;
+        }
 
         /* ---------- Guest Section ---------- */
         .guest-section {
@@ -410,6 +459,7 @@
             text-align: center;
             margin-bottom: 20px;
         }
+
         .guest-section a {
             color: var(--primary-color);
             font-weight: 600;
@@ -419,6 +469,7 @@
             align-items: center;
             gap: 8px;
         }
+
         .guest-section a:hover {
             color: var(--primary-dark);
             text-decoration: underline;
@@ -431,11 +482,13 @@
             color: var(--text-muted);
             margin-top: 8px;
         }
+
         .form-footer a {
             color: var(--primary-color);
             font-weight: 600;
             text-decoration: none;
         }
+
         .form-footer a:hover {
             text-decoration: underline;
         }
@@ -452,8 +505,11 @@
             margin-right: 8px;
             vertical-align: middle;
         }
+
         @keyframes spin {
-            to { transform: rotate(360deg); }
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         /* ============================================
@@ -463,20 +519,25 @@
             .auth-wrapper {
                 grid-template-columns: 1fr;
             }
+
             .brand-panel {
                 padding: 40px 30px;
                 min-height: auto;
             }
+
             .brand-content h1 {
                 font-size: 1.7rem;
             }
+
             .brand-content p {
                 font-size: 0.95rem;
                 margin-bottom: 20px;
             }
+
             .brand-features {
                 display: none;
             }
+
             .brand-footer {
                 display: none;
             }
@@ -486,26 +547,33 @@
             .form-panel {
                 padding: 25px 20px;
             }
+
             .form-header h2 {
                 font-size: 1.5rem;
             }
+
             .brand-panel {
                 padding: 30px 20px;
             }
+
             .brand-content h1 {
                 font-size: 1.4rem;
             }
+
             .brand-content p {
                 font-size: 0.9rem;
             }
+
             .form-options {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 12px;
             }
+
             .social-row {
                 flex-wrap: wrap;
             }
+
             .social-btn {
                 flex: 1 1 45%;
             }
@@ -523,7 +591,7 @@
                     if (data.authenticated) window.location.href = 'index.html';
                     else localStorage.removeItem('authenticated');
                 })
-                .catch(() => {});
+                .catch(() => { });
         }
     </script>
 
@@ -579,8 +647,7 @@
                         <label for="email">Email Address</label>
                         <div class="input-wrap">
                             <i class="fas fa-envelope input-icon"></i>
-                            <input type="email" id="email" placeholder="you@company.lk" required
-                                autocomplete="email" />
+                            <input type="email" id="email" placeholder="you@company.lk" required autocomplete="email" />
                         </div>
                     </div>
 
@@ -733,6 +800,29 @@
         // Clear error when user starts typing
         ['email', 'password'].forEach(id => {
             document.getElementById(id).addEventListener('input', hideError);
+        });
+        // ============ Handle signup success message ============
+        document.addEventListener('DOMContentLoaded', function () {
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('signup') === 'success') {
+                const box = document.getElementById('loginError');
+                box.classList.remove('alert-error');
+                box.style.background = '#f0fdf4';
+                box.style.border = '1px solid #86efac';
+                box.style.color = '#16a34a';
+                box.style.padding = '12px 16px';
+                box.style.borderRadius = '8px';
+                box.style.fontSize = '0.88rem';
+                box.style.marginBottom = '20px';
+                box.style.display = 'block';
+                box.innerHTML = '<i class="fas fa-check-circle"></i> Account created successfully! Please sign in below.';
+
+                // Auto-fill email field if we have it in URL
+                const emailParam = params.get('email');
+                if (emailParam) {
+                    document.getElementById('email').value = emailParam;
+                }
+            }
         });
     </script>
 </body>
